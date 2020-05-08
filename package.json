@@ -1,0 +1,30 @@
+{
+  "name": "editor",
+  "version": "0.1.0",
+  "description": "Electron + React でテキストエディタを作る",
+  "author": "CDLab",
+  "main": "main.js",
+  "scripts": {
+    "start": "npm run clean && run-p copy:* && electron dist",
+    "build": "npm run clean && run-p copy:* && npm run package",
+    "clean": "rm -rf dist build",
+    "package": "electron-packager dist editor --out=build/Release",
+    "copy:main": "cpx src/**/* dist",
+    "copy:package.json": "cpx package.json dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdlab-sit/editor.git"
+  },
+  "keywords": [
+    "editor",
+    "electron",
+    "react"
+  ],
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "electron": "^8.2.5",
+    "electron-packager": "^14.2.1",
+    "npm-run-all": "^4.1.5"
+  }
+}
