@@ -10,8 +10,8 @@
     "lint": "eslint --ext .js,.jsx src",
     "clean": "rimraf dist build",
     "package": "electron-packager dist editor --out=build/Release",
-    "copy:static": "cpx 'src/**/*.{html,png,jpg,svg}' dist",
-    "copy:package.json": "cpx 'package.json' dist",
+    "copy:static": "cpx \"src/**/*.{html,png,jpg,svg}\" dist",
+    "copy:package.json": "cpx \"package.json\" dist",
     "js:dev": "webpack --mode development",
     "js:build": "webpack --mode production",
     "css:tailwind": "tailwindcss build src/style.css -o dist/style.css"
