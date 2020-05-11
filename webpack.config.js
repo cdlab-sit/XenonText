@@ -19,15 +19,18 @@ module.exports = [
     }
   },
   {
-    entry: './src/renderer/app.jsx',
+    entry: './src/renderer/App.jsx',
     output: {
       filename: 'renderer.js',
       path: path.resolve(__dirname, 'dist'),
     },
     target:'electron-renderer',
+    resolve: {
+      extensions: ['.js', '.jsx']
+    },
     module: {
       rules: [{
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'babel-loader'
       }]
