@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, Menu, BrowserWindow } from 'electron'
 
 function createWindow () {
   // ブラウザウインドウを作成
@@ -11,8 +11,14 @@ function createWindow () {
     }
   })
 
+  // win.setMenu(initWindowMenu())
+
+  initWindowMenu()
+
+
   // そしてこのアプリの index.html をロード
   win.loadFile('index.html')
+  
 
   // 開発者ツールを開く
   // win.webContents.openDevTools()
@@ -39,3 +45,72 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+function initWindowMenu()
+{
+  const template = [
+    {
+      label: 'File',
+      submenu: [
+        { label: 'New File' },
+        { label: 'Open File' },
+        { label: 'Recurrent File' },
+        { type: 'separator' },
+        { label: 'Save' },
+        { label: 'Save As...' },
+        { type: 'separator' },
+        { label: 'Exit', click: onExit }
+      ]
+    },
+    // { role: 'editMenu' }
+    {
+      label: 'Edit',
+      submenu: [
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' }
+      ]
+    },
+    // { role: 'viewMenu' }
+    {
+      label: 'View',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+        { type: 'separator' },
+        { role: 'resetzoom' },
+        { role: 'zoomin' },
+        { role: 'zoomout' },
+        { type: 'separator' },
+        { role: 'togglefullscreen' }
+      ]
+    },
+    // { role: 'windowMenu' }
+    {
+      label: 'Window',
+      submenu: [
+        { role: 'minimize' },
+        { role: 'zoom' }
+      ]
+    },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Learn More'
+        }
+      ]
+    }
+  ]
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+}
+
+function onExit() {
+  app.quit();
+}
