@@ -5,15 +5,16 @@
   "author": "CDLab",
   "main": "main.js",
   "scripts": {
-    "start": "npm run lint && npm run clean && run-p copy:* && npm run js:dev && electron dist",
-    "build": "npm run lint && npm run clean && run-p copy:* && npm run js:build && npm run package",
+    "start": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:dev && electron dist",
+    "build": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:build && npm run package",
     "lint": "eslint --ext .js,.jsx src",
     "clean": "rm -rf dist build",
     "package": "electron-packager dist editor --out=build/Release",
     "copy:static": "cpx 'src/**/*.{html,png,jpg,svg}' dist",
     "copy:package.json": "cpx 'package.json' dist",
     "js:dev": "webpack --mode development",
-    "js:build": "webpack --mode production"
+    "js:build": "webpack --mode production",
+    "css:tailwind": "tailwindcss build src/style.css -o dist/style.css"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
     "npm-run-all": "^4.1.5",
+    "tailwindcss": "^1.4.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
