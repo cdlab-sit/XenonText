@@ -3,8 +3,9 @@ import { app, BrowserWindow } from 'electron'
 function createWindow () {
   // ブラウザウインドウを作成
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    titleBarStyle: 'hidden',
+    width: 1280,
+    height: 720,
     webPreferences: {
       nodeIntegration: true
     }
