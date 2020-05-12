@@ -5,8 +5,8 @@ module.exports = {
         "node": true,
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "eslint:all",
+        "plugin:react/all"
     ],
     "globals": {
         "Atomics": "readonly",
