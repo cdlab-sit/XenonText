@@ -11,7 +11,7 @@ export default function Footer () {
 
     // 下記の footer 位置固定は absolute ではなく App で flex などでレイアウト決定が良いかも
     return (
-        <footer className="w-full h-6 bg-gray-900 absolute bottom-0">
+        <footer className="w-full h-6 bg-gray-800 absolute bottom-0">
             <p
                 className="
                     text-xs text-gray-300 text-right
