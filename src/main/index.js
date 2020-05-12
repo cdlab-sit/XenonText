@@ -1,41 +1,68 @@
-import { app, BrowserWindow } from 'electron'
+import {BrowserWindow, app} from "electron";
 
-function createWindow () {
-  // ブラウザウインドウを作成
-  const win = new BrowserWindow({
-    titleBarStyle: 'hidden',
-    width: 1280,
-    height: 720,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
+const createWindow = () => {
 
-  // そしてこのアプリの index.html をロード
-  win.loadFile('index.html')
+    // ブラウザウインドウを作成
+    const win = new BrowserWindow({
+        "height": 720,
+        "titleBarStyle": "hidden",
+        "webPreferences": {
+            "nodeIntegration": true
+        },
+        "width": 1280
+    });
 
-  // 開発者ツールを開く
-  // win.webContents.openDevTools()
-}
+    // そしてこのアプリの index.html をロード
+    win.loadFile("index.html");
 
-// このメソッドは、Electron が初期化処理と
-// browser window の作成準備が完了した時に呼び出されます。
-// 一部のAPIはこのイベントが発生した後にのみ利用できます。
-app.whenReady().then(createWindow)
+    /*
+     * 開発者ツールを開く
+     * win.webContents.openDevTools();
+     */
+
+};
+
+/*
+ * このメソッドは、Electron が初期化処理と
+ * BrowserWindow の作成準備が完了した時に呼び出されます。
+ * 一部のAPIはこのイベントが発生した後にのみ利用できます。
+ */
+app.whenReady().then(createWindow);
 
 // 全てのウィンドウが閉じられた時に終了します。
-app.on('window-all-closed', () => {
-  // macOSでは、ユーザが Cmd + Q で明示的に終了するまで、
-  // アプリケーションとそのメニューバーは有効なままにするのが一般的です。
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+app.on(
+    "window-all-closed",
+    () => {
 
-app.on('activate', () => {
-  // macOSでは、ユーザがドックアイコンをクリックしたとき、
-  // そのアプリのウインドウが無かったら再作成するのが一般的です。
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
+        /*
+         * ユーザが Cmd + Q で明示的に終了するまで、
+         * アプリケーションとそのメニューバーは有効なままにするのが一般的です（ macOS ）。
+         */
+        if (process.platform !== "darwin") {
+
+            app.quit();
+
+        }
+
+    }
+
+);
+
+app.on(
+    "activate",
+    () => {
+
+        /*
+         * ユーザがドックアイコンをクリックしたとき、
+         * そのアプリのウインドウが無かったら再作成するのが一般的です（ macOS ）。
+         */
+        const noWindow = 0;
+        if (BrowserWindow.getAllWindows().length === noWindow) {
+
+            createWindow();
+
+        }
+
+    }
+
+);
