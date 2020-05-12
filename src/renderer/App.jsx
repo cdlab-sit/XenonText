@@ -1,7 +1,7 @@
-import React from "react"
+import React, { Component } from "react"
 import TitleBar from "./components/TitleBar"
 
-export default class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
   }

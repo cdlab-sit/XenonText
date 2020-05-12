@@ -19,7 +19,7 @@ module.exports = [
     }
   },
   {
-    entry: './src/index.js',
+    entry: './src/renderer/index.js',
     output: {
       filename: 'renderer.js',
       path: path.resolve(__dirname, 'dist'),
