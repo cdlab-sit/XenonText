@@ -1,8 +1,7 @@
-import React from "react"
-import { render } from "react-dom"
+import React, { Component } from "react"
 import TitleBar from "./components/TitleBar"
 
-export default class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
   }
@@ -12,13 +11,6 @@ export default class App extends React.Component {
       <div>
         <TitleBar />
       </div>
-
     );
   }
 }
-
-render(
-  <App />,
-  document.getElementById('app')
-)
-
