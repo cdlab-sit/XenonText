@@ -1,4 +1,5 @@
 import {BrowserWindow, app} from "electron";
+import fs from "fs";
 
 const createWindow = () => {
 
@@ -21,6 +22,24 @@ const createWindow = () => {
      */
 
 };
+
+// eslint-disable-next-line
+if (process.env.NODE_ENV === "development") {
+
+    fs.watch(
+        "dist",
+        () => {
+
+            for (const win of BrowserWindow.getAllWindows()) {
+
+                win.reload();
+
+            }
+
+        }
+    );
+
+}
 
 /*
  * このメソッドは、Electron が初期化処理と

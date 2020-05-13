@@ -5,15 +5,19 @@
   "author": "CDLab",
   "main": "main.js",
   "scripts": {
-    "start": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:dev && electron dist",
+    "start": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:dev && npm run dev",
     "build": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:build && npm run package",
+    "watch": "npm run lint && npm run clean && run-p copy:* && run-p css:* && run-p watch:*",
+    "dev": "electron dist",
     "lint": "eslint --ext .js,.jsx src",
     "clean": "rimraf dist build",
     "package": "electron-packager dist editor --out=build/Release",
     "copy:static": "cpx \"src/**/*.{html,png,jpg,svg}\" dist",
     "copy:package.json": "cpx \"package.json\" dist",
+    "watch:static": "cpx -vw \"src/**/*.{html,png,jpg,svg}\" dist",
     "js:dev": "webpack --mode development",
     "js:build": "webpack --mode production",
+    "watch:js": "webpack --watch --mode development",
     "css:tailwind": "tailwindcss build src/style.css -o dist/style.css"
   },
   "repository": {
