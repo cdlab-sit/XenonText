@@ -1,4 +1,5 @@
 import {BrowserWindow, app} from "electron";
+import fs from "fs";
 
 const createWindow = () => {
 
@@ -21,6 +22,20 @@ const createWindow = () => {
      */
 
 };
+
+// プロダクションでも動作するので注意すること。
+fs.watch(
+    "dist",
+    () => {
+
+        for (const win of BrowserWindow.getAllWindows()) {
+
+            win.reload();
+
+        }
+
+    }
+);
 
 /*
  * このメソッドは、Electron が初期化処理と
