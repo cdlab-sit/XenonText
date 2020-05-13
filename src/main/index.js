@@ -23,19 +23,23 @@ const createWindow = () => {
 
 };
 
-// プロダクションでも動作するので注意すること。
-fs.watch(
-    "dist",
-    () => {
+// eslint-disable-next-line
+if (process.env.NODE_ENV === "development") {
 
-        for (const win of BrowserWindow.getAllWindows()) {
+    fs.watch(
+        "dist",
+        () => {
 
-            win.reload();
+            for (const win of BrowserWindow.getAllWindows()) {
+
+                win.reload();
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
 /*
  * このメソッドは、Electron が初期化処理と

@@ -23,6 +23,15 @@ $ cd editor
 $ npm install
 ```
 
+### 開発
+ホットリロードに対応しています。
+```
+# ファイル監視
+$ npm run watch
+# 実行
+$ npm run dev
+```
+
 ### 実行
 ```
 $ npm start
