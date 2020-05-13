@@ -29,6 +29,9 @@ const createWindow = () => {
  */
 app.whenReady().then(createWindow);
 
+// Electron 9 への破壊的アップデートに備える。
+app.allowRendererProcessReuse = true;
+
 // 全てのウィンドウが閉じられた時に終了します。
 app.on(
     "window-all-closed",
