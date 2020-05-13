@@ -4,7 +4,7 @@ import React from "react";
 export default function App () {
 
     return (
-        <div className="flax flax-col h-screen">
+        <div className="flex flex-col h-screen">
             <TitleBar />
             <Main />
             <Footer />

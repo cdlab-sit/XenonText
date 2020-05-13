@@ -1,22 +1,22 @@
+import {EditArea, SideBar} from "../components/index";
 import React from "react";
 import ResizePanel from "react-resize-panel";
-import {SideBar} from "../components/index";
-import EditArea from "./EditArea";
 
 export default function Main () {
 
-    const main = "editer";
-
+    /* eslint-disable react/forbid-component-props */
     return (
         <div className="flex flex-auto">
             <ResizePanel
                 direction="e"
                 handleClass="hidden"
+                style={{"width": "200px"}}
             >
                 <SideBar />
             </ResizePanel>
             <EditArea />
         </div>
     );
+    /* eslint-enable react/forbid-component-props */
 
 }
