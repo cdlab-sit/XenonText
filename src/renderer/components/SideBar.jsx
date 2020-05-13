@@ -2,12 +2,12 @@ import React from "react";
 
 export default function SideBar () {
 
-    const sidebar = "SideBar";
+    const sidebar = "SideBaar";
 
     return (
-        <h2>
+        <div className="w-full">
             {sidebar}
-        </h2>
+        </div>
     );
 
 }
