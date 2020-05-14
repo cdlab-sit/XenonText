@@ -1,4 +1,4 @@
-import {EditArea, SideBar} from "../components/index";
+import {EditArea, SideBar, Tabs} from "../components/index";
 import React from "react";
 import ResizePanel from "react-resize-panel";
 
@@ -14,7 +14,10 @@ export default function Main () {
             >
                 <SideBar />
             </ResizePanel>
-            <EditArea />
+            <div className="flex flex-col w-full">
+                <Tabs />
+                <EditArea />
+            </div>
         </div>
     );
     /* eslint-enable react/forbid-component-props */

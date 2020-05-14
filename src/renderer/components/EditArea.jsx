@@ -4,7 +4,7 @@ export default function EditArea () {
 
     const text = "EditArea";
     return (
-        <div className="bg-gray-900 w-full">
+        <div className="bg-gray-900 h-full">
             <p
                 className="
                     text-xs text-white
