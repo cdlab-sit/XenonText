@@ -1,13 +1,12 @@
-import {Footer, Main, SideBar, TitleBar} from "./components/index";
+import {Footer, Main, TitleBar} from "./components/index";
 import React from "react";
 
 export default function App () {
 
     return (
-        <div>
+        <div className="flex flex-col h-screen">
             <TitleBar />
             <Main />
-            <SideBar />
             <Footer />
         </div>
     );

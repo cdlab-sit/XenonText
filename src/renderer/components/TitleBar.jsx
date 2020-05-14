@@ -5,7 +5,7 @@ export default function TitleBar () {
     const title = "TitleBar";
 
     return (
-        <header className="w-full h-6 absoluto top-0">
+        <header className="w-full h-6">
             <h1
                 className="
                     text-xs text-center text-white
