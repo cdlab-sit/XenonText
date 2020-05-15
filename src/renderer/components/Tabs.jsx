@@ -1,14 +1,11 @@
 import React from "react";
+import {Tab} from "../components/index";
 
 export default function Tabs () {
 
-    const tabs = "Tabs";
-
     return (
-        <div className="h-6">
-            <h1>
-                {tabs}
-            </h1>
+        <div className="h-10 flex items-end">
+            <Tab />
         </div>
     );
 
