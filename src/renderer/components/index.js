@@ -5,3 +5,4 @@ export {default as SideBar} from "./SideBar";
 export {default as EditArea} from "./EditArea";
 export {default as Tabs} from "./Tabs";
 export {default as Tab} from "./Tab";
+export {default as FileStatus} from "./FileStatus";
