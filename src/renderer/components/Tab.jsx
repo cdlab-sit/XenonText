@@ -10,7 +10,8 @@ export default function Tabs () {
                 text-xs text-gray-300
                 my-1 ml-2 leading-6
                 w-32 h-6
-            ">
+                "
+            >
                 {item}
             </h1>
         </div>
