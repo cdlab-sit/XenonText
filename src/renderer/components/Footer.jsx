@@ -14,7 +14,7 @@ export default function Footer () {
         <footer className="w-full h-6 bg-gray-800">
             <p
                 className="
-                    text-xs text-gray-300 text-right
+                    text-xs text-gray-300 text-right select-none
                     leading-6 w-40 font-medium
                 "
             >
