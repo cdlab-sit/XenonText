@@ -15,7 +15,7 @@ export default function Tabs () {
             >
                 {item}
             </h2>
-            <FileStatus />
+            <FileStatus pos="w-3 h-3 mr-2 ml-1" />
         </div>
     );
 
