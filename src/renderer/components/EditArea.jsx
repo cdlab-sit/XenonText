@@ -8,12 +8,6 @@ import "./theme-monokai-default";
 // import "ace-builds/src-noconflict/theme-monokai"
 import AceEditor from "react-ace";
 
-ace.config.set(
-    "basePath",
-    "https://cdn.jsdelivr.net/npm/ace-builds@1.4.11/src-noconflict/"
-)
-
-
 export default function EditArea () {
 
     return (
@@ -35,8 +29,6 @@ export default function EditArea () {
                 highlightActiveLine={false}
                 focus={false} //あるほうがいいかも　好み
                 wrapEnabed={false} //設定より変更可能にする//うまくいかない他コンポーネントの設定が必要
-                enableBasicAutocompletion={true}
-                enableLiveAutocompletion={true}
                 tabSize={4}
             />
         </div>
@@ -44,4 +36,3 @@ export default function EditArea () {
 
 }
 /* eslint-enable */
-// Warning!! react-aceとace-buildsをdevと普通の両方にいれた
