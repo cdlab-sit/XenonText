@@ -1,19 +1,47 @@
+/* eslint-disable */
 import React from "react";
+
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/mode-c_cpp";
+import "./theme-monokai-default";
+// import "./theme-github"
+// import "ace-builds/src-noconflict/theme-monokai"
+import AceEditor from "react-ace";
+
+ace.config.set(
+    "basePath",
+    "https://cdn.jsdelivr.net/npm/ace-builds@1.4.11/src-noconflict/"
+)
+
 
 export default function EditArea () {
 
-    const text = "EditArea";
     return (
         <div className="bg-gray-900 flex-auto">
-            <p
-                className="
-                    text-xs text-white
-                    leading-6 font-medium
-                "
-            >
-                {text}
-            </p>
+            <AceEditor
+                placeholder="Happy Hacking!!"
+                editorProps={{"$blockScrolling": "true"}}
+                name="UNIQUE_ID_OF_DIV"
+                theme="monokai-default"
+                // value="value"
+                // defaultValue="defaultValue"
+                mode="c_cpp"
+                width="100%"
+                // height="100%"
+                fontSize="10px"
+                className=""
+                // showGutter={true}
+                showPrintMargin={false} //?
+                highlightActiveLine={false}
+                focus={false} //あるほうがいいかも　好み
+                wrapEnabed={false} //設定より変更可能にする//うまくいかない他コンポーネントの設定が必要
+                enableBasicAutocompletion={true}
+                enableLiveAutocompletion={true}
+                tabSize={4}
+            />
         </div>
     );
 
 }
+/* eslint-enable */
+// Warning!! react-aceとace-buildsをdevと普通の両方にいれた
