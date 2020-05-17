@@ -10,7 +10,7 @@ export default function Tabs () {
             <h2 className="
                 text-xs text-gray-300 select-none
                 my-1 ml-2 leading-6
-                w-32 h-6
+                w-full h-6
                 "
             >
                 {item}

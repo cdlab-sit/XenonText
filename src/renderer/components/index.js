@@ -6,3 +6,5 @@ export {default as EditArea} from "./EditArea";
 export {default as Tabs} from "./Tabs";
 export {default as Tab} from "./Tab";
 export {default as FileStatus} from "./FileStatus";
+export {default as FileSelector} from "./FileSelector";
+export {default as FileBlock} from "./FileBlock";
