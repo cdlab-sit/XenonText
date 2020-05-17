@@ -5,13 +5,22 @@ ace.define("ace/theme/monokai-default",["require","exports","module","ace/lib/do
     exports.cssClass = "ace-monokai";
     exports.cssText = ".ace-monokai .ace_gutter {\
     //background: #2F3129;\
-        color: #8F908A\
+        color: #8F908A;\
+    }\
+    .ace_gutter{\
+        width: 32px !important;\
+    }\
+    .ace_gutter-layer{\
+        width: 32px !important;\
     }\
     .ace_gutter-cell{\
-        //max-width: 32px;\
+        width: 32px !important;\
         height: 16px;\
-        padding-left 0;\
+        box-sizing: border-box;\
         padding-right: 4px !important;\
+    }\
+    ace_layer ace_gutter-layer ace_folding-enable{\
+        width: 32px\
     }\
     .ace-monokai .ace_print-margin {\
     width: 1px;\
