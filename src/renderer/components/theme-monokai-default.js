@@ -3,31 +3,29 @@ ace.define("ace/theme/monokai-default",["require","exports","module","ace/lib/do
 
     exports.isDark = true;
     exports.cssClass = "ace-monokai";
-    exports.cssText = ".ace-monokai .ace_gutter {\
-    //background: #2F3129;\
-        color: #8F908A;\
-    }\
-    .ace_gutter{\
-        width: 32px !important;\
+    exports.cssText = " \
+    .ace_scroller{\
+        left: 32px !important;\
     }\
     .ace_gutter-layer{\
         width: 32px !important;\
     }\
     .ace_gutter-cell{\
-        width: 32px !important;\
-        height: 16px;\
-        box-sizing: border-box;\
+        padding-left: initial !important;\
         padding-right: 4px !important;\
+        width: 32px !important;\
+        box-sizing: border-box;\
+        font-size: 10px !important;\
     }\
-    ace_layer ace_gutter-layer ace_folding-enable{\
-        width: 32px\
+    .ace-monokai .ace_gutter {\
+        color:  #8F908A;\
+        min-width: 32px; !important\
     }\
     .ace-monokai .ace_print-margin {\
     width: 1px;\
     background: #555651\
     }\
     .ace-monokai {\
-    //background-color: #272822;\
     color: #F8F8F2\
     }\
     .ace-monokai .ace_cursor {\
@@ -50,7 +48,7 @@ ace.define("ace/theme/monokai-default",["require","exports","module","ace/lib/do
     background: #202020\
     }\
     .ace-monokai .ace_gutter-active-line {\
-    background-color: #2D3748\
+    background-color: #2D3748;\
     }\
     .ace-monokai .ace_marker-layer .ace_selected-word {\
     border: 1px solid #49483E\
