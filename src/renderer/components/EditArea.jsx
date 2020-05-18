@@ -1,38 +1,30 @@
-/* eslint-disable */
-import React from "react";
-
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
+/* eslint-disable */
 import "./theme-monokai-default";
-// import "./theme-github"
-// import "ace-builds/src-noconflict/theme-monokai"
+/* eslint-enable */
 import AceEditor from "react-ace";
+import React from "react";
 
 export default function EditArea () {
 
     return (
         <div className="bg-gray-900 flex-auto">
             <AceEditor
-                placeholder="Happy Hacking!!"
                 editorProps={{"$blockScrolling": "true"}}
-                name="UNIQUE_ID_OF_DIV"
-                theme="monokai-default"
-                // value="value"
-                // defaultValue="defaultValue"
-                mode="c_cpp"
-                width="100%"
-                // height="100%"
+                focus={false}
                 fontSize="10px"
-                className=""
-                // showGutter={true}
-                showPrintMargin={false} //?
                 highlightActiveLine={false}
-                focus={false} //あるほうがいいかも　好み
-                wrapEnabed={false} //設定より変更可能にする//うまくいかない他コンポーネントの設定が必要
+                mode="c_cpp"
+                name="UNIQUE_ID_OF_DIV"
+                placeholder="Happy Hacking!!"
+                showPrintMargin={false}
                 tabSize={4}
+                theme="monokai-default"
+                width="100%"
+                wrapEnabed={false}
             />
         </div>
     );
 
 }
-/* eslint-enable */
