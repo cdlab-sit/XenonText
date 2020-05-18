@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
 import React from "react";
 
-export default function FileStatus ({pos}) {
+export default function FileStatus () {
 
     return (
-        <div className={pos}>
+        <div className="w-3 h-3 mx-2 flex-shrink-0">
             <svg
                 className="text-gray-300"
                 fill="currentColor"
@@ -23,7 +22,3 @@ export default function FileStatus ({pos}) {
     );
 
 }
-
-FileStatus.propTypes = {
-    "pos": PropTypes.string.isRequired
-};
