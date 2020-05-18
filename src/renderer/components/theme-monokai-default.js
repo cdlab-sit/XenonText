@@ -4,6 +4,13 @@ ace.define("ace/theme/monokai-default",["require","exports","module","ace/lib/do
     exports.isDark = true;
     exports.cssClass = "ace-monokai";
     exports.cssText = " \
+    .ace_cursor{\
+        position: relative !important;\
+        right: 2px;\
+    }\
+    .ace_text-layer{\
+        margin-left: 2px !important\
+    }\
     .ace_scroller{\
         left: 32px !important;\
     }\
@@ -13,13 +20,14 @@ ace.define("ace/theme/monokai-default",["require","exports","module","ace/lib/do
     .ace_gutter-cell{\
         padding-left: initial !important;\
         padding-right: 4px !important;\
+        padding-bottom: 2px;\
         width: 32px !important;\
         box-sizing: border-box;\
         font-size: 10px !important;\
     }\
     .ace-monokai .ace_gutter {\
         color:  #8F908A;\
-        min-width: 32px; !important\
+        min-width: 32px;\
     }\
     .ace-monokai .ace_print-margin {\
     width: 1px;\
