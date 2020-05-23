@@ -23,5 +23,6 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "react/no-set-state": "off"
     }
 };
