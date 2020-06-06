@@ -14,6 +14,7 @@ export default function EditArea () {
                 editorProps={{"$blockScrolling": "true"}}
                 focus={false}
                 fontSize="16px"
+                height="100%"
                 highlightActiveLine={false}
                 mode="c_cpp"
                 name="UNIQUE_ID_OF_DIV"
