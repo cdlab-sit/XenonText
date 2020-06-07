@@ -118,6 +118,6 @@ ace.define("ace/theme/xenon",["require","exports","module","ace/lib/dom"], funct
     .ace-xenon .ace_indent-guide {\
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y\
     }";
-});                
+});
 
 /* eslint-enable */
