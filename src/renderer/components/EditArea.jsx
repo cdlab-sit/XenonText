@@ -1,18 +1,29 @@
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/mode-c_cpp";
+/* eslint-disable */
+import "./theme-xenon";
+/* eslint-enable */
+import AceEditor from "react-ace";
 import React from "react";
 
 export default function EditArea () {
 
-    const text = "EditArea";
     return (
         <div className="bg-gray-900 flex-auto">
-            <p
-                className="
-                    text-xs text-white
-                    leading-6 font-medium
-                "
-            >
-                {text}
-            </p>
+            <AceEditor
+                editorProps={{"$blockScrolling": "true"}}
+                focus={false}
+                fontSize="16px"
+                height="100%"
+                highlightActiveLine={false}
+                mode="c_cpp"
+                name="UNIQUE_ID_OF_DIV"
+                showPrintMargin={false}
+                tabSize={4}
+                theme="xenon"
+                width="100%"
+                wrapEnabed={false}
+            />
         </div>
     );
 
