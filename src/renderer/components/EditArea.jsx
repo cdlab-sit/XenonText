@@ -5,7 +5,7 @@ import "./theme-xenon";
 
 import AceEditor from "react-ace";
 import React from "react";
-import { setCharCount } from "../actions/";
+import { setCharCount } from "../reducks/charCount/actions";
 import { useDispatch } from "react-redux";
 
 export default function EditArea() {
