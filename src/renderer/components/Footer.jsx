@@ -1,13 +1,16 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 export default function Footer () {
 
-    // エディター部分の文字列長を取得するように変更する
-    const charCount = 1234567890,
+    const counter = useSelector((state) => state.counter),
         footer = {
             "en": " charactors",
             "ja": " 文字"
         };
+    // エディター部分の文字列長を取得するように変更する
+
+    // C, const charCount = 1234567890,
 
     // 下記の footer 位置固定は absolute ではなく App で flex などでレイアウト決定が良いかも
     return (
@@ -18,7 +21,7 @@ export default function Footer () {
                     leading-6 w-40 font-medium
                 "
             >
-                {charCount}
+                {counter}
                 {footer.en}
             </p>
         </footer>
