@@ -1,10 +1,8 @@
-/* eslint-disable */
-const initialState = {
-    charCount: {
-        count: 0,
-        type: "SET_CHAR_COUNT"
-    }
-};
+export const initialState = {
 
-export default initialState;
-/* eslint-able */
+    "charCount": {
+        "count": 0,
+        "type": "SET_CHAR_COUNT"
+    }
+
+};

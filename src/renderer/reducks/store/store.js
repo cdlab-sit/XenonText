@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
     combineReducers,
     createStore as reduxCreateStore
@@ -8,13 +7,8 @@ import {CharCountReducer} from "../charCount/reducers";
 
 export default function createStore () {
 
-    return reduxCreateStore(
-        combineReducers({
-            charCount: CharCountReducer
-        })
-    );
+    return reduxCreateStore(combineReducers({
+        "charCount": CharCountReducer
+    }));
 
 }
-
-/* eslint-able */
-

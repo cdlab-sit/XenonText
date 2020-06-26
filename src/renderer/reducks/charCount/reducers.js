@@ -1,15 +1,16 @@
-/* eslint-disable */
 import * as Actions from "./actions";
-import initialState from "../store/initialState";
+import {initialState} from "../store/initialState";
 
+// eslint-disable-next-line default-param-last
 export const CharCountReducer = (state = initialState.charCount, action) => {
-    // Comment, switch文必要ないが拡張に備えている
-    console.log({...state});
-    console.log({...action});
-    // console.log();
+
+    // Switch文必要ないが拡張に備えている
     switch (action.type) {
+
     case Actions.SET_CHAR_COUNT:
         return {
+            // ...storeいらないが勉強のため置いてある
+            ...state,
             ...action
         };
     default:
@@ -17,7 +18,5 @@ export const CharCountReducer = (state = initialState.charCount, action) => {
 
     }
 
-}
+};
 
-// export default CharCountReducer;
-/* eslint-able */
