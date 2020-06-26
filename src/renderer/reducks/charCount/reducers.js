@@ -9,12 +9,14 @@ export const CharCountReducer = (state = initialState.charCount, action) => {
 
     case Actions.SET_CHAR_COUNT:
         return {
-            // ...storeいらないが拡張に備えている
+            // ...state必要ないが拡張に備えている
             ...state,
             ...action
         };
     default:
-        return state;
+        return {
+            ...state
+        };
 
     }
 
