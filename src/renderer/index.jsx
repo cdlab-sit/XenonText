@@ -1,12 +1,14 @@
 import App from "./App";
 import {Provider} from "react-redux";
 import React from "react";
-import {remote} from "electron";
 import createStore from "./reducks/store/store";
+import {remote} from "electron";
 import {render} from "react-dom";
 import sampleMenu from "./Menus";
 
-const store = createStore();
+const menu = remote.Menu.buildFromTemplate(sampleMenu()),
+    store = createStore();
+remote.Menu.setApplicationMenu(menu);
 
 render(
     <Provider store={store}>
@@ -17,5 +19,3 @@ render(
     document.getElementById("app")
 );
 
-const menu = remote.Menu.buildFromTemplate(sampleMenu());
-remote.Menu.setApplicationMenu(menu);
