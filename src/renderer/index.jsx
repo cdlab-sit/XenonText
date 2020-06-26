@@ -1,10 +1,11 @@
 import App from "./App";
-import {Menu} from "electron";
 import React from "react";
+import {remote} from "electron";
 import {render} from "react-dom";
 import sampleMenu from "./Menus";
 
-Menu.setApplicationMenu(Menu.buildFromTemplate(sampleMenu()));
+/* eslint-disable */
+console.log(sampleMenu());
 
 render(
     <React.StrictMode>
@@ -12,3 +13,6 @@ render(
     </React.StrictMode>,
     document.getElementById("app")
 );
+
+const menu = remote.Menu.buildFromTemplate(sampleMenu());
+remote.Menu.setApplicationMenu(menu);
