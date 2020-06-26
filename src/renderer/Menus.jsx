@@ -3,34 +3,40 @@ const appmenu = [
         "label": "File",
         "submenu": [
             {
-                "label": "New File",
-                "role": "undo"
+                "label": "New File"
             },
             {
-                "label": "Open File",
-                "role": "undo"
+                "label": "Open File"
             },
             {
-                "label": "Recently File",
-                "role": "undo"
+                "label": "Recently File"
             },
             {
                 "type": "separator"
             },
             {
-                "label": "Save",
-                "role": "undo"
+                "label": "Save"
             },
             {
-                "label": "Save as",
-                "role": "undo"
+                "label": "Save as"
+            },
+            {
+                "type": "separator"
+            },
+            {
+                "label": "Full Screen",
+                "role": "togglefullscreen"
+            },
+            {
+                "label": "Minimize",
+                "role": "minimize"
             },
             {
                 "type": "separator"
             },
             {
                 "label": "Close",
-                "role": "undo"
+                "role": "close"
             }
         ]
     },
@@ -59,6 +65,46 @@ const appmenu = [
             {
                 "label": "Paste",
                 "role": "paste"
+            },
+            {
+                "type": "separator"
+            },
+            {
+                "label": "Search"
+            },
+            {
+                "label": "Replace"
+            },
+            {
+                "label": "Select All",
+                "role": "selectall"
+            }
+        ]
+    },
+    {
+        "label": "View",
+        "submenu": [
+            {
+                "label": "Zoom In",
+                "role": "zoomin"
+            },
+            {
+                "label": "Zoom Out",
+                "role": "zoomout"
+            }
+        ]
+    },
+    {
+        "label": "Help",
+        "submenu": [
+            {
+                "label": "Learn More"
+            },
+            {
+                "type": "separator"
+            },
+            {
+                "label": "Version"
             }
         ]
     }
