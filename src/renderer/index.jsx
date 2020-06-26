@@ -1,16 +1,19 @@
 import App from "./App";
+import {Provider} from "react-redux";
 import React from "react";
 import {remote} from "electron";
+import createStore from "./reducks/store/store";
 import {render} from "react-dom";
 import sampleMenu from "./Menus";
 
-/* eslint-disable */
-console.log(sampleMenu());
+const store = createStore();
 
 render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+    <Provider store={store}>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </Provider>,
     document.getElementById("app")
 );
 
