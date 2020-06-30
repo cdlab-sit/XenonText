@@ -1,5 +1,51 @@
-const appmenu = [
-    {
+import {shell} from "electron";
+
+const editMenu = {
+        "label": "Edit",
+        "submenu": [
+            {
+                "label": "Undo",
+                "role": "undo"
+            },
+            {
+                "label": "Redo",
+                "role": "redo"
+            },
+            {
+                "type": "separator"
+            },
+            {
+                "label": "Cut",
+                "role": "cut"
+            },
+            {
+                "label": "Copy",
+                "role": "copy"
+            },
+            {
+                "label": "Paste",
+                "role": "paste"
+            },
+            {
+                "label": "Delete",
+                "role": "delete"
+            },
+            {
+                "type": "separator"
+            },
+            {
+                "label": "Search"
+            },
+            {
+                "label": "Replace"
+            },
+            {
+                "label": "Select All",
+                "role": "selectall"
+            }
+        ]
+    },
+    fileMenu = {
         "label": "File",
         "submenu": [
             {
@@ -9,7 +55,7 @@ const appmenu = [
                 "label": "Open File"
             },
             {
-                "label": "Recently File"
+                "label": "Open File As Recently"
             },
             {
                 "type": "separator"
@@ -40,64 +86,16 @@ const appmenu = [
             }
         ]
     },
-    {
-        "label": "Edit",
-        "submenu": [
-            {
-                "label": "Undo",
-                "role": "undo"
-            },
-            {
-                "label": "Redo",
-                "role": "redo"
-            },
-            {
-                "type": "separator"
-            },
-            {
-                "label": "Cut",
-                "role": "cut"
-            },
-            {
-                "label": "Copy",
-                "role": "copy"
-            },
-            {
-                "label": "Paste",
-                "role": "paste"
-            },
-            {
-                "type": "separator"
-            },
-            {
-                "label": "Search"
-            },
-            {
-                "label": "Replace"
-            },
-            {
-                "label": "Select All",
-                "role": "selectall"
-            }
-        ]
-    },
-    {
-        "label": "View",
-        "submenu": [
-            {
-                "label": "Zoom In",
-                "role": "zoomin"
-            },
-            {
-                "label": "Zoom Out",
-                "role": "zoomout"
-            }
-        ]
-    },
-    {
+    helpMenu = {
         "label": "Help",
         "submenu": [
             {
+                "click": async () => {
+
+                    const ur = "https://github.com/cdlab-sit/editor";
+                    await shell.openExternal(ur);
+
+                },
                 "label": "Learn More"
             },
             {
@@ -107,11 +105,32 @@ const appmenu = [
                 "label": "Version"
             }
         ]
-    }
-];
+    },
+    viewMenu = {
+        "label": "View",
+        "submenu": [
+            {
+                "label": "Zoom In",
+                "role": "zoomin"
+            },
+            {
+                "label": "Zoom Out",
+                "role": "zoomout"
+            },
+            {
+                "label": "toggleDevTools",
+                "role": "toggledevtools"
+            }
+        ]
+    };
 
 export default function sampleMenu () {
 
-    return appmenu;
+    return [
+        fileMenu,
+        editMenu,
+        viewMenu,
+        helpMenu
+    ];
 
 }
