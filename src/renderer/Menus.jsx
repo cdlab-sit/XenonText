@@ -1,4 +1,20 @@
-import {shell} from "electron";
+/* eslint-disable */
+import {remote, shell} from "electron";
+
+function openDialog () {
+
+    const options = {
+        "properties": ["openDirectory"],
+        "title": "open folder"
+    };
+    remote.dialog.showOpenDialog(options, function (filenames) {
+        remote.ipcRenderer.send("mul-async-dialog", filenames);
+        remote.ipcRenderer.on("mul-async-dialog-replay", (event, arg) => {
+            msg(arg);
+        });
+    });
+
+};
 
 const editMenu = {
         "label": "Edit",
@@ -49,6 +65,11 @@ const editMenu = {
         "label": "File",
         "submenu": [
             {
+                "click":  () => {
+
+                    openDialog()
+
+                },
                 "label": "New File"
             },
             {
