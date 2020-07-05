@@ -37,7 +37,7 @@ ace.define("ace/theme/xenon",["require","exports","module","ace/lib/dom"], funct
         color: #FFFFFF\
     }\
     .ace-xenon .ace_marker-layer .ace_selection {\
-        background: #49483E\
+        background: #718096\
     }\
     .ace-xenon.ace_multiselect .ace_selection.ace_start {\
         box-shadow: 0 0 3px 0px #272822;\
