@@ -17,15 +17,18 @@ export default function EditArea () {
             dispatch(setCharCount(text.length));
 
         },
-        /* eslint-disable */
         onSelectionChange = (select) => {
-            if (!select.isEmpty()) {
-                console.log("if")
+
+            const empty = select.isEmpty();
+            if (!empty) {
+
                 const selectedText = myRef.current.editor.getSelectedText();
                 dispatch(setCharCount(selectedText.length));
-            } else {
-                console.log("else")
+
+            } else if (empty) {
+
                 onChange();
+
             }
 
         };
