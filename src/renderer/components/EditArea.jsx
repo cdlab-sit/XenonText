@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-no-bind */
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "./theme-xenon";
@@ -8,21 +8,31 @@ import {setCharCount} from "../reducks/charCount/actions";
 import {useDispatch} from "react-redux";
 
 export default function EditArea () {
-    const dispatch = useDispatch();
 
-    const myRef = React.createRef();
+    const dispatch = useDispatch(),
+        myRef = React.createRef(),
+        onChange = () => {
 
-    const onSelectionChange = (newValue, event) => {
-        console.log("select-change", newValue);
-        console.log("select-change-event", event);
-        const selctedText = myRef.current.editor.getSelectedText();
-        console.log(selctedText.length);
-    };
+            const text = myRef.current.editor.getValue();
+            dispatch(setCharCount(text.length));
+
+        },
+        /* eslint-disable */
+        onSelectionChange = (select) => {
+            if (!select.isEmpty()) {
+                console.log("if")
+                const selectedText = myRef.current.editor.getSelectedText();
+                dispatch(setCharCount(selectedText.length));
+            } else {
+                console.log("else")
+                onChange();
+            }
+
+        };
+
     return (
         <div className="bg-gray-900 flex-auto">
             <AceEditor
-                // ref={this.text}
-                ref={myRef}
                 editorProps={{"$blockScrolling": "true"}}
                 focus={false}
                 fontSize="16px"
@@ -30,9 +40,9 @@ export default function EditArea () {
                 highlightActiveLine={false}
                 mode="c_cpp"
                 name="UNIQUE_ID_OF_DIV"
-                // eslint-disable-next-line react/jsx-no-bind
-                onChange={(val) => dispatch(setCharCount(val.length))}
+                onChange={onChange}
                 onSelectionChange={onSelectionChange}
+                ref={myRef}
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
@@ -42,8 +52,6 @@ export default function EditArea () {
         </div>
     );
 
-
-
 }
 
-/* eslint-able */
+/* eslint-disable */
