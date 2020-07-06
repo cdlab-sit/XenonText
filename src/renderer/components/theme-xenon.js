@@ -37,7 +37,7 @@ ace.define("ace/theme/xenon",["require","exports","module","ace/lib/dom"], funct
         color: #FFFFFF\
     }\
     .ace-xenon .ace_marker-layer .ace_selection {\
-        background: #49483E\
+        background: rgba(74, 85, 104, 0.8)\
     }\
     .ace-xenon.ace_multiselect .ace_selection.ace_start {\
         box-shadow: 0 0 3px 0px #272822;\
@@ -53,7 +53,7 @@ ace.define("ace/theme/xenon",["require","exports","module","ace/lib/dom"], funct
         background: #202020\
     }\
     .ace-xenon .ace_gutter-active-line {\
-        background-color: #2D3748;\
+        background-color: rgba(74, 85, 104, 0.8);\
     }\
     .ace-xenon .ace_marker-layer .ace_selected-word {\
         border: 1px solid #49483E\
