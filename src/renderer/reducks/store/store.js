@@ -4,12 +4,12 @@ import {
 } from "redux";
 
 import {EditTextReducer} from "../editText/reducers";
-import {FileStatusReducer} from "../fileStatus/reducers";
+import {FileManagerReducer} from "../FileManager/reducers";
 export default function createStore () {
 
     return reduxCreateStore(combineReducers({
         "editText": EditTextReducer,
-        "fileStatus": FileStatusReducer
+        "fileManager": FileManagerReducer
     }));
 
 }

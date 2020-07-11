@@ -1,5 +1,5 @@
 import React from "react";
-import {getFileStatus} from "../reducks/fileStatus/selectors";
+import {getFileStatus} from "../reducks/fileManager/selectors";
 import {useSelector} from "react-redux";
 
 const notSave = "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 " +

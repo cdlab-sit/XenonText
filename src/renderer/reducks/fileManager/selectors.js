@@ -2,12 +2,12 @@ import {createSelector} from "reselect";
 
 export const getFileStatus = createSelector(
     [
-        (state) => state.fileStatus,
+        (state) => state.fileManager,
         (state) => state.editText
     ],
-    (fileStatus, editText) => {
+    (fileManager, editText) => {
 
-        if (editText.text === fileStatus.fileText) {
+        if (editText.text === fileManager.fileText) {
 
             return true;
 

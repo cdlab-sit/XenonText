@@ -2,6 +2,6 @@
 export const CHANGE_FILE = "CHANGE_FILE",
     setText = (text) => ({
         "payload": {
-            "text": text.getText
+            text
         }
     });

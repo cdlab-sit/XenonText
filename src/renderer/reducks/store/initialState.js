@@ -7,7 +7,7 @@ export const initialState = {
         "text": "",
         "type": SET_TEXT
     },
-    "fileStatus": {
+    "fileManager": {
         "fileText": "abcde"
     }
 

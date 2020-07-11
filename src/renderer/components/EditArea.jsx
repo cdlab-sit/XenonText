@@ -5,6 +5,7 @@ import React, {useCallback} from "react";
 import {setSelectedText, setText} from "../reducks/editText/actions";
 import AceEditor from "react-ace";
 import {useDispatch} from "react-redux";
+// Cimport {getNewText} from "../reducks/editText/selectors";
 
 export default function EditArea () {
 
@@ -41,6 +42,8 @@ export default function EditArea () {
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
+                // Cvalue={getNewText(useSelector((state) => state))}
+                value="aaaa"
                 width="100%"
                 wrapEnabed={false}
             />
