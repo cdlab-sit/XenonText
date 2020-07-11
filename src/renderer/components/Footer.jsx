@@ -1,15 +1,14 @@
 import React from "react";
-import {getCharCount} from "../reducks/charCount/selectors";
+import {getFooterCount} from "../reducks/editText/selectors";
 import {useSelector} from "react-redux";
 
 export default function Footer () {
 
-    const charCount = getCharCount(useSelector((state) => state)),
+    const charCount = getFooterCount(useSelector((state) => state)),
         footer = {
             "en": " charactors",
             "ja": " 文字"
         };
-    // エディター部分の文字列長を取得するように変更する
 
     return (
         <footer className="w-full h-6 bg-gray-800">

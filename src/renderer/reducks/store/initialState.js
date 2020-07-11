@@ -1,10 +1,12 @@
-import {SET_CHAR_COUNT} from "../charCount/actions";
+import {SET_TEXT} from "../editText/actions";
 
 export const initialState = {
 
-    "charCount": {
-        "count": 0,
-        "type": SET_CHAR_COUNT
-    }
+    "editText": {
+        "selectedText": "",
+        "text": "",
+        "type": SET_TEXT
+    },
+    "fileText": ""
 
 };

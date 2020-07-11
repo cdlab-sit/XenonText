@@ -2,55 +2,27 @@ import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "./theme-xenon";
 import React, {useCallback} from "react";
+import {setSelectedText, setText} from "../reducks/editText/actions";
 import AceEditor from "react-ace";
-import {setCharCount} from "../reducks/charCount/actions";
 import {useDispatch} from "react-redux";
-
-const myRef = React.createRef();
-
-// eslint-disable-next-line one-var
-const getAllLength = () => {
-
-        const text = myRef.current.editor.getValue();
-        return text.length;
-
-    },
-    getSelectedLength = (select) => {
-
-        const empty = select.isEmpty();
-        let SelectedLength = 0;
-        if (!empty) {
-
-            const text = myRef.current.editor.getSelectedText();
-            SelectedLength = text.length;
-
-        } else if (empty) {
-
-            SelectedLength = getAllLength();
-
-        }
-        return SelectedLength;
-
-    };
 
 export default function EditArea () {
 
+    let editor = "";
     const dispatch = useDispatch(),
-        updateChar = (length) => {
+        onChange = useCallback(() => {
 
-            dispatch(setCharCount(length));
-
-        };
-
-    // eslint-disable-next-line one-var
-    const onChange = useCallback(() => {
-
-            updateChar(getAllLength());
+            dispatch(setText(editor));
 
         }),
-        onSelectionChange = useCallback((select) => {
+        onLoad = useCallback((newEditor) => {
 
-            updateChar(getSelectedLength(select));
+            editor = newEditor;
+
+        }),
+        onSelectionChange = useCallback(() => {
+
+            dispatch(setSelectedText(editor));
 
         });
     return (
@@ -64,8 +36,8 @@ export default function EditArea () {
                 mode="c_cpp"
                 name="UNIQUE_ID_OF_DIV"
                 onChange={onChange}
+                onLoad={onLoad}
                 onSelectionChange={onSelectionChange}
-                ref={myRef}
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
@@ -76,3 +48,5 @@ export default function EditArea () {
     );
 
 }
+
+/* eslint-able */
