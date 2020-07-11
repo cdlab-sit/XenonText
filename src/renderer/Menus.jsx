@@ -1,20 +1,49 @@
 /* eslint-disable */
 import {remote, shell} from "electron";
+import fs from "fs";
 
-function openDialog () {
+function readFile(path) {
+    fs.readFile(path, (error, data) => {
+        if (error != null) {
+            alert("file open error.");
+            return;
+        }
+    })
+};
+
+function openFile () {
 
     const options = {
-        "properties": ["openDirectory"],
-        "title": "open folder"
+        "properties": ["openFile"]
     };
-    remote.dialog.showOpenDialog(options, function (filenames) {
-        remote.ipcRenderer.send("mul-async-dialog", filenames);
-        remote.ipcRenderer.on("mul-async-dialog-replay", (event, arg) => {
-            msg(arg);
-        });
+    var err = remote.dialog.showOpenDialog(remote.getCurrentWindow(), options).then(path => {
+        if (path) {
+            readFile(path.filePaths[0]);
+        }
     });
 
 };
+
+function writeFile(path, data) {
+    fs.writeFile(path, data, (error) => {
+        if (error != null) {
+            alert("save error");
+            return;
+        }
+    })
+}
+
+function saveFile () {
+    const options = {
+        "properties": ["openFile"]
+    };
+    remote.dialog.showSaveDialog(remote.getCurrentWindow(), options).then(path => {
+        if (path) {
+            var write_data = "ここに保存する情報を代入します";
+            writeFile(path.filePath, write_data);
+        }
+    })
+}
 
 const editMenu = {
         "label": "Edit",
@@ -65,14 +94,10 @@ const editMenu = {
         "label": "File",
         "submenu": [
             {
-                "click":  () => {
-
-                    openDialog()
-
-                },
                 "label": "New File"
             },
             {
+                "click": openFile,
                 "label": "Open File"
             },
             {
@@ -82,21 +107,11 @@ const editMenu = {
                 "type": "separator"
             },
             {
+                "click": saveFile,
                 "label": "Save"
             },
             {
                 "label": "Save as"
-            },
-            {
-                "type": "separator"
-            },
-            {
-                "label": "Full Screen",
-                "role": "togglefullscreen"
-            },
-            {
-                "label": "Minimize",
-                "role": "minimize"
             },
             {
                 "type": "separator"
@@ -137,6 +152,17 @@ const editMenu = {
             {
                 "label": "Zoom Out",
                 "role": "zoomout"
+            },
+            {
+                "type": "separator"
+            },
+            {
+                "label": "Full Screen",
+                "role": "togglefullscreen"
+            },
+            {
+                "label": "Minimize",
+                "role": "minimize"
             },
             {
                 "label": "toggleDevTools",
