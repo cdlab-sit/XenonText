@@ -7,6 +7,8 @@ export const initialState = {
         "text": "",
         "type": SET_TEXT
     },
-    "fileText": ""
+    "fileStatus": {
+        "fileText": "abcde"
+    }
 
 };

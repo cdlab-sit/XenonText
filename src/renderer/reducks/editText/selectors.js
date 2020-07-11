@@ -5,12 +5,12 @@ export const getFooterCount = createSelector(
     (editText) => {
 
         const selectedTextLength = editText.selectedText.length;
-        if (!selectedTextLength) {
+        if (selectedTextLength) {
 
-            return editText.text.length;
+            return selectedTextLength;
 
         }
-        return selectedTextLength;
+        return editText.text.length;
 
     }
 
