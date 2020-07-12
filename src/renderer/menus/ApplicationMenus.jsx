@@ -1,30 +1,55 @@
 import {editMenu, fileMenu, helpMenu, viewMenu} from "./index";
-import {app} from "electron";
 
-const isMac = process.platform === "darwin";
+const
+    appName = "XenonText",
+    isMac = process.platform === "darwin";
 
 let appMenu = [];
 
+if (isMac) {
+
+    appMenu = [
+        {
+            "label": appName,
+            "submenu": [
+                {
+                    "role": "about"
+                },
+                {
+                    "type": "separator"
+                },
+                {
+                    "role": "services"
+                },
+                {
+                    "type": "separator"
+                },
+                {
+                    "role": "hide"
+                },
+                {
+                    "role": "hideothers"
+                },
+                {
+                    "role": "unhide"
+                },
+                {
+                    "type": "separator"
+                },
+                {
+                    "role": "quit"
+                }
+            ]
+        }
+    ];
+
+} else {
+
+    appMenu = [];
+
+}
+
 export default function applicationMenuTemplate () {
-
-    if (isMac) {
-
-        appMenu = [
-            {
-                "label": app.name,
-                "submenu": [
-                    {
-                        "role": "quit"
-                    }
-                ]
-            }
-        ];
-
-    } else {
-
-        appMenu = [];
-
-    }
 
     return [
         ...appMenu,
