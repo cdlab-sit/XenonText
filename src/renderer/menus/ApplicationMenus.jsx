@@ -1,9 +1,6 @@
-import editMenu from "./EditMenu";
-import fileMenu from "./FileMenu";
-import helpMenu from "./HelpMenu";
-import viewMenu from "./ViewMenu";
+import {editMenu, fileMenu, helpMenu, viewMenu} from "./index";
 
-export default function applicationMenu () {
+export default function applicationMenuTemplate () {
 
     return [
         fileMenu,

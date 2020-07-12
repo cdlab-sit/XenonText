@@ -1,22 +1,20 @@
-/* eslint-disable */
 import fs from "fs";
 import {remote} from "electron";
 
-const openFile = () => {
+const
+    openFile = () => {
 
-        const fileNumber = 0,
+        const
+            fileNumber = 0,
             options = {
                 "properties": ["openFile"]
-            },
-            win = remote.getCurrentWindow();
+            };
 
-        remote.dialog.showOpenDialog(
-            win,
-            options
-        ).then((path) => {
+        remote.dialog.showOpenDialog(options).then((path) => {
 
             if (path) {
 
+                // eslint-disable-next-line no-use-before-define
                 readFile(path.filePaths[fileNumber]);
 
             }
@@ -46,18 +44,15 @@ const openFile = () => {
     saveFile = () => {
 
         const options = {
-                "properties": ["openFile"]
-            },
-            win = remote.getCurrentWindow();
+            "properties": ["openFile"]
+        };
 
-        remote.dialog.showSaveDialog(
-            win,
-            options
-        ).then((path) => {
+        remote.dialog.showSaveDialog(options).then((path) => {
 
             if (path) {
 
                 const writeData = "ここに保存する情報を代入します";
+                // eslint-disable-next-line no-use-before-define
                 writeFile(
                     path.filePath,
                     writeData
@@ -78,6 +73,7 @@ const openFile = () => {
 
                 if (error !== null) {
 
+                    // eslint-disable-next-line no-useless-return
                     return;
 
                 }
@@ -87,6 +83,7 @@ const openFile = () => {
 
     },
 
+    // eslint-disable-next-line sort-vars
     fileMenu = {
         "label": "File",
         "submenu": [

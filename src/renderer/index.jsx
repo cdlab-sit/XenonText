@@ -1,23 +1,24 @@
+import {applicationMenuTemplate, contextMenuTemplate} from "./menus/index";
 import App from "./App";
 import {Provider} from "react-redux";
 import React from "react";
-import applicationMenu from "./menus/ApplicationMenus";
-import contextMenu from "./menus/ContextMenus";
 import createStore from "./reducks/store/store";
 import {remote} from "electron";
 import {render} from "react-dom";
 
-const applicationmenu = remote.Menu.buildFromTemplate(applicationMenu()),
-    contextmenu = remote.Menu.buildFromTemplate(contextMenu()),
+const
+    applicationMenu = remote.Menu.buildFromTemplate(applicationMenuTemplate()),
+    contextMenu = remote.Menu.buildFromTemplate(contextMenuTemplate()),
     store = createStore();
-remote.Menu.setApplicationMenu(applicationmenu);
+
+remote.Menu.setApplicationMenu(applicationMenu);
 
 window.addEventListener(
     "contextmenu",
     (event) => {
 
         event.preventDefault();
-        contextmenu.popup(remote.getCurrentWindow());
+        contextMenu.popup(remote.getCurrentWindow());
 
     },
     false
