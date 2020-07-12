@@ -1,19 +1,23 @@
 import {createSelector} from "reselect";
 
 export const getFileStatus = createSelector(
-    [
-        (state) => state.fileManager,
-        (state) => state.editText
-    ],
-    (fileManager, editText) => {
+        [
+            (state) => state.fileManager,
+            (state) => state.editText
+        ],
+        (fileManager, editText) => {
 
-        if (editText.text === fileManager.fileText) {
+            if (editText.text === fileManager.fileText) {
 
-            return true;
+                return true;
+
+            }
+            return false;
 
         }
-        return false;
 
-    }
-
-);
+    ),
+    getNewText = createSelector(
+        [(state) => state.fileManager],
+        (state) => state.fileText
+    );

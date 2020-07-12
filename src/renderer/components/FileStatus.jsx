@@ -14,11 +14,11 @@ const notSave = "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 " +
 
 export default function FileStatus () {
 
-    let draw = notSave;
+    let draw = save;
     const isSaved = getFileStatus(useSelector((state) => state));
-    if (isSaved) {
+    if (!isSaved) {
 
-        draw = save;
+        draw = notSave;
 
     }
     return (

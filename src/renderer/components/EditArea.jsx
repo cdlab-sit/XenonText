@@ -3,13 +3,19 @@ import "ace-builds/src-noconflict/mode-c_cpp";
 import "./theme-xenon";
 import React, {useCallback} from "react";
 import {setSelectedText, setText} from "../reducks/editText/actions";
+import {useDispatch, useSelector} from "react-redux";
 import AceEditor from "react-ace";
-import {useDispatch} from "react-redux";
-// Cimport {getNewText} from "../reducks/editText/selectors";
+import {getNewText} from "../reducks/fileManager/selectors";
+import {getText} from "../reducks/editText/selectors";
+
+
+let
+    editor = "",
+    value = "";
 
 export default function EditArea () {
 
-    let editor = "";
+    value = getNewText(useSelector((state) => state));
     const dispatch = useDispatch(),
         onChange = useCallback(() => {
 
@@ -19,13 +25,20 @@ export default function EditArea () {
         onLoad = useCallback((newEditor) => {
 
             editor = newEditor;
+            dispatch(setText(editor));
 
         }),
         onSelectionChange = useCallback(() => {
 
             dispatch(setSelectedText(editor));
 
-        });
+        }),
+        text = getText(useSelector((state) => state));
+    if (editor) {
+
+        value = text;
+
+    }
     return (
         <div className="bg-gray-900 flex-auto">
             <AceEditor
@@ -42,8 +55,7 @@ export default function EditArea () {
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
-                // Cvalue={getNewText(useSelector((state) => state))}
-                value="aaaa"
+                value={value}
                 width="100%"
                 wrapEnabed={false}
             />
@@ -51,5 +63,3 @@ export default function EditArea () {
     );
 
 }
-
-/* eslint-able */
