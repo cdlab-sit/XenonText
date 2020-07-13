@@ -15,7 +15,6 @@ export const getFooterCount = createSelector(
         }
 
     ),
-    // eslint-disable-next-line sort-vars
     getText = createSelector(
         [(state) => state.editText],
         (state) => state.text
