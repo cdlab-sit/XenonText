@@ -31,7 +31,7 @@ const
 
                 if (error !== null) {
 
-                    throw new Error("Read Error");
+                    throw error;
 
                 }
                 data.toString();
@@ -73,7 +73,7 @@ const
 
                 if (error !== null) {
 
-                    throw new Error("Write Error");
+                    throw error;
 
                 }
 
