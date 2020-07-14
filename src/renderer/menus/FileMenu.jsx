@@ -5,7 +5,7 @@ const
     openFile = () => {
 
         const
-            fileNumber = 0,
+            fileIndex = 0,
             options = {
                 "properties": ["openFile"]
             };
@@ -15,7 +15,7 @@ const
             if (path) {
 
                 // eslint-disable-next-line no-use-before-define
-                readFile(path.filePaths[fileNumber]);
+                readFile(path.filePaths[fileIndex]);
 
             }
 
@@ -31,7 +31,7 @@ const
 
                 if (error !== null) {
 
-                    return;
+                    throw new Error("Read Error");
 
                 }
                 data.toString();
@@ -73,8 +73,7 @@ const
 
                 if (error !== null) {
 
-                    // eslint-disable-next-line no-useless-return
-                    return;
+                    throw new Error("Write Error");
 
                 }
 
