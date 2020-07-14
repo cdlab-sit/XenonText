@@ -1,7 +1,8 @@
 import {editMenu, fileMenu, helpMenu, viewMenu} from "./index";
+import {remote} from "electron";
 
 const
-    appName = "XenonText",
+    appName = remote.app.name,
     isMac = process.platform === "darwin";
 
 let appMenu = [];
@@ -42,10 +43,6 @@ if (isMac) {
             ]
         }
     ];
-
-} else {
-
-    appMenu = [];
 
 }
 
