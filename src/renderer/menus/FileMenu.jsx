@@ -41,7 +41,7 @@ const
 
     },
 
-    saveFile = () => {
+    saveAsFile = () => {
 
         const options = {
             "properties": ["openFile"]
@@ -99,10 +99,10 @@ const
                 "type": "separator"
             },
             {
-                "click": saveFile,
                 "label": "Save"
             },
             {
+                "click": saveAsFile,
                 "label": "Save as"
             },
             {
