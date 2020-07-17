@@ -10,6 +10,11 @@ const menu = remote.Menu.buildFromTemplate(sampleMenu()),
     store = createStore();
 remote.Menu.setApplicationMenu(menu);
 
+/*
+ *  ストアの状態を表示
+ * store.subscribe(() => console.log(store.getState()));
+ */
+
 render(
     <Provider store={store}>
         <React.StrictMode>

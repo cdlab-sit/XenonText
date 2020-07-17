@@ -2,41 +2,43 @@ import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "./theme-xenon";
 import React, {useCallback} from "react";
-import {setSelectedText, setText} from "../reducks/editText/actions";
+import {setSelectedText, setText} from "../reducks/edit/actions";
 import {useDispatch, useSelector} from "react-redux";
 import AceEditor from "react-ace";
-import {getNewText} from "../reducks/fileManager/selectors";
-import {getText} from "../reducks/editText/selectors";
+import {getNewText} from "../reducks/file/selectors";
+import {getText} from "../reducks/edit/selectors";
 
 
 let
-    editor = "",
-    value = "";
+    // エディタインスタンス
+    editorInstance = "",
+    // EditAreaに表示する文字列
+    textValue = "";
 
 export default function EditArea () {
 
-    value = getNewText(useSelector((state) => state));
+    textValue = getNewText(useSelector((state) => state));
     const dispatch = useDispatch(),
         onChange = useCallback(() => {
 
-            dispatch(setText(editor));
+            dispatch(setText(editorInstance));
 
         }),
         onLoad = useCallback((newEditor) => {
 
-            editor = newEditor;
-            dispatch(setText(editor));
+            editorInstance = newEditor;
+            dispatch(setText(editorInstance));
 
         }),
         onSelectionChange = useCallback(() => {
 
-            dispatch(setSelectedText(editor));
+            dispatch(setSelectedText(editorInstance));
 
         }),
         text = getText(useSelector((state) => state));
-    if (editor) {
+    if (editorInstance) {
 
-        value = text;
+        textValue = text;
 
     }
     return (
@@ -55,7 +57,7 @@ export default function EditArea () {
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
-                value={value}
+                value={textValue}
                 width="100%"
                 wrapEnabed={false}
             />

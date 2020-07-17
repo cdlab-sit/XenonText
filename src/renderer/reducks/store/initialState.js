@@ -1,19 +1,21 @@
-import {SET_TEXT} from "../editText/actions";
-
 export const initialState = {
 
-    "editText": {
-        "selectedText": "",
-        "text": "",
-        "type": SET_TEXT
+    "edit": {
+        "activeEditorId": "editor1",
+        "editInfo": [
+            {
+                "editorId": "editor1",
+                "selectedText": "",
+                "text": ""
+            }
+        ]
     },
-    "fileManager": {
-
-        /*
-         * テスト文字列
-         * 実際には"fileText"にopenしたファイルの文字列が入る
-         */
-        "fileText": "abcde"
-    }
-
+    "file": [
+        {
+            "editorId": "editor1",
+            "name": "",
+            "path": "",
+            "text": "abcde"
+        }
+    ]
 };

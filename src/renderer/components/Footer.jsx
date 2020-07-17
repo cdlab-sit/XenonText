@@ -1,10 +1,10 @@
 import React from "react";
-import {getFooterCount} from "../reducks/editText/selectors";
+import {getCharCount} from "../reducks/edit/selectors";
 import {useSelector} from "react-redux";
 
 export default function Footer () {
 
-    const charCount = getFooterCount(useSelector((state) => state)),
+    const charCount = getCharCount(useSelector((state) => state)),
         footer = {
             "en": " charactors",
             "ja": " 文字"
