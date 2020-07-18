@@ -1,5 +1,6 @@
 export const initialState = {
 
+    /* 編集機能で利用する */
     "edit": {
         "activeEditorId": "editor1",
         "editInfo": [
@@ -10,6 +11,8 @@ export const initialState = {
             }
         ]
     },
+
+    /* ファイル機能で利用する */
     "file": [
         {
             "editorId": "editor1",
