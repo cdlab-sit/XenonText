@@ -3,7 +3,7 @@ export const initialState = {
     /* 編集機能で利用する */
     "edit": {
         "activeEditorId": "editor1",
-        "editInfo": [
+        "editorInfo": [
             {
                 "editorId": "editor1",
                 "selectedText": "",

@@ -5,28 +5,27 @@ import React, {useCallback} from "react";
 import {setSelectedText, setText} from "../reducks/edit/actions";
 import {useDispatch, useSelector} from "react-redux";
 import AceEditor from "react-ace";
+import {getActiveText} from "../reducks/edit/selectors";
 import {getNewText} from "../reducks/file/selectors";
-import {getText} from "../reducks/edit/selectors";
 
 
 let
     // エディタインスタンス
-    editorInstance = "",
-    // EditAreaに表示する文字列
-    textValue = "";
+    editorInstance = "";
 
 export default function EditArea () {
 
-    textValue = getNewText(useSelector((state) => state));
-    const dispatch = useDispatch(),
+    let textValue = getNewText(useSelector((state) => state));
+    const activeText = getActiveText(useSelector((state) => state)),
+        dispatch = useDispatch(),
         onChange = useCallback(() => {
 
             dispatch(setText(editorInstance));
 
         }),
-        onLoad = useCallback((newEditor) => {
+        onLoad = useCallback((newEditorInstance) => {
 
-            editorInstance = newEditor;
+            editorInstance = newEditorInstance;
             dispatch(setText(editorInstance));
 
         }),
@@ -34,11 +33,10 @@ export default function EditArea () {
 
             dispatch(setSelectedText(editorInstance));
 
-        }),
-        text = getText(useSelector((state) => state));
+        });
     if (editorInstance) {
 
-        textValue = text;
+        textValue = activeText;
 
     }
     return (

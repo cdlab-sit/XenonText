@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {getActiveEditInfo} from "../edit/selectors";
+import {getActiveEditorInfo} from "../edit/selectors";
 
 export const
     getFileStatus = createSelector(
@@ -9,10 +9,10 @@ export const
         ],
         (file, edit) => {
 
-            const activeEditInfo = getActiveEditInfo(edit),
+            const activeEditorInfo = getActiveEditorInfo(edit),
                 activeFile = file.find((val) => val.editorId ===
                     edit.activeEditorId);
-            if (activeEditInfo.text === activeFile.text) {
+            if (activeEditorInfo.text === activeFile.text) {
 
                 return true;
 

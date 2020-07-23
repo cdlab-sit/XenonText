@@ -1,36 +1,35 @@
 import {createSelector} from "reselect";
 
 export const
-    getActiveEditInfo = (edit) => {
+    getActiveEditorInfo = (edit) => {
 
-        const activeEditInfo = edit.editInfo.find((val) => val.editorId ===
+        const activeEditorInfo = edit.editorInfo.find((val) => val.editorId ===
         edit.activeEditorId);
-        return activeEditInfo;
+        return activeEditorInfo;
 
     },
+    getActiveText = createSelector(
+        [(state) => state.edit],
+        (edit) => {
 
+            const activeEditorInfo = getActiveEditorInfo(edit);
+            return activeEditorInfo.text;
+
+        }
+    ),
     getCharCount = createSelector(
         [(state) => state.edit],
         (edit) => {
 
-            const activeEditInfo = getActiveEditInfo(edit);
+            const activeEditorInfo = getActiveEditorInfo(edit);
 
-            if (activeEditInfo.selectedText) {
+            if (activeEditorInfo.selectedText) {
 
-                return activeEditInfo.selectedText.length;
+                return activeEditorInfo.selectedText.length;
 
             }
-            return activeEditInfo.text.length;
+            return activeEditorInfo.text.length;
 
         }
 
-    ),
-    getText = createSelector(
-        [(state) => state.edit],
-        (edit) => {
-
-            const activeEditInfo = getActiveEditInfo(edit);
-            return activeEditInfo.text;
-
-        }
     );
