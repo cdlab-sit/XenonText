@@ -28,9 +28,9 @@ export const
         ],
         (file, edit) => {
 
-            const fileText = file.find((val) => val.editorId ===
-                    edit.activeEditorId).text;
-
+            const activeFile = file.find((val) => val.editorId ===
+                    edit.activeEditorId),
+                fileText = activeFile.text;
             return fileText;
 
         }

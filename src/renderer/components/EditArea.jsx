@@ -11,7 +11,7 @@ import {getNewText} from "../reducks/file/selectors";
 
 let
     // エディタインスタンス
-    editorInstance = "";
+    editorInstance = null;
 
 export default function EditArea () {
 
