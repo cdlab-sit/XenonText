@@ -3,12 +3,13 @@ import {
     createStore as reduxCreateStore
 } from "redux";
 
-import {CharCountReducer} from "../charCount/reducers";
-
+import {EditReducer} from "../edit/reducers";
+import {FileReducer} from "../file/reducers";
 export default function createStore () {
 
     return reduxCreateStore(combineReducers({
-        "charCount": CharCountReducer
+        "edit": EditReducer,
+        "file": FileReducer
     }));
 
 }

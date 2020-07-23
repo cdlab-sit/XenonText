@@ -2,60 +2,43 @@ import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "./theme-xenon";
 import React, {useCallback} from "react";
+import {setSelectedText, setText} from "../reducks/edit/actions";
+import {useDispatch, useSelector} from "react-redux";
 import AceEditor from "react-ace";
-import {setCharCount} from "../reducks/charCount/actions";
-import {useDispatch} from "react-redux";
+import {getActiveText} from "../reducks/edit/selectors";
+import {getNewText} from "../reducks/file/selectors";
 
-const myRef = React.createRef();
 
-// eslint-disable-next-line one-var
-const getAllLength = () => {
-
-        const text = myRef.current.editor.getValue();
-        return text.length;
-
-    },
-    getSelectedLength = (select) => {
-
-        const empty = select.isEmpty();
-        let SelectedLength = 0;
-        if (!empty) {
-
-            const text = myRef.current.editor.getSelectedText();
-            SelectedLength = text.length;
-
-        } else if (empty) {
-
-            SelectedLength = getAllLength();
-
-        }
-        return SelectedLength;
-
-    };
+let
+    // エディタインスタンス
+    editorInstance = null;
 
 export default function EditArea () {
 
-    const dispatch = useDispatch(),
-        updateChar = (length) => {
+    const activeText = getActiveText(useSelector((state) => state)),
+        dispatch = useDispatch(),
+        initialText = getNewText(useSelector((state) => state)),
+        onChange = useCallback(() => {
 
-            dispatch(setCharCount(length));
-
-        };
-
-    // eslint-disable-next-line one-var
-    const onChange = useCallback(() => {
-
-            updateChar(getAllLength());
+            dispatch(setText(editorInstance));
 
         }),
-        onSelectionChange = useCallback((select) => {
+        onLoad = useCallback((newEditorInstance) => {
 
-            updateChar(getSelectedLength(select));
+            editorInstance = newEditorInstance;
+            dispatch(setText(editorInstance));
+
+        }),
+        onSelectionChange = useCallback(() => {
+
+            dispatch(setSelectedText(editorInstance));
 
         });
+
     return (
         <div className="bg-gray-900 flex-auto">
             <AceEditor
+                defaultValue={initialText}
                 editorProps={{"$blockScrolling": "true"}}
                 focus={false}
                 fontSize="16px"
@@ -64,11 +47,12 @@ export default function EditArea () {
                 mode="c_cpp"
                 name="UNIQUE_ID_OF_DIV"
                 onChange={onChange}
+                onLoad={onLoad}
                 onSelectionChange={onSelectionChange}
-                ref={myRef}
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
+                value={activeText}
                 width="100%"
                 wrapEnabed={false}
             />

@@ -4,12 +4,12 @@ import ResizePanel from "react-resize-panel";
 
 export default function Main () {
 
-    /* eslint-disable react/forbid-component-props */
     return (
         <div className="flex flex-auto">
             <ResizePanel
                 direction="e"
                 handleClass="hidden"
+                // eslint-disable-next-line react/forbid-component-props
                 style={{"width": "200px"}}
             >
                 <SideBar />
@@ -20,6 +20,6 @@ export default function Main () {
             </div>
         </div>
     );
-    /* eslint-enable react/forbid-component-props */
 
 }
+
