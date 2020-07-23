@@ -15,9 +15,9 @@ let
 
 export default function EditArea () {
 
-    let textValue = getNewText(useSelector((state) => state));
     const activeText = getActiveText(useSelector((state) => state)),
         dispatch = useDispatch(),
+        initialText = getNewText(useSelector((state) => state)),
         onChange = useCallback(() => {
 
             dispatch(setText(editorInstance));
@@ -34,14 +34,11 @@ export default function EditArea () {
             dispatch(setSelectedText(editorInstance));
 
         });
-    if (editorInstance) {
 
-        textValue = activeText;
-
-    }
     return (
         <div className="bg-gray-900 flex-auto">
             <AceEditor
+                defaultValue={initialText}
                 editorProps={{"$blockScrolling": "true"}}
                 focus={false}
                 fontSize="16px"
@@ -55,7 +52,7 @@ export default function EditArea () {
                 showPrintMargin={false}
                 tabSize={4}
                 theme="xenon"
-                value={textValue}
+                value={activeText}
                 width="100%"
                 wrapEnabed={false}
             />
