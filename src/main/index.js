@@ -21,12 +21,12 @@ const createWindow = () => {
    */
 };
 
-// eslint-disable-next-line
 if (process.env.NODE_ENV === 'development') {
   fs.watch('dist', () => {
-    for (const win of BrowserWindow.getAllWindows()) {
+    const wins = BrowserWindow.getAllWindows();
+    wins.forEach((win) => {
       win.reload();
-    }
+    });
   });
 }
 
