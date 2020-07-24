@@ -1,13 +1,13 @@
 import React from 'react';
-import { getCharCount } from '../reducks/edit/selectors';
 import { useSelector } from 'react-redux';
+import { getCharCount } from '../reducks/edit/selectors';
 
 export default function Footer() {
-  const charCount = getCharCount(useSelector((state) => state)),
-    footer = {
-      en: ' charactors',
-      ja: ' 文字',
-    };
+  const charCount = getCharCount(useSelector((state) => state));
+  const footer = {
+    en: ' charactors',
+    ja: ' 文字',
+  };
 
   return (
     <footer className="w-full h-6 bg-gray-800">

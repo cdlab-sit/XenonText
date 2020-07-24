@@ -1,4 +1,4 @@
-export const initialState = {
+const initialState = {
   /* 編集機能で利用する */
   edit: {
     activeEditorId: 'editor1',
@@ -21,3 +21,5 @@ export const initialState = {
     },
   ],
 };
+
+export default initialState;

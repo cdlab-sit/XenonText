@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { remote } from 'electron';
-import { Footer, Main, TitleBar } from './components/index';
+import Footer from './components/Footer';
+import Main from './components/Main';
+import TitleBar from './components/TitleBar';
 
 export default class App extends Component {
   constructor(props) {

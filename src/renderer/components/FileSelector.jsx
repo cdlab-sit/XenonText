@@ -1,5 +1,5 @@
-import { FileBlock } from '../components/index';
 import React from 'react';
+import FileBlock from './FileBlock';
 
 export default function FileSelector() {
   return (

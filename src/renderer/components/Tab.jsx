@@ -1,5 +1,5 @@
-import { FileStatus } from '../components/index';
 import React from 'react';
+import FileStatus from './FileStatus';
 
 export default function Tabs() {
   const item = 'Untitled';

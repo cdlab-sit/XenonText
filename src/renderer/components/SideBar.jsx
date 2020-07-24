@@ -1,5 +1,5 @@
-import { FileSelector } from '../components/index';
 import React from 'react';
+import FileSelector from './FileSelector';
 
 export default function SideBar() {
   return (

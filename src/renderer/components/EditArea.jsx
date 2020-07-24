@@ -2,9 +2,9 @@ import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/src-noconflict/mode-c_cpp';
 import './theme-xenon';
 import React, { useCallback } from 'react';
-import { setSelectedText, setText } from '../reducks/edit/actions';
-import { useDispatch, useSelector } from 'react-redux';
 import AceEditor from 'react-ace';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedText, setText } from '../reducks/edit/actions';
 import { getActiveText } from '../reducks/edit/selectors';
 import { getNewText } from '../reducks/file/selectors';
 
@@ -12,19 +12,19 @@ let // エディタインスタンス
   editorInstance = null;
 
 export default function EditArea() {
-  const activeText = getActiveText(useSelector((state) => state)),
-    dispatch = useDispatch(),
-    initialText = getNewText(useSelector((state) => state)),
-    onChange = useCallback(() => {
-      dispatch(setText(editorInstance));
-    }),
-    onLoad = useCallback((newEditorInstance) => {
-      editorInstance = newEditorInstance;
-      dispatch(setText(editorInstance));
-    }),
-    onSelectionChange = useCallback(() => {
-      dispatch(setSelectedText(editorInstance));
-    });
+  const activeText = getActiveText(useSelector((state) => state));
+  const initialText = getNewText(useSelector((state) => state));
+  const dispatch = useDispatch();
+  const onChange = useCallback(() => {
+    dispatch(setText(editorInstance));
+  });
+  const onLoad = useCallback((newEditorInstance) => {
+    editorInstance = newEditorInstance;
+    dispatch(setText(editorInstance));
+  });
+  const onSelectionChange = useCallback(() => {
+    dispatch(setSelectedText(editorInstance));
+  });
 
   return (
     <div className="bg-gray-900 flex-auto">

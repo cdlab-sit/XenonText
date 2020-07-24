@@ -1,6 +1,8 @@
-import { EditArea, SideBar, Tabs } from '../components/index';
 import React from 'react';
 import ResizePanel from 'react-resize-panel';
+import EditArea from './EditArea';
+import SideBar from './SideBar';
+import Tabs from './Tabs';
 
 export default function Main() {
   return (
@@ -8,7 +10,6 @@ export default function Main() {
       <ResizePanel
         direction="e"
         handleClass="hidden"
-        // eslint-disable-next-line react/forbid-component-props
         style={{ width: '200px' }}
       >
         <SideBar />
