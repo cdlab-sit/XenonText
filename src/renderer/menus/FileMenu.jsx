@@ -1,6 +1,15 @@
 import fs from 'fs';
 import { remote } from 'electron';
 
+const readFile = (path) => {
+  fs.readFile(path, (error, data) => {
+    if (error !== null) {
+      throw error;
+    }
+    data.toString();
+  });
+};
+
 const openFile = () => {
   const fileIndex = 0;
   const options = {
@@ -9,18 +18,16 @@ const openFile = () => {
 
   remote.dialog.showOpenDialog(options).then((path) => {
     if (path) {
-      // eslint-disable-next-line no-use-before-define
       readFile(path.filePaths[fileIndex]);
     }
   });
 };
 
-const readFile = (path) => {
-  fs.readFile(path, (error, data) => {
+const writeFile = (path, data) => {
+  fs.writeFile(path, data, (error) => {
     if (error !== null) {
       throw error;
     }
-    data.toString();
   });
 };
 
@@ -32,16 +39,7 @@ const saveAsFile = () => {
   remote.dialog.showSaveDialog(options).then((path) => {
     if (path) {
       const writeData = 'ここに保存する情報を代入します';
-      // eslint-disable-next-line no-use-before-define
       writeFile(path.filePath, writeData);
-    }
-  });
-};
-
-const writeFile = (path, data) => {
-  fs.writeFile(path, data, (error) => {
-    if (error !== null) {
-      throw error;
     }
   });
 };
