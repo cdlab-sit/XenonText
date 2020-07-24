@@ -1,9 +1,12 @@
 /* eslint-disable */
-ace.define("ace/theme/xenon",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
-
+ace.define(
+  'ace/theme/xenon',
+  ['require', 'exports', 'module', 'ace/lib/dom'],
+  function (require, exports, module) {
     exports.isDark = true;
-    exports.cssClass = "ace-xenon";
-    exports.cssText = " \
+    exports.cssClass = 'ace-xenon';
+    exports.cssText =
+      ' \
     .ace-xenon .ace_cursor{\
         position: relative !important;\
         right: 2px;\
@@ -117,7 +120,8 @@ ace.define("ace/theme/xenon",["require","exports","module","ace/lib/dom"], funct
     }\
     .ace-xenon .ace_indent-guide {\
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y\
-    }";
-});
+    }';
+  },
+);
 
 /* eslint-enable */
