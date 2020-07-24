@@ -1,118 +1,80 @@
-import fs from "fs";
-import {remote} from "electron";
+import fs from 'fs';
+import { remote } from 'electron';
 
-const
-    openFile = () => {
+const readFile = (path) => {
+  fs.readFile(path, (error, data) => {
+    if (error !== null) {
+      throw error;
+    }
+    data.toString();
+  });
+};
 
-        const
-            fileIndex = 0,
-            options = {
-                "properties": ["openFile"]
-            };
+const openFile = () => {
+  const fileIndex = 0;
+  const options = {
+    properties: ['openFile'],
+  };
 
-        remote.dialog.showOpenDialog(options).then((path) => {
+  remote.dialog.showOpenDialog(options).then((path) => {
+    if (path) {
+      readFile(path.filePaths[fileIndex]);
+    }
+  });
+};
 
-            if (path) {
+const writeFile = (path, data) => {
+  fs.writeFile(path, data, (error) => {
+    if (error !== null) {
+      throw error;
+    }
+  });
+};
 
-                // eslint-disable-next-line no-use-before-define
-                readFile(path.filePaths[fileIndex]);
+const saveAsFile = () => {
+  const options = {
+    properties: ['openFile'],
+  };
 
-            }
+  remote.dialog.showSaveDialog(options).then((path) => {
+    if (path) {
+      const writeData = 'ここに保存する情報を代入します';
+      writeFile(path.filePath, writeData);
+    }
+  });
+};
 
-        });
-
+const fileMenu = {
+  label: 'File',
+  submenu: [
+    {
+      label: 'New File',
     },
-
-    readFile = (path) => {
-
-        fs.readFile(
-            path,
-            (error, data) => {
-
-                if (error !== null) {
-
-                    throw error;
-
-                }
-                data.toString();
-
-            }
-        );
-
+    {
+      click: openFile,
+      label: 'Open File',
     },
-
-    saveAsFile = () => {
-
-        const options = {
-            "properties": ["openFile"]
-        };
-
-        remote.dialog.showSaveDialog(options).then((path) => {
-
-            if (path) {
-
-                const writeData = "ここに保存する情報を代入します";
-                // eslint-disable-next-line no-use-before-define
-                writeFile(
-                    path.filePath,
-                    writeData
-                );
-
-            }
-
-        });
-
+    {
+      label: 'Open File As Recently',
     },
-
-    writeFile = (path, data) => {
-
-        fs.writeFile(
-            path,
-            data,
-            (error) => {
-
-                if (error !== null) {
-
-                    throw error;
-
-                }
-
-            }
-        );
-
+    {
+      type: 'separator',
     },
-    // eslint-disable-next-line sort-vars
-    fileMenu = {
-        "label": "File",
-        "submenu": [
-            {
-                "label": "New File"
-            },
-            {
-                "click": openFile,
-                "label": "Open File"
-            },
-            {
-                "label": "Open File As Recently"
-            },
-            {
-                "type": "separator"
-            },
-            {
-                "label": "Save"
-            },
-            {
-                "click": saveAsFile,
-                "label": "Save as"
-            },
-            {
-                "type": "separator"
-            },
-            {
-                "label": "Close",
-                "role": "close"
-            }
-        ]
-    };
+    {
+      label: 'Save',
+    },
+    {
+      click: saveAsFile,
+      label: 'Save as',
+    },
+    {
+      type: 'separator',
+    },
+    {
+      label: 'Close',
+      role: 'close',
+    },
+  ],
+};
 
 export default fileMenu;

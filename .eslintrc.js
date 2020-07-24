@@ -5,8 +5,10 @@ module.exports = {
         "node": true,
     },
     "extends": [
-        "eslint:all",
-        "plugin:react/all"
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:prettier/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -20,9 +22,10 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
-        "react/no-set-state": "off"
+        "prettier/prettier": "error"
     }
 };
