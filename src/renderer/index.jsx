@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import createStore from './reducks/store/store';
-import { applicationMenuTemplate } from './menus/index';
+import applicationMenuTemplate from './menus/ApplicationMenus';
 
 const applicationMenu = remote.Menu.buildFromTemplate(
   applicationMenuTemplate(),
