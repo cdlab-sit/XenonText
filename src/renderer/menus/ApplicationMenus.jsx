@@ -1,8 +1,11 @@
-import { editMenu, fileMenu, helpMenu, viewMenu } from './index';
 import { remote } from 'electron';
+import fileMenu from './FileMenu';
+import editMenu from './EditMenu';
+import helpMenu from './HelpMenu';
+import viewMenu from './ViewMenu';
 
-const appName = remote.app.name,
-  isMac = process.platform === 'darwin';
+const appName = remote.app.name;
+const isMac = process.platform === 'darwin';
 
 let appMenu = [];
 
