@@ -5,8 +5,9 @@ module.exports = {
         "node": true,
     },
     "extends": [
-        "eslint:all",
-        "plugin:react/all"
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "airbnb"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -22,7 +23,5 @@ module.exports = {
     "plugins": [
         "react"
     ],
-    "rules": {
-        "react/no-set-state": "off"
-    }
+    "rules": {}
 };
