@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { remote } from 'electron';
 import Footer from './components/Footer';
-import Main from './components/Main';
+import Body from './components/Body';
 import TitleBar from './components/TitleBar';
 
 export default class App extends Component {
@@ -38,7 +38,7 @@ export default class App extends Component {
     return (
       <div className="flex flex-col h-screen">
         {!isFullScreen && <TitleBar />}
-        <Main />
+        <Body />
         <Footer />
       </div>
     );

@@ -1,23 +1,21 @@
 import React from 'react';
-import ResizePanel from 'react-resize-panel';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import EditArea from './EditArea';
-import SideBar from './SideBar';
-import Tabs from './Tabs';
 
 export default function Main() {
   return (
-    <div className="flex flex-auto">
-      <ResizePanel
-        direction="e"
-        handleClass="hidden"
-        style={{ width: '200px' }}
-      >
-        <SideBar />
-      </ResizePanel>
-      <div className="flex flex-col w-full">
-        <Tabs />
+    <Tabs forceRenderTabPanel>
+      <TabList>
+        <Tab>Tab1</Tab>
+        <Tab>Tab1</Tab>
+      </TabList>
+
+      <TabPanel>
         <EditArea />
-      </div>
-    </div>
+      </TabPanel>
+      <TabPanel>
+        <EditArea />
+      </TabPanel>
+    </Tabs>
   );
 }

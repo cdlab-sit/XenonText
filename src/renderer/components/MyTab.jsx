@@ -1,11 +1,11 @@
 import React from 'react';
 import FileStatus from './FileStatus';
 
-export default function Tabs() {
+export default function MyTab() {
   const item = 'Untitled';
 
   return (
-    <div className="bg-gray-900 h-8 w-40 flex flex-row items-center">
+    <>
       <h2
         className="
                 text-xs text-gray-300 select-none
@@ -16,6 +16,6 @@ export default function Tabs() {
         {item}
       </h2>
       <FileStatus />
-    </div>
+    </>
   );
 }
