@@ -24,7 +24,8 @@ export default function Tab(props) {
       >
         {item}
       </h2>
-      <FileStatus />
+      {/* あとでやる */}
+      {/* <FileStatus /> */}
     </div>
   );
 }

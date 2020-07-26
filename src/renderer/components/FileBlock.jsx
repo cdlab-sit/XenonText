@@ -6,7 +6,8 @@ export default function FileBlock() {
 
   return (
     <div className="flex h-6 w-full bg-gray-800 items-center">
-      <FileStatus />
+      {/* あとでやる */}
+      {/* <FileStatus /> */}
       <h3
         className="
                 text-xs text-gray-300

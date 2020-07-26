@@ -13,6 +13,9 @@ const unsavedImagePathCommand =
   '1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 ' +
   '10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z';
 
+// 今すべて共通になってるので親からeditorIdもらう必要あり,
+// もしNewだったらFileないからgetFileStatusエラーになる
+//あとでもいっかファイルステータス
 export default function FileStatus() {
   let fileStatusPathCommand = savedImagePathCommand;
   const isSaved = getFileStatus(useSelector((state) => state));

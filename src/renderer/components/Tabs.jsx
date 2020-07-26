@@ -18,7 +18,7 @@ export default function Tabs() {
   return (
     <div className="h-10 flex items-end" onDoubleClick={onDoubleClick}>
       {editorInfo.map((editor) => {
-        return <Tab editorId={editor.editorId} key={editor.editorId}/>;
+        return <Tab editorId={editor.editorId} key={editor.editorId} />;
       })}
     </div>
   );

@@ -18,7 +18,10 @@ const EditArea = React.memo(function EditArea(props) {
   const myFileSelector = useSelector((state) =>
     state.file.find((val) => val.editorId === props.editorId),
   );
-  const initialText = getNewText(myFileSelector);
+  let initialText = '';
+  if (myFileSelector !== undefined) {
+    initialText = getNewText(myFileSelector);
+  }
   // console.log('initialText=', initialText);
 
   // const myEditSelector = useSelector((state) =>
