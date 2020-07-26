@@ -5,40 +5,55 @@ import React, { useCallback, useState } from 'react';
 import AceEditor from 'react-ace';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedText, setText } from '../reducks/edit/actions';
-import { getActiveText } from '../reducks/edit/selectors';
+import { getActiveText, getActiveEditorId } from '../reducks/edit/selectors';
 import { getNewText } from '../reducks/file/selectors';
 
-let editorInstance = null;
+/* useSelectorについて
+https://tech.aptpod.co.jp/entry/2020/06/26/090000 */
 
-export default function EditArea() {
-  console.log("EditArea");
-  const [editorId, setEditorId] = useState(0);
-  // const activeText = getActiveText(useSelector((state) => state));
-  // const initialText = getNewText(useSelector((state) => state));
-  // const dispatch = useDispatch();
+const EditArea = React.memo(function EditArea(props) {
+  let editorInstance = null;
+  console.log('start EditArea: ', props.editorId);
+  // const [editorId, setEditorId] = useState(0);
+  // const myFileSelector = useSelector((state) =>
+  //   state.file.find((val) => val.editorId === editorId),
+  // );
+  // const initialText = getNewText(myFileSelector);
+  // console.log('initialText=', initialText);
+
+  // const myEditSelector = useSelector((state) =>
+  //   state.edit.editorInfo.find((val) => val.editorId === editorId),
+  // );
+  // const { text } = myEditSelector;
+
+  // const text = getActiveText(myEditSelector); //使えない理由不明
+  // console.log('text=', myEditSelector.text);
+  // console.log('start EditArea: ', editorId);
+  const dispatch = useDispatch();
+
   const onChange = useCallback(() => {
-    // dispatch(setText(editorInstance));
+    console.log(editorInstance.id);
+    // console.log('onChange!', editorInstance.getValue());
+    dispatch(setText(editorInstance));
   });
   const onLoad = useCallback((newEditorInstance) => {
     editorInstance = newEditorInstance;
-    setEditorId(editorInstance.id);
-    console.log('onLoad id=', editorInstance.id);
-    // dispatch(setText(editorInstance));
+    // console.log('onLoad id=', editorInstance.id);
+    dispatch(setText(editorInstance));
   });
   const onSelectionChange = useCallback(() => {
-    // dispatch(setSelectedText(editorInstance));
+    // console.log('onSelectionChange!');
+    dispatch(setSelectedText(editorInstance));
   });
   const onFocus = useCallback(() => {
-    console.log(editorId);
+    // console.log('onFocus\n\n', editorId);
   });
 
   return (
     <div className="bg-gray-900 flex-auto">
       <AceEditor
-        defaultValue={"initialText"}
+        // defaultValue={initialText}
         editorProps={{ $blockScrolling: 'true' }}
-        focus={true}
-        tabSize={12}
         fontSize="16px"
         height="100%"
         highlightActiveLine={false}
@@ -51,10 +66,12 @@ export default function EditArea() {
         showPrintMargin={false}
         tabSize={4}
         theme="xenon"
-        // value={activeText}
+        // value={text}
         width="100%"
         wrapEnabed={false}
       />
     </div>
   );
-}
+});
+
+export default EditArea;

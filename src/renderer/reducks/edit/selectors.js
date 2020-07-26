@@ -7,9 +7,9 @@ export const getActiveEditorInfo = (edit) => {
   return activeEditorInfo;
 };
 
-export const getActiveText = createSelector([(state) => state.edit], (edit) => {
-  const activeEditorInfo = getActiveEditorInfo(edit);
-  return activeEditorInfo.text;
+export const getActiveText = createSelector([(state) => state], (state) => {
+  const { text } = state;
+  return text;
 });
 
 export const getCharCount = createSelector([(state) => state.edit], (edit) => {
@@ -19,4 +19,7 @@ export const getCharCount = createSelector([(state) => state.edit], (edit) => {
     return activeEditorInfo.selectedText.length;
   }
   return activeEditorInfo.text.length;
+});
+export const getActiveEditorId = createSelector([(state) => state], (state) => {
+  return state;
 });

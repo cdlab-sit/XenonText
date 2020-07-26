@@ -8,6 +8,16 @@ const initialState = {
         selectedText: '',
         text: '',
       },
+      {
+        editorId: 'editor2',
+        selectedText: '',
+        text: '',
+      },
+      {
+        editorId: 'editor3',
+        selectedText: '',
+        text: '',
+      },
     ],
   },
 
@@ -18,6 +28,18 @@ const initialState = {
       name: '',
       path: '',
       text: 'abcde',
+    },
+    {
+      editorId: 'editor2',
+      name: '',
+      path: '',
+      text: 'fghij',
+    },
+    {
+      editorId: 'editor3',
+      name: '',
+      path: '',
+      text: 'fghij',
     },
   ],
 };

@@ -12,11 +12,9 @@ export const getFileStatus = createSelector(
     return false;
   },
 );
-export const getNewText = createSelector(
-  [(state) => state.file, (state) => state.edit],
-  (file, edit) => {
-    const activeFile = file.find((val) => val.editorId === edit.activeEditorId);
-    const fileText = activeFile.text;
-    return fileText;
-  },
-);
+export const getNewText = createSelector([(state) => state], (state) => {
+  if (state.text) {
+    return state.text;
+  }
+  return null;
+});
