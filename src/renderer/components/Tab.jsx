@@ -4,9 +4,10 @@ import FileStatus from './FileStatus';
 import { setActiveEditorId } from '../reducks/edit/actions';
 
 export default function Tab(props) {
-  const item = props.editorId;
+  const item = props.editorId; //おかしい, 名前
   const dispatch = useDispatch();
-  const onClick = () => {
+  const onClick = (e) => {
+    // e.stopPropagation();
     dispatch(setActiveEditorId(props.editorId));
   };
   return (

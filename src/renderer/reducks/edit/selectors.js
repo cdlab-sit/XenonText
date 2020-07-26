@@ -20,6 +20,11 @@ export const getCharCount = createSelector([(state) => state.edit], (edit) => {
   }
   return activeEditorInfo.text.length;
 });
+
 export const getActiveEditorId = createSelector([(state) => state], (state) => {
+  return state;
+});
+
+export const getEditorInfo = createSelector([(state) => state], (state) => {
   return state;
 });

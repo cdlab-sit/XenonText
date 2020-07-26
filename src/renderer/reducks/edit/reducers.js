@@ -1,6 +1,17 @@
-import { SET_SELECTED_TEXT, SET_TEXT, SET_ACTIVE_EDITOR_ID } from './actions';
+import {
+  SET_SELECTED_TEXT,
+  SET_TEXT,
+  SET_ACTIVE_EDITOR_ID,
+  SET_NEW_EDIT,
+} from './actions';
 import { getActiveEditorInfo } from './selectors';
 import initialState from '../store/initialState';
+
+const newEditTemplate = {
+  editorId: '',
+  selectedText: '',
+  text: '',
+};
 
 const EditReducer = (state = initialState.edit, action) => {
   const activeEditorInfo = getActiveEditorInfo(state);
@@ -15,6 +26,11 @@ const EditReducer = (state = initialState.edit, action) => {
       return {
         ...state,
         ...action.payload,
+      };
+    case SET_NEW_EDIT:
+      return {
+        ...state,
+        editorInfo: [...state.editorInfo, newEditTemplate],
       };
     default:
   }

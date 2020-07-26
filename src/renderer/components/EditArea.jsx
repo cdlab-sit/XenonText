@@ -13,12 +13,12 @@ https://tech.aptpod.co.jp/entry/2020/06/26/090000 */
 
 const EditArea = React.memo(function EditArea(props) {
   let editorInstance = null;
-  console.log('start EditArea: ', props.editorId);
+  // console.log('start EditArea: ', props.editorId);
   // const [editorId, setEditorId] = useState(0);
-  // const myFileSelector = useSelector((state) =>
-  //   state.file.find((val) => val.editorId === editorId),
-  // );
-  // const initialText = getNewText(myFileSelector);
+  const myFileSelector = useSelector((state) =>
+    state.file.find((val) => val.editorId === props.editorId),
+  );
+  const initialText = getNewText(myFileSelector);
   // console.log('initialText=', initialText);
 
   // const myEditSelector = useSelector((state) =>
@@ -52,7 +52,7 @@ const EditArea = React.memo(function EditArea(props) {
   return (
     <div className="bg-gray-900 flex-auto">
       <AceEditor
-        // defaultValue={initialText}
+        defaultValue={initialText}
         editorProps={{ $blockScrolling: 'true' }}
         fontSize="16px"
         height="100%"
