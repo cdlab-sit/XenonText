@@ -1,41 +1,26 @@
 import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/src-noconflict/mode-c_cpp';
 import './theme-xenon';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import AceEditor from 'react-ace';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedText, setText } from '../reducks/edit/actions';
-import { getActiveText, getActiveEditorId } from '../reducks/edit/selectors';
-import { getNewText } from '../reducks/file/selectors';
+import { setSelectedText, setText } from '../reducks/editor/actions';
+import { getFileText } from '../reducks/editor/selectors';
 
-/* useSelectorについて
-https://tech.aptpod.co.jp/entry/2020/06/26/090000 */
-
-const EditArea = React.memo(function EditArea(props) {
+const EditArea = React.memo(function EditArea({ editorId }) {
   let editorInstance = null;
-  // console.log('start EditArea: ', props.editorId);
-  // const [editorId, setEditorId] = useState(0);
+
   const myFileSelector = useSelector((state) =>
-    state.file.find((val) => val.editorId === props.editorId),
+    state.editor.documents.find((val) => val.editorId === editorId),
   );
   let initialText = '';
   if (myFileSelector !== undefined) {
-    initialText = getNewText(myFileSelector);
+    initialText = getFileText(myFileSelector);
   }
-  // console.log('initialText=', initialText);
 
-  // const myEditSelector = useSelector((state) =>
-  //   state.edit.editorInfo.find((val) => val.editorId === editorId),
-  // );
-  // const { text } = myEditSelector;
-
-  // const text = getActiveText(myEditSelector); //使えない理由不明
-  // console.log('text=', myEditSelector.text);
-  // console.log('start EditArea: ', editorId);
   const dispatch = useDispatch();
 
   const onChange = useCallback(() => {
-    console.log(editorInstance.id);
     // console.log('onChange!', editorInstance.getValue());
     dispatch(setText(editorInstance));
   });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getFileStatus } from '../reducks/file/selectors';
+import { getFileStatus } from '../reducks/editor/selectors';
 
 const savedImagePathCommand =
   'M4.293 4.293a1 1 0 011.414 0L10 ' +
@@ -15,7 +15,8 @@ const unsavedImagePathCommand =
 
 // 今すべて共通になってるので親からeditorIdもらう必要あり,
 // もしNewだったらFileないからgetFileStatusエラーになる
-//あとでもいっかファイルステータス
+// あとでもいっかファイルステータス
+
 export default function FileStatus() {
   let fileStatusPathCommand = savedImagePathCommand;
   const isSaved = getFileStatus(useSelector((state) => state));

@@ -1,47 +1,25 @@
 const initialState = {
-  /* 編集機能で利用する */
-  edit: {
-    activeEditorId: 'editor1',
-    editorInfo: [
+  editor: {
+    documents: [
       {
         editorId: 'editor1',
         selectedText: '',
-        text: '',
+        editedText: '',
+        fileText: 'init Text form file',
+        fileName: 'testFile1',
+        filePath: '',
       },
       {
         editorId: 'editor2',
         selectedText: '',
-        text: '',
-      },
-      {
-        editorId: 'editor3',
-        selectedText: '',
-        text: '',
+        editedText: '',
+        fileText: 'this is 2init',
+        fileName: 'testFile2',
+        filePath: '',
       },
     ],
+    activeEditorId: 'editor1',
   },
-
-  /* ファイル機能で利用する */
-  file: [
-    {
-      editorId: 'editor1',
-      name: '',
-      path: '',
-      text: 'abcde',
-    },
-    {
-      editorId: 'editor2',
-      name: '',
-      path: '',
-      text: 'fghij',
-    },
-    {
-      editorId: 'editor3',
-      name: '',
-      path: '',
-      text: 'fghij',
-    },
-  ],
 };
 
 export default initialState;

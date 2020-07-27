@@ -3,38 +3,38 @@ import { useSelector } from 'react-redux';
 import EditArea from './EditArea';
 import Tabs from './Tabs';
 
-import { getActiveEditorId, getEditorInfo } from '../reducks/edit/selectors';
+import { getActiveEditorId, getDocuments } from '../reducks/editor/selectors';
 
-let num = "editor1";
+let showId = 'editor1';
 
-const checkActive = (i) => {
-  if (i !== num) {
-    return 'hidden';
+const shouldShow = (id) => {
+  if (id !== showId) {
+    return false;
   }
-  return '';
+  return true;
 };
 
 export default function Main() {
-  console.log('start Main');
-  const activeId = getActiveEditorId(
-    useSelector((state) => state.edit.activeEditorId),
+  showId = getActiveEditorId(
+    useSelector((state) => state.editor.activeEditorId),
   );
-  num = activeId;
 
-  const editSelector = useSelector((state) => state.edit.editorInfo);
-  const editorInfo = getEditorInfo(editSelector);
+  const editSelector = useSelector((state) => state.editor.documents);
+  const documents = getDocuments(editSelector);
 
   return (
     <div className="flex flex-auto flex-col">
       <Tabs />
 
-      {editorInfo.map((editor) => {
+      {documents.map((document) => {
         return (
           <div
-            className={`flex flex-auto ${checkActive(editor.editorId)}`}
-            key={editor.editorId}
+            className={`flex flex-auto ${
+              shouldShow(document.editorId) ? '' : 'hidden'
+            }`}
+            key={document.editorId}
           >
-            <EditArea editorId={editor.editorId} key={editor.editorId} />
+            <EditArea editorId={document.editorId} key={document.editorId} />
           </div>
         );
       })}

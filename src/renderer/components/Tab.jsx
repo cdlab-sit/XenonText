@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import FileStatus from './FileStatus';
-import { setActiveEditorId } from '../reducks/edit/actions';
+import { setActiveEditorId } from '../reducks/editor/actions';
 
 export default function Tab(props) {
-  const item = props.editorId; //おかしい, 名前
+  const item = props.title;
   const dispatch = useDispatch();
-  const onClick = (e) => {
+  const onClick = () => {
     // e.stopPropagation();
     dispatch(setActiveEditorId(props.editorId));
   };

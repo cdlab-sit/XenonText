@@ -17,7 +17,6 @@ remote.Menu.setApplicationMenu(applicationMenu);
  *  ストアの状態を表示
  * store.subscribe(() => console.log(store.getState()));
  */
-
 store.subscribe(() => console.log(store.getState()));
 render(
   <Provider store={store}>
