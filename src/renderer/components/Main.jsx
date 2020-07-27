@@ -1,31 +1,33 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import EditArea from './EditArea';
 import Tabs from './Tabs';
 
 import { getActiveEditorId, getDocuments } from '../reducks/editor/selectors';
 
-let showId = 'editor1';
-
-const shouldShow = (id) => {
-  if (id !== showId) {
-    return false;
-  }
-  return true;
-};
-
 export default function Main() {
-  showId = getActiveEditorId(
-    useSelector((state) => state.editor.activeEditorId),
-  );
+  // EditAreaに文字入力時, なぜ2回呼び出されるのかは不明
+  console.log('start Main');
 
-  const editSelector = useSelector((state) => state.editor.documents);
-  const documents = getDocuments(editSelector);
+  const editorSelector = useSelector(
+    (state) => state.editor,
+    // shallowEqualあってもかわんない
+    shallowEqual,
+  );
+  const showId = getActiveEditorId(editorSelector);
+  console.log('showId=', showId);
+  const documents = getDocuments(editorSelector);
+
+  const shouldShow = (id) => {
+    if (id !== showId) {
+      return false;
+    }
+    return true;
+  };
 
   return (
     <div className="flex flex-auto flex-col">
       <Tabs />
-
       {documents.map((document) => {
         return (
           <div
@@ -34,7 +36,11 @@ export default function Main() {
             }`}
             key={document.editorId}
           >
-            <EditArea editorId={document.editorId} key={document.editorId} />
+            <EditArea
+              editorId={document.editorId}
+              initialText={document.fileText}
+              key={document.editorId}
+            />
           </div>
         );
       })}

@@ -1,41 +1,42 @@
 import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/src-noconflict/mode-c_cpp';
 import './theme-xenon';
-import React, { useCallback } from 'react';
+import React from 'react';
 import AceEditor from 'react-ace';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedText, setText } from '../reducks/editor/actions';
-import { getFileText } from '../reducks/editor/selectors';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import {
+  setSelectedText,
+  setText,
+  setMyEditorId,
+  setActiveEditorId,
+} from '../reducks/editor/actions';
 
-const EditArea = React.memo(function EditArea({ editorId }) {
+const EditArea = React.memo(function EditArea(props) {
   let editorInstance = null;
-
-  const myFileSelector = useSelector((state) =>
-    state.editor.documents.find((val) => val.editorId === editorId),
-  );
-  let initialText = '';
-  if (myFileSelector !== undefined) {
-    initialText = getFileText(myFileSelector);
-  }
+  const { editorId } = props;
+  const { initialText } = props;
+  console.log('start EditArea!!!!');
 
   const dispatch = useDispatch();
-
-  const onChange = useCallback(() => {
-    // console.log('onChange!', editorInstance.getValue());
+  const onChange = () => {
     dispatch(setText(editorInstance));
-  });
-  const onLoad = useCallback((newEditorInstance) => {
+  };
+  const onLoad = (newEditorInstance) => {
     editorInstance = newEditorInstance;
-    // console.log('onLoad id=', editorInstance.id);
     dispatch(setText(editorInstance));
-  });
-  const onSelectionChange = useCallback(() => {
-    // console.log('onSelectionChange!');
+    // ファイルが新規作成された場合
+    if (editorId === '') {
+      dispatch(setMyEditorId(editorInstance.id));
+      dispatch(setActiveEditorId(editorInstance.id));
+    }
+  };
+  const onSelectionChange = () => {
     dispatch(setSelectedText(editorInstance));
-  });
-  const onFocus = useCallback(() => {
-    // console.log('onFocus\n\n', editorId);
-  });
+  };
+  const onFocus = () => {
+    // console.log('onFocus\n\n', props.editorId);
+  };
 
   return (
     <div className="bg-gray-900 flex-auto">
@@ -54,7 +55,6 @@ const EditArea = React.memo(function EditArea({ editorId }) {
         showPrintMargin={false}
         tabSize={4}
         theme="xenon"
-        // value={text}
         width="100%"
         wrapEnabed={false}
       />
@@ -62,4 +62,16 @@ const EditArea = React.memo(function EditArea({ editorId }) {
   );
 });
 
+EditArea.propTypes = {
+  editorId: PropTypes.string.isRequired,
+  initialText: PropTypes.string.isRequired,
+};
+
 export default EditArea;
+
+// const EditArea = React.memo(function EditArea(props){
+//   console.log('start EditArea');
+//   return <h1>it is EditArea</h1>;
+// });
+
+// export default EditArea;

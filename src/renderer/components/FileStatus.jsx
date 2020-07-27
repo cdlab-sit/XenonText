@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { getFileStatus } from '../reducks/editor/selectors';
 
@@ -13,13 +14,15 @@ const unsavedImagePathCommand =
   '1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 ' +
   '10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z';
 
-// 今すべて共通になってるので親からeditorIdもらう必要あり,
-// もしNewだったらFileないからgetFileStatusエラーになる
-// あとでもいっかファイルステータス
-
-export default function FileStatus() {
+export default function FileStatus(props) {
+  const { editorId } = props;
   let fileStatusPathCommand = savedImagePathCommand;
-  const isSaved = getFileStatus(useSelector((state) => state));
+
+  const documentSelector = useSelector((state) =>
+    state.editor.documents.find((val) => val.editorId === editorId),
+  );
+  const isSaved = getFileStatus(documentSelector, editorId);
+
   if (!isSaved) {
     fileStatusPathCommand = unsavedImagePathCommand;
   }
@@ -31,3 +34,7 @@ export default function FileStatus() {
     </div>
   );
 }
+
+FileStatus.propTypes = {
+  editorId: PropTypes.string.isRequired,
+};

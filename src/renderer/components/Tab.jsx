@@ -1,14 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import FileStatus from './FileStatus';
 import { setActiveEditorId } from '../reducks/editor/actions';
 
 export default function Tab(props) {
-  const item = props.title;
+  const { title } = props;
+  const { editorId } = props;
   const dispatch = useDispatch();
   const onClick = () => {
-    // e.stopPropagation();
-    dispatch(setActiveEditorId(props.editorId));
+    dispatch(setActiveEditorId(editorId));
   };
   return (
     <div
@@ -22,10 +23,14 @@ export default function Tab(props) {
                 w-full h-6
                 "
       >
-        {item}
+        {title}
       </h2>
-      {/* あとでやる */}
-      {/* <FileStatus /> */}
+      <FileStatus editorId={editorId} />
     </div>
   );
 }
+
+Tab.propTypes = {
+  title: PropTypes.string.isRequired,
+  editorId: PropTypes.string.isRequired,
+};

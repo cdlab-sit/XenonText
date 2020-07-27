@@ -20,27 +20,24 @@ export const getCharCount = createSelector(
 
 // 必要か?
 export const getActiveEditorId = createSelector([(state) => state], (state) => {
-  return state;
+  return state.activeEditorId;
 });
 
 // 必要か?
 export const getDocuments = createSelector([(state) => state], (state) => {
-  return state;
+  return state.documents;
 });
 
+// 必要か?
 export const getFileText = createSelector([(state) => state], (state) => {
   return state.fileText;
 });
 
-// 未完成
-export const getFileStatus = createSelector(
-  [(state) => state.file, (state) => state.edit],
-  (file, edit) => {
-    const activeEditorInfo = getActiveDocument(edit);
-    const activeFile = file.find((val) => val.editorId === edit.activeEditorId);
-    if (activeEditorInfo.text === activeFile.text) {
-      return true;
-    }
-    return false;
-  },
-);
+export const getFileStatus = createSelector([(state) => state], (document) => {
+  console.log('edit->', document.editedText);
+  console.log('file->', document.fileText);
+  if (document.editedText === document.fileText) {
+    return true;
+  }
+  return false;
+});
