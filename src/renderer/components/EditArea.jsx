@@ -12,11 +12,9 @@ import {
   setActiveEditorId,
 } from '../reducks/editor/actions';
 
-let editorInstance = null;
 const EditArea = React.memo(
   (props) => {
-    console.log('start EditArea------: ');
-
+    let editorInstance = null;
     /*  XenonTextで開いている際, 他のエディタなのでファイルが変更されると
     initialTextが変更され反映される.
     しかしeditorIdも新しくなるためゾンビがのこるかもしれない.
@@ -69,10 +67,8 @@ const EditArea = React.memo(
   },
   (prevProps, nextProps) => {
     if (prevProps.fileText === nextProps.fileText) {
-      console.log(true);
       return true;
     }
-    console.log(false);
     return false;
   },
 );
