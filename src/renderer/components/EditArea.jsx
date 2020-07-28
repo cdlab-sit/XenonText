@@ -15,22 +15,26 @@ import {
 let editorInstance = null;
 const EditArea = React.memo(
   (props) => {
-
     console.log('start EditArea------: ');
 
-    // const initialText = props.fileText;
-    const initialText = 'initialText';
-
-    console.log('start =', props.editorId);
+    /*  XenonTextで開いている際, 他のエディタなのでファイルが変更されると
+    initialTextが変更され反映される.
+    しかしeditorIdも新しくなるためゾンビがのこるかもしれない.
+    未確認が必要 */
+    const { initialText } = props;
 
     const dispatch = useDispatch();
     const onChange = () => {
       dispatch(setText(editorInstance));
     };
+    /* editorInstance作成後 */
     const onLoad = (newEditorInstance) => {
       editorInstance = newEditorInstance;
+      /* ストアにeditorIdを登録(初期状態は'') */
       dispatch(setMyEditorId(editorInstance.id));
+      /* ストアにActiveEditorIdを登録 */
       dispatch(setActiveEditorId(editorInstance.id));
+      /* ストアにTextを登録 */
       dispatch(setText(editorInstance));
     };
     const onSelectionChange = () => {
@@ -64,8 +68,6 @@ const EditArea = React.memo(
     );
   },
   (prevProps, nextProps) => {
-    console.log('<', nextProps.editorId, '>');
-    console.log(prevProps, ' -> Props ->', nextProps);
     if (prevProps.fileText === nextProps.fileText) {
       console.log(true);
       return true;
@@ -75,16 +77,8 @@ const EditArea = React.memo(
   },
 );
 
-// EditArea.propTypes = {
-//   editorId: PropTypes.string.isRequired,
-//   initialText: PropTypes.string.isRequired,
-// };
+EditArea.propTypes = {
+  initialText: PropTypes.string.isRequired,
+};
 
 export default EditArea;
-
-// const EditArea = React.memo(function EditArea(props){
-//   console.log('start EditArea');
-//   return <h1>it is EditArea</h1>;
-// });
-
-// export default EditArea;
