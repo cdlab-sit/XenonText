@@ -1,24 +1,27 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import Tab from './Tab';
 import { setNewDocument } from '../reducks/editor/actions';
-import { getDocuments } from '../reducks/editor/selectors';
 
-export default function Tabs() {
+export default function Tabs(props) {
+  const activeEditorId = useSelector((state) => state.editor.activeEditorId);
+  const { documents } = props;
   const dispatch = useDispatch();
+
   const onDoubleClick = () => {
+    /* 新規ドキュメントをストアに作成 */
     dispatch(setNewDocument());
   };
 
-  // Mainからpropsでもってきたほうがいいかもしんない
-  const editorDocuments = getDocuments(useSelector((state) => state.editor));
   return (
-    <div className="h-10 flex items-end" onDoubleClick={onDoubleClick}>
-      {editorDocuments.map((document) => {
+    <div className="h-10 flex items-end red" onDoubleClick={onDoubleClick}>
+      {documents.map((document) => {
         return (
           <Tab
             title={document.fileName}
             editorId={document.editorId}
+            isActive={document.editorId === activeEditorId}
             key={document.editorId}
           />
         );
@@ -26,3 +29,8 @@ export default function Tabs() {
     </div>
   );
 }
+
+Tabs.propTypes = {
+  /* 警告ありarrayダメらしい, どうすんだ */
+  documents: PropTypes.array.isRequired,
+};
