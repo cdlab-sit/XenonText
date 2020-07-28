@@ -6,6 +6,7 @@ export const SET_MY_EDITOR_ID = 'SET_MY_EDITOR_ID';
 
 export const setSelectedText = (editorInstance) => ({
   payload: {
+    editorId: editorInstance.id,
     selectedText: editorInstance.getSelectedText(),
   },
   type: SET_SELECTED_TEXT,
@@ -13,6 +14,7 @@ export const setSelectedText = (editorInstance) => ({
 
 export const setText = (editorInstance) => ({
   payload: {
+    editorId: editorInstance.id,
     text: editorInstance.getValue(),
   },
   type: SET_TEXT,
