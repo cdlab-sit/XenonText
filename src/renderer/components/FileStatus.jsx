@@ -18,11 +18,10 @@ export default function FileStatus(props) {
   const { editorId } = props;
   let fileStatusPathCommand = savedImagePathCommand;
 
-  const documentSelector = useSelector((state) =>
-    state.editor.documents.find((val) => val.editorId === editorId),
+  const isSaved = getFileStatus(
+    useSelector((state) => state.editor),
+    editorId,
   );
-  const isSaved = getFileStatus(documentSelector, editorId);
-
   if (!isSaved) {
     fileStatusPathCommand = unsavedImagePathCommand;
   }
