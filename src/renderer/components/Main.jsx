@@ -1,22 +1,26 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import EditArea from './EditArea';
 import Tabs from './Tabs';
 
 import { getActiveEditorId, getDocuments } from '../reducks/editor/selectors';
+import { setNewDocument } from '../reducks/editor/actions';
 
 export default function Main() {
   // EditAreaに文字入力時, なぜ2回呼び出されるのかは不明
-  // というか新規作成時, 2回呼び出されるからおかしくなってる
+  // Selectorがあるから? 参照だけなんだけど...
+  const dispatch = useDispatch();
 
-  const editorSelector = useSelector(
-    (state) => state.editor,
-    // shallowEqualあってもかわんない
-    shallowEqual,
-  );
-
+  const editorSelector = useSelector((state) => state.editor);
   const showId = getActiveEditorId(editorSelector);
   const documents = getDocuments(editorSelector);
+
+  /* これでできたけど根本的な理由は不明, あとで調べる */
+  useEffect(() => {
+    if (documents.length === 0) {
+      dispatch(setNewDocument());
+    }
+  });
 
   const shouldShow = (id) => {
     if (id !== showId) {
@@ -28,9 +32,6 @@ export default function Main() {
   return (
     <div className="flex flex-auto flex-col">
       <Tabs documents={documents} />
-      {/* editorIdを更新すると不必要なeditorInstanceが作成される
-      多分, 別のものだと認識してReact.memoがつかえないんだろうな */}
-      {/* ちがいました, editorIdでkey指定してたからです!! */}
       {documents.map((document, index) => {
         return (
           <div
@@ -40,13 +41,7 @@ export default function Main() {
             /* 警告あり, index使っちゃだめらしい */
             key={index}
           >
-            <EditArea
-              // editorId={document.editorId}
-              initialText={document.fileText}
-              // key={document.fileText}
-              // fileText={"document.fileText"}
-              // key={document.fileText}
-            />
+            <EditArea initialText={document.fileText} />
           </div>
         );
       })}

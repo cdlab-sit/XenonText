@@ -4,16 +4,16 @@ import {
   SET_ACTIVE_EDITOR_ID,
   SET_NEW_DOCUMENT,
   SET_MY_EDITOR_ID,
+  DELETE_MY_DOCUMENT,
 } from './actions';
 import { getMyDocument } from './selectors';
 import initialState from '../store/initialState';
 
 const documentTemplate = {
-  // editorId: 'editor1',
   editorId: '',
   selectedText: null,
   editedText: '',
-  fileText: 'documentTemplate',
+  fileText: '',
   fileName: 'Untitled',
   filePath: null,
 };
@@ -69,6 +69,43 @@ const EditorReducer = (state = initialState.editor, action) => {
       );
       return { ...state, documents: newDocuments };
     }
+    case DELETE_MY_DOCUMENT: {
+      let deletedIndex;
+      let nextActiveEditorIndex;
+      /* 対象のDocumentを抜いたDocumentsを作成 */
+      const newDocuments = state.documents.filter((value, index) => {
+        if (value.editorId !== action.payload.editorId) {
+          return value;
+        }
+        deletedIndex = index;
+        return null;
+      });
+      const documentsCount = newDocuments.length;
+
+      switch (true) {
+        /* 全てのタブを削除した場合 */
+        case documentsCount === 0:
+          return {
+            ...state,
+            activeEditorId: '',
+            documents: [],
+          };
+        /* 削除したタブが右端の場合 */
+        case documentsCount === deletedIndex:
+          nextActiveEditorIndex = deletedIndex - 1;
+          break;
+        /* 削除したタブの右に, 他のタブがある場合 */
+        default:
+          nextActiveEditorIndex = deletedIndex;
+      }
+
+      return {
+        ...state,
+        activeEditorId: newDocuments[nextActiveEditorIndex].editorId,
+        documents: newDocuments,
+      };
+    }
+
     default:
       return { ...state };
   }

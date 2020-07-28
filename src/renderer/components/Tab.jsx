@@ -13,9 +13,9 @@ export default function Tab(props) {
   const { isActive } = props;
   const dispatch = useDispatch();
 
+  // タブ(FileStatus以外の場所)が押された時
   const onClick = () => {
     /* activeEditorIdをストアにセット */
-    console.log('In Tab.jsx editorId: ', editorId);
     dispatch(setActiveEditorId(editorId));
   };
 

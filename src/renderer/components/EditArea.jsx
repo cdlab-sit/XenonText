@@ -18,7 +18,7 @@ const EditArea = React.memo(
     /*  XenonTextで開いている際, 他のエディタなのでファイルが変更されると
     initialTextが変更され反映される.
     しかしeditorIdも新しくなるためゾンビがのこるかもしれない.
-    未確認が必要 */
+    確認が必要 */
     const { initialText } = props;
 
     const dispatch = useDispatch();
