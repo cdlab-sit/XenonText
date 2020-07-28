@@ -4,16 +4,30 @@ import PropTypes from 'prop-types';
 import FileStatus from './FileStatus';
 import { setActiveEditorId } from '../reducks/editor/actions';
 
+const activeTabColor = 'bg-gray-900';
+const inactiveTabColor = 'bg-gray-800';
+
 export default function Tab(props) {
   const { title } = props;
   const { editorId } = props;
+  const { isActive } = props;
   const dispatch = useDispatch();
+
   const onClick = () => {
+    /* activeEditorIdをストアにセット */
+    console.log('In Tab.jsx editorId: ', editorId);
     dispatch(setActiveEditorId(editorId));
   };
+
+  let tabColor = inactiveTabColor;
+  if (isActive) {
+    tabColor = activeTabColor;
+  }
+
   return (
+    /* divはやめろって警告がでてる, いつか直す */
     <div
-      className="bg-gray-900 h-8 w-40 flex flex-row items-center"
+      className={`"h-8 w-40 flex flex-row items-center " ${tabColor}`}
       onClick={onClick}
     >
       <h2
@@ -31,6 +45,7 @@ export default function Tab(props) {
 }
 
 Tab.propTypes = {
-  title: PropTypes.string.isRequired,
   editorId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
