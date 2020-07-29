@@ -7,8 +7,7 @@ import { getActiveEditorId, getDocuments } from '../reducks/editor/selectors';
 import { setNewDocument } from '../reducks/editor/actions';
 
 export default function Main() {
-  // EditAreaに文字入力時, なぜ2回呼び出されるのかは不明
-  // Selectorがあるから? 参照だけなんだけど...
+  // state.editor変更時, なぜ2回呼び出されるのかは不明
   const dispatch = useDispatch();
 
   const editorSelector = useSelector((state) => state.editor);
@@ -32,14 +31,13 @@ export default function Main() {
   return (
     <div className="flex flex-auto flex-col">
       <Tabs documents={documents} />
-      {documents.map((document, index) => {
+      {documents.map((document) => {
         return (
           <div
             className={`flex flex-auto ${
               shouldShow(document.editorId) ? '' : 'hidden'
             }`}
-            /* 警告あり, index使っちゃだめらしい */
-            key={index}
+            key={document}
           >
             <EditArea initialText={document.fileText} />
           </div>

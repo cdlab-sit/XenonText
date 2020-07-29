@@ -5,7 +5,7 @@ import FileStatus from './FileStatus';
 import { setActiveEditorId } from '../reducks/editor/actions';
 
 const activeTabColor = 'bg-gray-900';
-const inactiveTabColor = 'bg-gray-800';
+const inActiveTabColor = 'bg-gray-800';
 
 export default function Tab(props) {
   const { title } = props;
@@ -19,14 +19,14 @@ export default function Tab(props) {
     dispatch(setActiveEditorId(editorId));
   };
 
-  let tabColor = inactiveTabColor;
+  let tabColor = inActiveTabColor;
   if (isActive) {
     tabColor = activeTabColor;
   }
 
   return (
-    /* divはやめろって警告がでてる, いつか直す */
-    <div
+    <button
+      type="button"
       className={`"h-8 w-40 flex flex-row items-center " ${tabColor}`}
       onClick={onClick}
     >
@@ -40,7 +40,7 @@ export default function Tab(props) {
         {title}
       </h2>
       <FileStatus editorId={editorId} />
-    </div>
+    </button>
   );
 }
 

@@ -15,7 +15,7 @@ import {
 const EditArea = React.memo(
   (props) => {
     let editorInstance = null;
-    /*  XenonTextで開いている際, 他のエディタなのでファイルが変更されると
+    /*  XenonTextで開いている際, 他のエディタなどでファイルが変更されると
     initialTextが変更され反映される.
     しかしeditorIdも新しくなるためゾンビがのこるかもしれない.
     確認が必要 */
@@ -38,9 +38,6 @@ const EditArea = React.memo(
     const onSelectionChange = () => {
       dispatch(setSelectedText(editorInstance));
     };
-    const onFocus = () => {
-      // console.log('onFocus\n\n', props.editorId);
-    };
 
     return (
       <div className="bg-gray-900 flex-auto">
@@ -55,7 +52,6 @@ const EditArea = React.memo(
           onChange={onChange}
           onLoad={onLoad}
           onSelectionChange={onSelectionChange}
-          onFocus={onFocus}
           showPrintMargin={false}
           tabSize={4}
           theme="xenon"
@@ -65,12 +61,8 @@ const EditArea = React.memo(
       </div>
     );
   },
-  (prevProps, nextProps) => {
-    if (prevProps.fileText === nextProps.fileText) {
-      return true;
-    }
-    return false;
-  },
+  // Props.fileTextが変更されない限り, 再レンダリングしない
+  (prevProps, nextProps) => prevProps.fileText === nextProps.fileText,
 );
 
 EditArea.propTypes = {
