@@ -22,6 +22,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_TEXT: {
       const { editorId } = action.payload;
       const document = getMyDocument(state, editorId);
+      if (document === undefined) return { ...state };
       const newDocument = {
         ...document,
         editedText: action.payload.text,
@@ -35,6 +36,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_SELECTED_TEXT: {
       const { editorId } = action.payload;
       const document = getMyDocument(state, editorId);
+      if (document === undefined) return { ...state };
       const newDocument = {
         ...document,
         selectedText: action.payload.selectedText,
