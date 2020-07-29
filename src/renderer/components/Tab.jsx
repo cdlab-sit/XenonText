@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -25,8 +27,7 @@ export default function Tab(props) {
   }
 
   return (
-    <button
-      type="button"
+    <div
       className={`"h-8 w-40 flex flex-row items-center " ${tabColor}`}
       onClick={onClick}
     >
@@ -40,7 +41,7 @@ export default function Tab(props) {
         {title}
       </h2>
       <FileStatus editorId={editorId} />
-    </button>
+    </div>
   );
 }
 

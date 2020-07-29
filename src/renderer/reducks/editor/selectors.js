@@ -29,17 +29,14 @@ export const getCharCount = createSelector(
   },
 );
 
-// 必要か?
 export const getActiveEditorId = createSelector([(state) => state], (state) => {
   return state.activeEditorId;
 });
 
-// 必要か?
 export const getDocuments = createSelector([(state) => state], (state) => {
   return state.documents;
 });
 
-// 必要か?
 export const getFileText = createSelector([(state) => state], (state) => {
   return state.fileText;
 });

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,7 +36,6 @@ export default function FileStatus(props) {
     fileStatusPathCommand = unsavedImagePathCommand;
   }
   return (
-    /* divはonClick使うなという警告 */
     <div className="w-3 h-3 mx-2 flex-shrink-0" onClick={onClick}>
       <svg className="text-gray-300" fill="currentColor" viewBox="0 0 20 20">
         <path clipRule="evenodd" d={fileStatusPathCommand} fillRule="evenodd" />
