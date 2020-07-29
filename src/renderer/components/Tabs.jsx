@@ -15,7 +15,7 @@ export default function Tabs(props) {
   };
 
   return (
-    <div className="h-10 flex items-end red" onDoubleClick={onDoubleClick}>
+    <div className="h-10 flex items-end">
       {documents.map((document) => {
         return (
           <Tab
@@ -26,11 +26,17 @@ export default function Tabs(props) {
           />
         );
       })}
+      {/* デザインは適当 */}
+      <div
+        className="flex-auto h-full bg-gray-500"
+        onDoubleClick={onDoubleClick}
+      >
+        タブルクリックで新規ファイルを開く
+      </div>
     </div>
   );
 }
 
 Tabs.propTypes = {
-  /* 警告ありarrayダメらしい, どうすんだ */
-  documents: PropTypes.array.isRequired,
+  documents: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
