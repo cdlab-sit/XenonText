@@ -8,8 +8,6 @@
     "start": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:dev && npm run dev",
     "build": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:build && npm run package",
     "watch": "npm run lint && npm run clean && run-p copy:* && run-p css:* && run-p watch:*",
-    "testwatch": "npm run clean && run-p copy:* && run-p css:* && run-p watch:*",
-    "testdev": "electron dist",
     "dev": "electron dist",
     "lint": "eslint --ext .js,.jsx src",
     "clean": "rimraf dist build",
