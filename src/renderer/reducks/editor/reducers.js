@@ -21,12 +21,15 @@ const EditorReducer = (state = initialState.editor, action) => {
   switch (action.type) {
     case SET_TEXT: {
       const { editorId } = action.payload;
+      /* editorIdに対応したdocumentを取得 */
       const document = getMyDocument(state, editorId);
       if (document === undefined) return { ...state };
+      /* editedTextを更新したdocumentを生成 */
       const newDocument = {
         ...document,
         editedText: action.payload.text,
       };
+      /* 更新documentを含むdocumentsを生成 */
       const newDocuments = state.documents.map((el) =>
         el.editorId === document.editorId ? newDocument : el,
       );
@@ -35,12 +38,15 @@ const EditorReducer = (state = initialState.editor, action) => {
 
     case SET_SELECTED_TEXT: {
       const { editorId } = action.payload;
+      /* editorIdに対応したdocumentを取得 */
       const document = getMyDocument(state, editorId);
       if (document === undefined) return { ...state };
+      /* selectedTextを更新したdocumentを生成 */
       const newDocument = {
         ...document,
         selectedText: action.payload.selectedText,
       };
+      /* 更新documentを含むdocumentsを生成 */
       const newDocuments = state.documents.map((el) =>
         el.editorId === document.editorId ? newDocument : el,
       );
@@ -52,20 +58,19 @@ const EditorReducer = (state = initialState.editor, action) => {
         ...state,
         ...action.payload,
       };
-    case SET_NEW_DOCUMENT: {
-      const newDocuments = {
+    case SET_NEW_DOCUMENT:
+      return {
         ...state,
+        /* documentTemplateを追加する */
         documents: [...state.documents, documentTemplate],
       };
-      return {
-        ...newDocuments,
-      };
-    }
     case SET_MY_EDITOR_ID: {
+      /* editorIdを付与したdocumentを作成 */
       const newDocument = {
         ...documentTemplate,
         editorId: action.payload.editorId,
       };
+      /* editorIdが''のdocumentをnewDocumentに更新する */
       const newDocuments = state.documents.map((el) =>
         el.editorId === '' ? newDocument : el,
       );

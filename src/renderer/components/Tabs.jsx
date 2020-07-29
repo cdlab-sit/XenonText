@@ -31,7 +31,7 @@ export default function Tabs(props) {
         className="flex-auto h-full bg-gray-500"
         onDoubleClick={onDoubleClick}
       >
-        タブルクリックで新規ファイルを開く
+        タブルクリックで新規documentを作成
       </div>
     </div>
   );

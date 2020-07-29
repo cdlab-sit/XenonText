@@ -61,8 +61,8 @@ const EditArea = React.memo(
       </div>
     );
   },
-  // Props.fileTextが変更されない限り, 再レンダリングしない
-  (prevProps, nextProps) => prevProps.fileText === nextProps.fileText,
+  // Props.initialTextが変更されない限り, 再レンダリングしない
+  (prevProps, nextProps) => prevProps.initialText === nextProps.initialText,
 );
 
 EditArea.propTypes = {

@@ -31,13 +31,16 @@ export default function Main() {
   return (
     <div className="flex flex-auto flex-col">
       <Tabs documents={documents} />
-      {documents.map((document) => {
+      {/* documentsに含まれているdocumentを全てレンダリング */}
+      {documents.map((document, index) => {
         return (
           <div
             className={`flex flex-auto ${
+              /* アクティブなdocumentのみを表示 */
               shouldShow(document.editorId) ? '' : 'hidden'
             }`}
-            key={document}
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
           >
             <EditArea initialText={document.fileText} />
           </div>
