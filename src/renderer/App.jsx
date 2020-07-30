@@ -9,6 +9,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       isFullScreen: false,
+      isWindows: process.platform === 'win32',
     };
 
     const currentWindow = remote.getCurrentWindow();
@@ -33,11 +34,11 @@ export default class App extends Component {
   }
 
   render() {
-    const { isFullScreen } = this.state;
+    const { isFullScreen, isWindows } = this.state;
 
     return (
       <div className="flex flex-col h-screen">
-        {!isFullScreen && <TitleBar />}
+        {!isFullScreen && !isWindows && <TitleBar />}
         <Body />
         <Footer />
       </div>
