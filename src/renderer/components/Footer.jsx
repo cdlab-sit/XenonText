@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getCharCount } from '../reducks/edit/selectors';
+import { getCharCount } from '../reducks/editor/selectors';
 
 export default function Footer() {
   const charCount = getCharCount(useSelector((state) => state));

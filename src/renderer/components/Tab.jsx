@@ -1,11 +1,36 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import FileStatus from './FileStatus';
+import { setActiveEditorId } from '../reducks/editor/actions';
 
-export default function Tabs() {
-  const item = 'Untitled';
+const activeTabColor = 'bg-gray-900';
+const inactiveTabColor = 'bg-gray-800';
+
+export default function Tab(props) {
+  const { title } = props;
+  const { editorId } = props;
+  const { isActive } = props;
+  const dispatch = useDispatch();
+
+  // タブ(FileStatus以外の場所)が押された時
+  const onClick = () => {
+    /* activeEditorIdをストアにセット */
+    dispatch(setActiveEditorId(editorId));
+  };
+
+  let tabColor = inactiveTabColor;
+  if (isActive) {
+    tabColor = activeTabColor;
+  }
 
   return (
-    <div className="bg-gray-900 h-8 w-40 flex flex-row items-center">
+    <div
+      className={`"h-8 w-40 flex flex-row items-center " ${tabColor}`}
+      onClick={onClick}
+    >
       <h2
         className="
                 text-xs text-gray-300 select-none
@@ -13,9 +38,15 @@ export default function Tabs() {
                 w-full h-6
                 "
       >
-        {item}
+        {title}
       </h2>
-      <FileStatus />
+      <FileStatus editorId={editorId} />
     </div>
   );
 }
+
+Tab.propTypes = {
+  editorId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+};

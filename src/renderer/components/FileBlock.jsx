@@ -1,12 +1,12 @@
 import React from 'react';
-import FileStatus from './FileStatus';
 
 export default function FileBlock() {
   const item = 'untitled';
 
   return (
     <div className="flex h-6 w-full bg-gray-800 items-center">
-      <FileStatus />
+      {/* 現在未実装 */}
+      {/* <FileStatus /> */}
       <h3
         className="
                 text-xs text-gray-300
