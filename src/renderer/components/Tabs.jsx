@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,7 +14,7 @@ export default function Tabs(props) {
   const { documents } = props;
   const dispatch = useDispatch();
 
-  const onDoubleClick = () => {
+  const addNewTab = () => {
     /* 新規ドキュメントをストアに作成 */
     dispatch(setNewDocument());
   };
@@ -32,12 +34,13 @@ export default function Tabs(props) {
       {/* プラスボタン */}
       <div
         className="h-8 flex flex-auto items-center"
-        onDoubleClick={onDoubleClick}
+        onDoubleClick={addNewTab}
       >
         <svg
           className="w-3 h-3 mx-2 text-gray-800"
           fill="currentColor"
           viewBox="0 0 20 20"
+          onClick={addNewTab}
         >
           <path
             clipRule="evenodd"
