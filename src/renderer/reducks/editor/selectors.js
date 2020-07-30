@@ -7,9 +7,9 @@ export const getActiveDocument = (editor) => {
   return activeDocument;
 };
 
-export const getMyDocument = (editor, editorId) => {
-  const myDocument = editor.documents.find((val) => val.editorId === editorId);
-  return myDocument;
+export const getDocument = (editor, editorId) => {
+  const document = editor.documents.find((val) => val.editorId === editorId);
+  return document;
 };
 
 export const getCharCount = createSelector(
@@ -41,7 +41,7 @@ export const getFileText = createSelector([(state) => state], (state) => {
   return state.fileText;
 });
 
-export const getFileStatus = createSelector([getMyDocument], (document) => {
+export const getFileStatus = createSelector([getDocument], (document) => {
   if (document.editedText === document.fileText) {
     return true;
   }

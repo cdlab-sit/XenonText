@@ -11,7 +11,7 @@ export default function Main() {
   const dispatch = useDispatch();
 
   const editorSelector = useSelector((state) => state.editor);
-  const showId = getActiveEditorId(editorSelector);
+  const activeEditorId = getActiveEditorId(editorSelector);
   const documents = getDocuments(editorSelector);
 
   /* これでできたけど根本的な理由は不明, あとで調べる */
@@ -22,7 +22,7 @@ export default function Main() {
   });
 
   const shouldShow = (id) => {
-    if (id !== showId) {
+    if (id !== activeEditorId) {
       return false;
     }
     return true;

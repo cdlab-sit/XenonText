@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import {
   setSelectedText,
   setText,
-  setMyEditorId,
+  setEditorId,
   setActiveEditorId,
 } from '../reducks/editor/actions';
 
@@ -29,7 +29,7 @@ const EditArea = React.memo(
     const onLoad = (newEditorInstance) => {
       editorInstance = newEditorInstance;
       /* ストアにeditorIdを登録(初期状態は'') */
-      dispatch(setMyEditorId(editorInstance.id));
+      dispatch(setEditorId(editorInstance.id));
       /* ストアにActiveEditorIdを登録 */
       dispatch(setActiveEditorId(editorInstance.id));
       /* ストアにTextを登録 */

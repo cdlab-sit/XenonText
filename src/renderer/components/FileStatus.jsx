@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFileStatus } from '../reducks/editor/selectors';
-import { deleteMyDocument } from '../reducks/editor/actions';
+import { deleteDocument } from '../reducks/editor/actions';
 
 const savedImagePathCommand =
   'M4.293 4.293a1 1 0 011.414 0L10 ' +
@@ -25,7 +25,7 @@ export default function FileStatus(props) {
   -> タブとドキュメントを削除 */
   const onClick = (e) => {
     e.stopPropagation();
-    dispatch(deleteMyDocument(editorId));
+    dispatch(deleteDocument(editorId));
   };
 
   const isSaved = getFileStatus(

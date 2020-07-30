@@ -3,10 +3,10 @@ import {
   SET_TEXT,
   SET_ACTIVE_EDITOR_ID,
   SET_NEW_DOCUMENT,
-  SET_MY_EDITOR_ID,
-  DELETE_MY_DOCUMENT,
+  SET_EDITOR_ID,
+  DELETE_DOCUMENT,
 } from './actions';
-import { getMyDocument } from './selectors';
+import { getDocument } from './selectors';
 import initialState from '../store/initialState';
 
 const documentTemplate = {
@@ -22,7 +22,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_TEXT: {
       const { editorId } = action.payload;
       /* editorIdに対応したdocumentを取得 */
-      const document = getMyDocument(state, editorId);
+      const document = getDocument(state, editorId);
       if (document === undefined) return { ...state };
       /* editedTextを更新したdocumentを生成 */
       const newDocument = {
@@ -39,7 +39,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_SELECTED_TEXT: {
       const { editorId } = action.payload;
       /* editorIdに対応したdocumentを取得 */
-      const document = getMyDocument(state, editorId);
+      const document = getDocument(state, editorId);
       if (document === undefined) return { ...state };
       /* selectedTextを更新したdocumentを生成 */
       const newDocument = {
@@ -64,7 +64,7 @@ const EditorReducer = (state = initialState.editor, action) => {
         /* documentTemplateを追加する */
         documents: [...state.documents, documentTemplate],
       };
-    case SET_MY_EDITOR_ID: {
+    case SET_EDITOR_ID: {
       /* editorIdを付与したdocumentを作成 */
       const newDocument = {
         ...documentTemplate,
@@ -76,7 +76,7 @@ const EditorReducer = (state = initialState.editor, action) => {
       );
       return { ...state, documents: newDocuments };
     }
-    case DELETE_MY_DOCUMENT: {
+    case DELETE_DOCUMENT: {
       let deletedIndex;
       let nextActiveEditorIndex;
       /* 対象のDocumentを抜いたDocumentsを作成 */

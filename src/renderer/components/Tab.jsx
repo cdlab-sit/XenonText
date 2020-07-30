@@ -7,7 +7,7 @@ import FileStatus from './FileStatus';
 import { setActiveEditorId } from '../reducks/editor/actions';
 
 const activeTabColor = 'bg-gray-900';
-const inActiveTabColor = 'bg-gray-800';
+const inactiveTabColor = 'bg-gray-800';
 
 export default function Tab(props) {
   const { title } = props;
@@ -21,7 +21,7 @@ export default function Tab(props) {
     dispatch(setActiveEditorId(editorId));
   };
 
-  let tabColor = inActiveTabColor;
+  let tabColor = inactiveTabColor;
   if (isActive) {
     tabColor = activeTabColor;
   }
