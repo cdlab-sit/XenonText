@@ -32,22 +32,20 @@ export default function Tabs(props) {
         );
       })}
       {/* プラスボタン */}
-      <div
-        className="h-8 flex flex-auto items-center"
-        onDoubleClick={addNewTab}
-      >
-        <svg
-          className="w-3 h-3 mx-2 text-gray-800"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          onClick={addNewTab}
-        >
-          <path
-            clipRule="evenodd"
-            d={newTabImagePathCommand}
-            fillRule="evenodd"
-          />
-        </svg>
+      <div className="h-8 flex flex-auto" onDoubleClick={addNewTab}>
+        <div className="h-8 w-8 flex items-center" onClick={addNewTab}>
+          <svg
+            className="w-3 h-3 mx-2 text-gray-800"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              clipRule="evenodd"
+              d={newTabImagePathCommand}
+              fillRule="evenodd"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );
