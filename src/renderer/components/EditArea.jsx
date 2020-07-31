@@ -14,12 +14,14 @@ import {
 
 const EditArea = React.memo(
   (props) => {
+    console.log('start EditArea');
     let editorInstance = null;
     /*  XenonTextで開いている際, 他のエディタなどでファイルが変更されると
     initialTextが変更され反映される.
     しかしeditorIdも新しくなるためゾンビがのこるかもしれない.
     確認が必要 */
     const { initialText } = props;
+    const { editorId } = props;
 
     const dispatch = useDispatch();
     const onChange = () => {
@@ -28,15 +30,19 @@ const EditArea = React.memo(
     /* editorInstance作成後 */
     const onLoad = (newEditorInstance) => {
       editorInstance = newEditorInstance;
+      console.log('editorId=', editorInstance.id);
       /* ストアにeditorIdを登録(初期状態は'') */
-      dispatch(setEditorId(editorInstance.id));
+      // dispatch(setEditorId(editorInstance.id));
       /* ストアにActiveEditorIdを登録 */
-      dispatch(setActiveEditorId(editorInstance.id));
+      dispatch(setActiveEditorId(editorId));
       /* ストアにTextを登録 */
       dispatch(setText(editorInstance));
     };
     const onSelectionChange = () => {
       dispatch(setSelectedText(editorInstance));
+    };
+    const onFocus = () => {
+      console.log(editorInstance.id);
     };
 
     return (
@@ -51,6 +57,7 @@ const EditArea = React.memo(
           name="UNIQUE_ID_OF_DIV"
           onChange={onChange}
           onLoad={onLoad}
+          onFocus={onFocus}
           onSelectionChange={onSelectionChange}
           showPrintMargin={false}
           tabSize={4}
@@ -67,6 +74,7 @@ const EditArea = React.memo(
 
 EditArea.propTypes = {
   initialText: PropTypes.string.isRequired,
+  editorId: PropTypes.number.isRequired,
 };
 
 export default EditArea;

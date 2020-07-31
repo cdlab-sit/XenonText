@@ -45,5 +45,5 @@ export default function FileStatus(props) {
 }
 
 FileStatus.propTypes = {
-  editorId: PropTypes.string.isRequired,
+  editorId: PropTypes.number.isRequired,
 };

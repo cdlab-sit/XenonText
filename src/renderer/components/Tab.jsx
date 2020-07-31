@@ -46,7 +46,7 @@ export default function Tab(props) {
 }
 
 Tab.propTypes = {
-  editorId: PropTypes.string.isRequired,
+  editorId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
 };

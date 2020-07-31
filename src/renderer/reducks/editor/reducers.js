@@ -58,12 +58,18 @@ const EditorReducer = (state = initialState.editor, action) => {
         ...state,
         ...action.payload,
       };
-    case SET_NEW_DOCUMENT:
+    case SET_NEW_DOCUMENT: {
+      const newDocument = {
+        ...documentTemplate,
+        editorId: Math.floor(Math.random() * (100 + 1 - 0)) + 0,
+      };
+      console.log('newDocument=', newDocument);
       return {
         ...state,
         /* documentTemplateを追加する */
-        documents: [...state.documents, documentTemplate],
+        documents: [...state.documents, newDocument],
       };
+    }
     case SET_EDITOR_ID: {
       /* editorIdを付与したdocumentを作成 */
       const newDocument = {
