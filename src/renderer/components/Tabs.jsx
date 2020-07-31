@@ -5,7 +5,9 @@ import Tab from './Tab';
 import { setNewDocument } from '../reducks/editor/actions';
 
 export default function Tabs(props) {
-  const activeEditorId = useSelector((state) => state.editor.activeEditorId);
+  const activeDocumentId = useSelector(
+    (state) => state.editor.activeDocumentId,
+  );
   const { documents } = props;
   const dispatch = useDispatch();
 
@@ -20,9 +22,9 @@ export default function Tabs(props) {
         return (
           <Tab
             title={document.fileName}
-            editorId={document.editorId}
-            isActive={document.editorId === activeEditorId}
-            key={document.editorId}
+            documentId={document.documentId}
+            isActive={document.documentId === activeDocumentId}
+            key={document.documentId}
           />
         );
       })}

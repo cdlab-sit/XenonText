@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import EditArea from './EditArea';
 import Tabs from './Tabs';
 
-import { getActiveEditorId, getDocuments } from '../reducks/editor/selectors';
+import { getActiveDocumentId, getDocuments } from '../reducks/editor/selectors';
 import { setNewDocument } from '../reducks/editor/actions';
 
 export default function Main() {
@@ -11,7 +11,7 @@ export default function Main() {
   const dispatch = useDispatch();
 
   const editorSelector = useSelector((state) => state.editor);
-  const activeEditorId = getActiveEditorId(editorSelector);
+  const activeDocumentId = getActiveDocumentId(editorSelector);
   const documents = getDocuments(editorSelector);
 
   /* これでできたけど根本的な理由は不明, あとで調べる */
@@ -22,7 +22,7 @@ export default function Main() {
   });
 
   const shouldShow = (id) => {
-    if (id !== activeEditorId) {
+    if (id !== activeDocumentId) {
       return false;
     }
     return true;
@@ -37,13 +37,13 @@ export default function Main() {
           <div
             className={`flex flex-auto ${
               /* アクティブなdocumentのみを表示 */
-              shouldShow(document.editorId) ? '' : 'hidden'
+              shouldShow(document.documentId) ? '' : 'hidden'
             }`}
-            key={document.editorId}
+            key={document.documentId}
           >
             <EditArea
               initialText={document.fileText}
-              editorId={document.editorId}
+              documentId={document.documentId}
             />
           </div>
         );

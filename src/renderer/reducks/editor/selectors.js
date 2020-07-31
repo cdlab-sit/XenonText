@@ -2,13 +2,15 @@ import { createSelector } from 'reselect';
 
 export const getActiveDocument = (editor) => {
   const activeDocument = editor.documents.find(
-    (val) => val.editorId === editor.activeEditorId,
+    (val) => val.documentId === editor.activeDocumentId,
   );
   return activeDocument;
 };
 
-export const getDocument = (editor, editorId) => {
-  const document = editor.documents.find((val) => val.editorId === editorId);
+export const getDocument = (editor, documentId) => {
+  const document = editor.documents.find(
+    (val) => val.documentId === documentId,
+  );
   return document;
 };
 
@@ -29,9 +31,12 @@ export const getCharCount = createSelector(
   },
 );
 
-export const getActiveEditorId = createSelector([(state) => state], (state) => {
-  return state.activeEditorId;
-});
+export const getActiveDocumentId = createSelector(
+  [(state) => state],
+  (state) => {
+    return state.activeDocumentId;
+  },
+);
 
 export const getDocuments = createSelector([(state) => state], (state) => {
   return state.documents;
