@@ -10,7 +10,9 @@ const newTabImagePathCommand =
   'M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z';
 
 export default function Tabs(props) {
-  const activeEditorId = useSelector((state) => state.editor.activeEditorId);
+  const activeDocumentId = useSelector(
+    (state) => state.editor.activeDocumentId,
+  );
   const { documents } = props;
   const dispatch = useDispatch();
 
@@ -25,9 +27,9 @@ export default function Tabs(props) {
         return (
           <Tab
             title={document.fileName}
-            editorId={document.editorId}
-            isActive={document.editorId === activeEditorId}
-            key={document.editorId}
+            documentId={document.documentId}
+            isActive={document.documentId === activeDocumentId}
+            key={document.documentId}
           />
         );
       })}

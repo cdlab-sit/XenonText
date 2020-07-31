@@ -8,8 +8,7 @@ import { useDispatch } from 'react-redux';
 import {
   setSelectedText,
   setText,
-  setEditorId,
-  setActiveEditorId,
+  setActiveDocumentId,
 } from '../reducks/editor/actions';
 
 const EditArea = React.memo(
@@ -17,26 +16,25 @@ const EditArea = React.memo(
     let editorInstance = null;
     /*  XenonTextで開いている際, 他のエディタなどでファイルが変更されると
     initialTextが変更され反映される.
-    しかしeditorIdも新しくなるためゾンビがのこるかもしれない.
+    しかしdocumentIdも新しくなるためゾンビがのこるかもしれない.
     確認が必要 */
     const { initialText } = props;
+    const { documentId } = props;
 
     const dispatch = useDispatch();
     const onChange = () => {
-      dispatch(setText(editorInstance));
+      dispatch(setText(editorInstance, documentId));
     };
     /* editorInstance作成後 */
     const onLoad = (newEditorInstance) => {
       editorInstance = newEditorInstance;
-      /* ストアにeditorIdを登録(初期状態は'') */
-      dispatch(setEditorId(editorInstance.id));
-      /* ストアにActiveEditorIdを登録 */
-      dispatch(setActiveEditorId(editorInstance.id));
+      /* ストアにActiveDocumentIdを登録 */
+      dispatch(setActiveDocumentId(documentId));
       /* ストアにTextを登録 */
-      dispatch(setText(editorInstance));
+      dispatch(setText(editorInstance, documentId));
     };
     const onSelectionChange = () => {
-      dispatch(setSelectedText(editorInstance));
+      dispatch(setSelectedText(editorInstance, documentId));
     };
 
     return (
@@ -67,6 +65,7 @@ const EditArea = React.memo(
 
 EditArea.propTypes = {
   initialText: PropTypes.string.isRequired,
+  documentId: PropTypes.string.isRequired,
 };
 
 export default EditArea;

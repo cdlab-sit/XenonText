@@ -5,25 +5,25 @@ export const SET_NEW_DOCUMENT = 'SET_NEW_DOCUMENT';
 export const SET_EDITOR_ID = 'SET_EDITOR_ID';
 export const DELETE_DOCUMENT = 'DELETE_DOCUMENT';
 
-export const setSelectedText = (editorInstance) => ({
+export const setSelectedText = (editorInstance, documentId) => ({
   payload: {
-    editorId: editorInstance.id,
+    documentId,
     selectedText: editorInstance.getSelectedText(),
   },
   type: SET_SELECTED_TEXT,
 });
 
-export const setText = (editorInstance) => ({
+export const setText = (editorInstance, documentId) => ({
   payload: {
-    editorId: editorInstance.id,
+    documentId,
     text: editorInstance.getValue(),
   },
   type: SET_TEXT,
 });
 
-export const setActiveEditorId = (editorId) => ({
+export const setActiveDocumentId = (documentId) => ({
   payload: {
-    activeEditorId: editorId,
+    activeDocumentId: documentId,
   },
   type: SET_ACTIVE_EDITOR_ID,
 });
@@ -32,16 +32,16 @@ export const setNewDocument = () => ({
   type: SET_NEW_DOCUMENT,
 });
 
-export const setEditorId = (editorId) => ({
+export const setDocumentId = (documentId) => ({
   payload: {
-    editorId,
+    documentId,
   },
   type: SET_EDITOR_ID,
 });
 
-export const deleteDocument = (editorId) => ({
+export const deleteDocument = (documentId) => ({
   payload: {
-    editorId,
+    documentId,
   },
   type: DELETE_DOCUMENT,
 });

@@ -18,19 +18,19 @@ const unsavedImagePathCommand =
   '10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z';
 
 export default function FileStatus(props) {
-  const { editorId } = props;
+  const { documentId } = props;
   let fileStatusPathCommand = savedImagePathCommand;
   const dispatch = useDispatch();
   /* FileStatusが押された時
   -> タブとドキュメントを削除 */
   const onClick = (e) => {
     e.stopPropagation();
-    dispatch(deleteDocument(editorId));
+    dispatch(deleteDocument(documentId));
   };
 
   const isSaved = getFileStatus(
     useSelector((state) => state.editor),
-    editorId,
+    documentId,
   );
   if (!isSaved) {
     fileStatusPathCommand = unsavedImagePathCommand;
@@ -45,5 +45,5 @@ export default function FileStatus(props) {
 }
 
 FileStatus.propTypes = {
-  editorId: PropTypes.string.isRequired,
+  documentId: PropTypes.string.isRequired,
 };

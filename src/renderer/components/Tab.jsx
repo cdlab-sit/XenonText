@@ -4,21 +4,21 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import FileStatus from './FileStatus';
-import { setActiveEditorId } from '../reducks/editor/actions';
+import { setActiveDocumentId } from '../reducks/editor/actions';
 
 const activeTabColor = 'bg-gray-900';
 const inactiveTabColor = 'bg-gray-800';
 
 export default function Tab(props) {
   const { title } = props;
-  const { editorId } = props;
+  const { documentId } = props;
   const { isActive } = props;
   const dispatch = useDispatch();
 
   // タブ(FileStatus以外の場所)が押された時
   const onClick = () => {
-    /* activeEditorIdをストアにセット */
-    dispatch(setActiveEditorId(editorId));
+    /* activeDocumentIdをストアにセット */
+    dispatch(setActiveDocumentId(documentId));
   };
 
   let tabColor = inactiveTabColor;
@@ -40,13 +40,13 @@ export default function Tab(props) {
       >
         {title}
       </h2>
-      <FileStatus editorId={editorId} />
+      <FileStatus documentId={documentId} />
     </div>
   );
 }
 
 Tab.propTypes = {
-  editorId: PropTypes.string.isRequired,
+  documentId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
 };

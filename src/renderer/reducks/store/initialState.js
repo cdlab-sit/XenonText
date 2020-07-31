@@ -1,7 +1,7 @@
 const initialState = {
   editor: {
     documents: [],
-    activeEditorId: '',
+    activeDocumentId: '',
   },
 };
 
