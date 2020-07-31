@@ -72,12 +72,12 @@ const EditorReducer = (state = initialState.editor, action) => {
     }
     case DELETE_DOCUMENT: {
       let deletedIndex;
-      const deletedId = action.payload.documentId;
+      const deletedDocumentId = action.payload.documentId;
       const { activeDocumentId } = state;
       /* 対象のDocumentを抜いたDocumentsを作成 */
       const newDocuments = state.documents.filter((value, index) => {
         /* 対象のDocumentではない場合 */
-        if (value.documentId !== deletedId) {
+        if (value.documentId !== deletedDocumentId) {
           return value;
         }
         /* 対象のDoucumentの場合 */
@@ -96,7 +96,7 @@ const EditorReducer = (state = initialState.editor, action) => {
             documents: [],
           };
         /* アクティブタブを変更しない場合 */
-        case deletedId !== activeDocumentId:
+        case deletedDocumentId !== activeDocumentId:
           return {
             ...state,
             activeDocumentId,
