@@ -10,9 +10,9 @@ export default function Main() {
   // state.editor変更時, なぜ2回呼び出されるのかは不明
   const dispatch = useDispatch();
 
-  const editorSelector = useSelector((state) => state.editor);
-  const activeDocumentId = getActiveDocumentId(editorSelector);
-  const documents = getDocuments(editorSelector);
+  const editorState = useSelector((state) => state.editor);
+  const activeDocumentId = getActiveDocumentId(editorState);
+  const documents = getDocuments(editorState);
 
   /* これでできたけど根本的な理由は不明, あとで調べる */
   useEffect(() => {
