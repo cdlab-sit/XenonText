@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 import FileStatus from './FileStatus';
 import { setActiveDocumentId } from '../reducks/editor/actions';
 
-/* タブの色 */
+/* タブの背景色 */
 const activeTabBackgroundColor = 'bg-gray-900';
 const inactiveTabBackgroundColor = 'bg-gray-800';
 
-/* タブのタイトル色 */
+/* タブの文字色 */
 const activeTabTextColor = 'text-gray-300';
 const inactiveTabTextColor = 'text-gray-600';
 
