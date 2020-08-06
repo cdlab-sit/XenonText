@@ -7,12 +7,12 @@ import FileStatus from './FileStatus';
 import { setActiveDocumentId } from '../reducks/editor/actions';
 
 /* タブの色 */
-const activeTabColor = 'bg-gray-900';
-const inactiveTabColor = 'bg-gray-800';
+const activeTabBackgroundColor = 'bg-gray-900';
+const inactiveTabBackgroundColor = 'bg-gray-800';
 
 /* タブのタイトル色 */
-const activeTabTitleColor = 'text-gray-300';
-const inactiveTabTitleColor = 'text-gray-600';
+const activeTabTextColor = 'text-gray-300';
+const inactiveTabTextColor = 'text-gray-600';
 
 export default function Tab(props) {
   const { title } = props;
@@ -26,20 +26,20 @@ export default function Tab(props) {
     dispatch(setActiveDocumentId(documentId));
   };
 
-  let tabColor = inactiveTabColor;
-  let tabTitleColor = inactiveTabTitleColor;
+  let tabBackgroundColor = inactiveTabBackgroundColor;
+  let tabTextColor = inactiveTabTextColor;
   if (isActive) {
-    tabColor = activeTabColor;
-    tabTitleColor = activeTabTitleColor;
+    tabBackgroundColor = activeTabBackgroundColor;
+    tabTextColor = activeTabTextColor;
   }
 
   return (
     <div
-      className={`" h-8 w-40 flex flex-row items-center " ${tabColor}`}
+      className={`h-8 w-40 flex flex-row items-center ${tabBackgroundColor}`}
       onClick={onClick}
     >
       <h2
-        className={`" text-xs select-none my-1 ml-2 leading-6 w-full h-6 " ${tabTitleColor}`}
+        className={`text-xs select-none my-1 ml-2 leading-6 w-full h-6 ${tabTextColor}`}
       >
         {title}
       </h2>
