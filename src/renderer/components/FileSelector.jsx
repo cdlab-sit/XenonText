@@ -4,9 +4,9 @@ import FileBlock from './FileBlock';
 import { getActiveDocumentId, getDocuments } from '../reducks/editor/selectors';
 
 export default function FileSelector() {
-  const editorSelector = useSelector((state) => state.editor);
-  const activeDocumentId = getActiveDocumentId(editorSelector);
-  const documents = getDocuments(editorSelector);
+  const editorState = useSelector((state) => state.editor);
+  const activeDocumentId = getActiveDocumentId(editorState);
+  const documents = getDocuments(editorState);
 
   return (
     <div className="flex flex-auto flex-col">
