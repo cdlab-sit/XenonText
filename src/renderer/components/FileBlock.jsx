@@ -6,33 +6,28 @@ import { useDispatch } from 'react-redux';
 import FileStatus from './FileStatus';
 import { setActiveDocumentId } from '../reducks/editor/actions';
 
-const activeFileBlockColor = 'bg-gray-800';
+const activeFileBlockBackgroundColor = 'bg-gray-800';
 
 export default function FileBlock(props) {
-  const { title } = props;
-  const { documentId } = props;
-  const { isActive } = props;
+  const { title, documentId, isActive } = props;
   const dispatch = useDispatch();
 
   const onClick = () => {
     dispatch(setActiveDocumentId(documentId));
   };
 
-  let fileBlockColor = '';
+  let fileBlockBackgroundColor = 'bg-opacity-0';
   if (isActive) {
-    fileBlockColor = activeFileBlockColor;
+    fileBlockBackgroundColor = activeFileBlockBackgroundColor;
   }
 
   return (
     <div
-      className={`"h-6 w-full flex flex-row items-center " ${fileBlockColor}`}
+      className={`h-6 w-full flex flex-row items-center ${fileBlockBackgroundColor}`}
     >
       <FileStatus documentId={documentId} />
       <h3
-        className="
-          text-xs text-gray-300
-          leading-6 w-full h-6 select-none
-          "
+        className="text-xs text-gray-300 leading-6 w-full h-6 select-none"
         onClick={onClick}
       >
         {title}
