@@ -3,6 +3,7 @@ import { remote } from 'electron';
 import Footer from './components/Footer';
 import Body from './components/Body';
 import TitleBar from './components/TitleBar';
+import AppMenu from './menus/AppMenu';
 
 export default class App extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export default class App extends Component {
         {!isFullScreen && <TitleBar />}
         <Body />
         <Footer />
+        <AppMenu />
       </div>
     );
   }
