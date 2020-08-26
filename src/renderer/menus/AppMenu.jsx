@@ -7,6 +7,7 @@ import {
   setNewDocument,
   deleteDocument,
 } from '../reducks/editor/actions';
+import { getActiveDocumentSelector } from '../reducks/editor/selectors';
 
 const { app, Menu } = remote;
 
@@ -14,6 +15,9 @@ export default function AppMenu() {
   const dispatch = useDispatch();
   const activeDocumentId = useSelector(
     (state) => state.editor.activeDocumentId,
+  );
+  const activeDocument = getActiveDocumentSelector(
+    useSelector((state) => state),
   );
 
   // 新規ファイル
@@ -27,15 +31,6 @@ export default function AppMenu() {
     return data.toString();
   };
 
-  // ファイルを書き込む
-  const writeFile = (path, data) => {
-    fs.writeFile(path, data, (error) => {
-      if (error !== null) {
-        throw error;
-      }
-    });
-  };
-
   // ファイルを開く
   const openFile = () => {
     const fileIndex = 0;
@@ -45,7 +40,6 @@ export default function AppMenu() {
 
     remote.dialog.showOpenDialog(options).then((path) => {
       if (path) {
-        // TODO: ファイル読み込みを完成させる（ Redux との連携 ）
         const filePath = path.filePaths[fileIndex];
         const fileText = readFile(filePath);
         dispatch(setDocumentFromFile(fileText, filePath));
@@ -53,29 +47,28 @@ export default function AppMenu() {
     });
   };
 
-  // ファイルの保存
-  const saveFile = () => {
-    // TODO: 実装する
-    fs.writeFile((error) => {
-      if (error !== null) {
-        throw error;
-      }
-    });
-  };
-
   // 名前を付けて保存
   const saveFileAs = () => {
-    // TODO: TODO: 実装する
     const options = {
       properties: ['openFile'],
     };
 
     remote.dialog.showSaveDialog(options).then((path) => {
       if (path) {
-        const writeData = 'ここに保存する情報を代入します';
-        writeFile(path.filePath, writeData);
+        const fileText = activeDocument.editedText;
+        fs.writeFileSync(path.filePath, fileText);
+        // TODO: Redux の値を書き換える
       }
     });
+  };
+
+  // ファイルの保存
+  const saveFile = () => {
+    if (activeDocument.filePath) {
+      fs.writeFileSync(activeDocument.filePath, activeDocument.editedText);
+    } else {
+      saveFileAs();
+    }
   };
 
   // ファイル（ タブ ）を閉じる

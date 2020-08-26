@@ -14,6 +14,18 @@ export const getDocument = (editor, documentId) => {
   return document;
 };
 
+export const getActiveDocumentSelector = createSelector(
+  [(state) => state.editor],
+  (editor) => {
+    const activeDocument = getActiveDocument(editor);
+    // activeDocumentがない瞬間があるので条件分岐
+    if (activeDocument) {
+      return activeDocument;
+    }
+    return 0;
+  },
+);
+
 export const getCharCount = createSelector(
   [(state) => state.editor],
   (editor) => {
