@@ -3,6 +3,8 @@ import { remote } from 'electron';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  setFileText,
+  setFileInfo,
   setDocumentFromFile,
   setNewDocument,
   deleteDocument,
@@ -57,7 +59,7 @@ export default function AppMenu() {
       if (path) {
         const fileText = activeDocument.editedText;
         fs.writeFileSync(path.filePath, fileText);
-        // TODO: Redux の値を書き換える
+        dispatch(setFileInfo(activeDocumentId, fileText, path.filePath));
       }
     });
   };
@@ -65,7 +67,9 @@ export default function AppMenu() {
   // ファイルの保存
   const saveFile = () => {
     if (activeDocument.filePath) {
-      fs.writeFileSync(activeDocument.filePath, activeDocument.editedText);
+      const fileText = activeDocument.editedText;
+      fs.writeFileSync(activeDocument.filePath, fileText);
+      dispatch(setFileText(activeDocumentId, fileText));
     } else {
       saveFileAs();
     }

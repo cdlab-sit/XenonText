@@ -1,3 +1,5 @@
+export const SET_FILE_TEXT = 'SET_FILE_TEXT';
+export const SET_FILE_INFO = 'SET_FILE_INFO';
 export const SET_DOCUMENT_FROM_FILE = 'SET_DOCUMENT_FROM_FILE';
 export const SET_SELECTED_TEXT = 'SET_SELECTED_TEXT';
 export const SET_TEXT = 'SET_TEXT';
@@ -5,6 +7,23 @@ export const SET_ACTIVE_EDITOR_ID = 'SET_ACTIVE_EDITOR_ID';
 export const SET_NEW_DOCUMENT = 'SET_NEW_DOCUMENT';
 export const SET_EDITOR_ID = 'SET_EDITOR_ID';
 export const DELETE_DOCUMENT = 'DELETE_DOCUMENT';
+
+export const setFileText = (documentId, fileText) => ({
+  payload: {
+    documentId,
+    fileText,
+  },
+  type: SET_FILE_TEXT,
+});
+
+export const setFileInfo = (documentId, fileText, filePath) => ({
+  payload: {
+    documentId,
+    fileText,
+    filePath,
+  },
+  type: SET_FILE_INFO,
+});
 
 export const setDocumentFromFile = (fileText, filePath) => ({
   payload: {
