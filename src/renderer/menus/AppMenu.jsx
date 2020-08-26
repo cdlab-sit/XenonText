@@ -231,6 +231,34 @@ export default function AppMenu() {
         },
       ],
     },
+
+    // ウィンドウ
+    {
+      label: 'ウインドウ',
+      role: 'windowMenu',
+    },
+
+    // 開発
+    {
+      label: '開発',
+      submenu: [
+        {
+          label: '開発者ツールの切り替え',
+          role: 'toggleDevTools',
+        },
+      ],
+    },
+
+     // ヘルプ
+
+     {
+      label: 'ヘルプ',
+      submenu: [
+        {
+          role: 'help',
+        },
+      ],
+    },
   ];
 
   const addAppMenu = () => {
