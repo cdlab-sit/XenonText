@@ -188,6 +188,28 @@ export default function AppMenu() {
         },
       ],
     },
+
+    // 選択
+    {
+      label: '選択',
+      submenu: [
+        {
+          label: 'すべて選択',
+          accelerator: 'Command+A',
+          role: 'selectAll',
+        },
+        {
+          label: '行を選択',
+          accelerator: 'Command+L',
+          enabled: false,
+        },
+        {
+          label: '単語を選択',
+          accelerator: 'Command+D',
+          enabled: false,
+        },
+      ],
+    },
   ];
 
   const addAppMenu = () => {
