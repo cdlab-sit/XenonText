@@ -2,7 +2,11 @@ import fs from 'fs';
 import { remote } from 'electron';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNewDocument, deleteDocument } from '../reducks/editor/actions';
+import {
+  setDocumentFromFile,
+  setNewDocument,
+  deleteDocument,
+} from '../reducks/editor/actions';
 
 const { app, Menu } = remote;
 
@@ -19,11 +23,16 @@ export default function AppMenu() {
 
   // ファイル読み込み
   const readFile = (path) => {
-    fs.readFile(path, (error, data) => {
+    const data = fs.readFileSync(path);
+    return data.toString();
+  };
+
+  // ファイルを書き込む
+  const writeFile = (path, data) => {
+    fs.writeFile(path, data, (error) => {
       if (error !== null) {
         throw error;
       }
-      data.toString();
     });
   };
 
@@ -37,7 +46,9 @@ export default function AppMenu() {
     remote.dialog.showOpenDialog(options).then((path) => {
       if (path) {
         // TODO: ファイル読み込みを完成させる（ Redux との連携 ）
-        readFile(path.filePaths[fileIndex]);
+        const filePath = path.filePaths[fileIndex];
+        const fileText = readFile(filePath);
+        dispatch(setDocumentFromFile(fileText, filePath));
       }
     });
   };
@@ -45,11 +56,26 @@ export default function AppMenu() {
   // ファイルの保存
   const saveFile = () => {
     // TODO: 実装する
+    fs.writeFile((error) => {
+      if (error !== null) {
+        throw error;
+      }
+    });
   };
 
   // 名前を付けて保存
   const saveFileAs = () => {
     // TODO: TODO: 実装する
+    const options = {
+      properties: ['openFile'],
+    };
+
+    remote.dialog.showSaveDialog(options).then((path) => {
+      if (path) {
+        const writeData = 'ここに保存する情報を代入します';
+        writeFile(path.filePath, writeData);
+      }
+    });
   };
 
   // ファイル（ タブ ）を閉じる

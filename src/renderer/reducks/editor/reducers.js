@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import {
+  SET_DOCUMENT_FROM_FILE,
   SET_SELECTED_TEXT,
   SET_TEXT,
   SET_ACTIVE_EDITOR_ID,
@@ -20,6 +21,26 @@ const documentTemplate = {
 };
 const EditorReducer = (state = initialState.editor, action) => {
   switch (action.type) {
+    case SET_DOCUMENT_FROM_FILE: {
+      const { fileText, filePath } = action.payload;
+
+      const fileName = filePath.split('/').reverse()[0];
+
+      const newDocument = {
+        ...documentTemplate,
+        documentId: uuidv4(),
+        editedText: fileText,
+        fileText,
+        fileName,
+        filePath,
+      };
+
+      return {
+        ...state,
+        documents: [...state.documents, newDocument],
+      };
+    }
+
     case SET_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocumentを取得 */
