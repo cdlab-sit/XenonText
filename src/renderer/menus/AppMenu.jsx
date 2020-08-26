@@ -210,6 +210,27 @@ export default function AppMenu() {
         },
       ],
     },
+
+    // 表示
+    {
+      label: '表示',
+      submenu: [
+        {
+          label: 'サイドバーを表示',
+          accelerator: 'Command+B',
+          type: 'checkbox',
+          enabled: false,
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'フルスクリーンにする',
+          accelerator: 'Option+Command+F',
+          role: 'togglefullscreen',
+        },
+      ],
+    },
   ];
 
   const addAppMenu = () => {
