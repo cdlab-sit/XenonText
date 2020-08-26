@@ -99,6 +99,7 @@ export default function AppMenu() {
         },
       ],
     },
+
     // ファイル
     {
       label: 'ファイル',
@@ -136,6 +137,54 @@ export default function AppMenu() {
           label: 'ファイルを閉じる',
           accelerator: 'Command+W',
           click: closeFile,
+        },
+      ],
+    },
+
+    // 編集
+    {
+      label: '編集',
+      submenu: [
+        {
+          label: '元に戻す',
+          accelerator: 'Command+Z',
+          role: 'undo',
+        },
+        {
+          label: 'やり直し',
+          accelerator: 'Shift+Command+Z',
+          role: 'redo',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: '切り取り',
+          accelerator: 'Command+X',
+          role: 'cut',
+        },
+        {
+          label: 'コピー',
+          accelerator: 'Command+C',
+          role: 'copy',
+        },
+        {
+          label: '貼り付け',
+          accelerator: 'Command+V',
+          role: 'paste',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: '検索',
+          accelerator: 'Command+F',
+          enabled: false,
+        },
+        {
+          label: '置換',
+          accelerator: 'SHIFT+Command+F',
+          enabled: false,
         },
       ],
     },
