@@ -249,9 +249,8 @@ export default function AppMenu() {
       ],
     },
 
-     // ヘルプ
-
-     {
+    // ヘルプ
+    {
       label: 'ヘルプ',
       submenu: [
         {
