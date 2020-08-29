@@ -1,6 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import {
+  SET_FILE_TEXT,
+  SET_FILE_INFO,
+  SET_DOCUMENT_FROM_FILE,
   SET_SELECTED_TEXT,
   SET_TEXT,
   SET_ACTIVE_EDITOR_ID,
@@ -20,6 +23,70 @@ const documentTemplate = {
 };
 const EditorReducer = (state = initialState.editor, action) => {
   switch (action.type) {
+    case SET_FILE_TEXT: {
+      const { documentId, fileText } = action.payload;
+
+      /* documentIdに対応したdocumentを取得 */
+      const document = getDocument(state, documentId);
+      if (document === undefined) return { ...state };
+
+      /* editedTextを更新したdocumentを生成 */
+      const newDocument = {
+        ...document,
+        fileText,
+      };
+
+      /* 更新documentを含むdocumentsを生成 */
+      const newDocuments = state.documents.map((el) =>
+        el.documentId === document.documentId ? newDocument : el,
+      );
+      return { ...state, documents: newDocuments };
+    }
+
+    case SET_FILE_INFO: {
+      const { documentId, fileText, filePath } = action.payload;
+      const fileName = filePath.split('/').reverse()[0];
+
+      /* documentIdに対応したdocumentを取得 */
+      const document = getDocument(state, documentId);
+      if (document === undefined) return { ...state };
+
+      /* editedTextを更新したdocumentを生成 */
+      const newDocument = {
+        ...document,
+        editedText: fileText,
+        fileText,
+        filePath,
+        fileName,
+      };
+
+      /* 更新documentを含むdocumentsを生成 */
+      const newDocuments = state.documents.map((el) =>
+        el.documentId === document.documentId ? newDocument : el,
+      );
+      return { ...state, documents: newDocuments };
+    }
+
+    case SET_DOCUMENT_FROM_FILE: {
+      const { fileText, filePath } = action.payload;
+
+      const fileName = filePath.split('/').reverse()[0];
+
+      const newDocument = {
+        ...documentTemplate,
+        documentId: uuidv4(),
+        editedText: fileText,
+        fileText,
+        fileName,
+        filePath,
+      };
+
+      return {
+        ...state,
+        documents: [...state.documents, newDocument],
+      };
+    }
+
     case SET_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocumentを取得 */
