@@ -2,29 +2,12 @@ const path = require('path');
 
 module.exports = [
     {
-        entry:{
-            main: './src/main/index.js',
-        },
-        output: {
-            filename: 'main.js',
-            path: path.resolve(__dirname, 'dist'),
-        },
-        target:'electron-main',
-        module: {
-            rules: [{
-                test: /\.js$/,
-                exclude: path.resolve(__dirname, 'node_modules'),
-                loader: 'babel-loader'
-            }]
-        }
-    },
-    {
-        entry: './src/renderer/index.jsx',
+        entry: './src/index.jsx',
         output: {
             filename: 'renderer.js',
-            path: path.resolve(__dirname, 'dist'),
+            path: path.resolve(__dirname, 'docs'),
         },
-        target:'electron-renderer',
+        target:'web',
         resolve: {
             extensions: ['.js', '.jsx']
         },
@@ -34,6 +17,9 @@ module.exports = [
                 exclude: path.resolve(__dirname, 'node_modules'),
                 loader: 'babel-loader'
             }]
+        },
+        devServer: {
+            contentBase: 'docs'
         }
     }
 ];

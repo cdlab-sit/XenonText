@@ -1,5 +1,8 @@
 import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/src-noconflict/mode-c_cpp';
+import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/mode-text';
 import './theme-xenon';
 import React, { useState } from 'react';
 import AceEditor from 'react-ace';
@@ -16,6 +19,7 @@ const EditArea = React.memo((props) => {
 
   const { initialText } = props;
   const { documentId } = props;
+  const { lang } = props;
 
   const dispatch = useDispatch();
   const onChange = () => {
@@ -39,7 +43,7 @@ const EditArea = React.memo((props) => {
         fontSize="16px"
         height="100%"
         highlightActiveLine={false}
-        mode="c_cpp"
+        mode={lang}
         name="UNIQUE_ID_OF_DIV"
         onChange={onChange}
         onLoad={onLoad}
@@ -57,6 +61,7 @@ const EditArea = React.memo((props) => {
 EditArea.propTypes = {
   initialText: PropTypes.string.isRequired,
   documentId: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 export default EditArea;

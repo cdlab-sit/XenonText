@@ -35,7 +35,7 @@ export default function Tab(props) {
 
   return (
     <div
-      className={`h-8 w-40 flex flex-row items-center ${tabBackgroundColor}`}
+      className={`h-8 w-24 flex flex-row items-center ${tabBackgroundColor}`}
       onClick={onClick}
     >
       <h2

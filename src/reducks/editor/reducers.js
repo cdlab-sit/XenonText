@@ -20,6 +20,7 @@ const documentTemplate = {
   fileText: '',
   fileName: 'Untitled',
   filePath: null,
+  lang: 'text',
 };
 const EditorReducer = (state = initialState.editor, action) => {
   switch (action.type) {

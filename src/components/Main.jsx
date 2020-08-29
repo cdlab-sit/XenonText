@@ -44,6 +44,7 @@ export default function Main() {
             <EditArea
               initialText={document.fileText}
               documentId={document.documentId}
+              lang={document.lang}
             />
           </div>
         );

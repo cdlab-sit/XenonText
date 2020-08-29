@@ -9,7 +9,7 @@ export default function Body() {
       <ResizePanel
         direction="e"
         handleClass="hidden"
-        style={{ width: '200px' }}
+        style={{ width: '150px' }}
       >
         <SideBar />
       </ResizePanel>

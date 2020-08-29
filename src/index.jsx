@@ -6,11 +6,6 @@ import createStore from './reducks/store/store';
 
 const store = createStore();
 
-/*
- *  ストアの状態を表示
- * store.subscribe(() => console.log(store.getState()));
- */
-
 render(
   <Provider store={store}>
     <React.StrictMode>

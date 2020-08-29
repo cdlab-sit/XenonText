@@ -1,25 +1,23 @@
 {
   "name": "XenonText",
-  "version": "0.1.0",
+  "version": "0.1.0-website",
   "description": "Electron + React でテキストエディタを作る",
   "author": "CDLab",
   "main": "main.js",
   "scripts": {
-    "start": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:dev && npm run dev",
-    "build": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:build && npm run package",
+    "start": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:dev && webpack-dev-server",
+    "build": "npm run lint && npm run clean && run-p copy:* && run-p css:* && npm run js:build",
     "watch": "npm run lint && npm run clean && run-p copy:* && run-p css:* && run-p watch:*",
-    "dev": "electron dist",
+    "dev": "webpack-dev-server",
     "lint": "eslint --ext .js,.jsx src",
-    "clean": "rimraf dist build",
-    "package": "electron-packager dist XenonText --out=build/Release --icon=icon/icon.icns",
-    "copy:static": "cpx \"src/**/*.{html,png,jpg,svg}\" dist",
-    "copy:package.json": "cpx \"package.json\" dist",
-    "watch:static": "cpx -vw \"src/**/*.{html,png,jpg,svg}\" dist",
+    "clean": "rimraf docs",
+    "copy:static": "cpx \"src/**/*.{html,png,jpg,svg}\" docs",
+    "copy:package.json": "cpx \"package.json\" docs",
+    "watch:static": "cpx -vw \"src/**/*.{html,png,jpg,svg}\" docs",
     "js:dev": "webpack --mode development",
     "js:build": "webpack --mode production",
     "watch:js": "webpack --watch --mode development",
-    "css:tailwind": "tailwindcss build src/style.css -o dist/style.css",
-    "icon:mac": "png2icns icon/icon.png -o icon/icon.icns"
+    "css:tailwind": "tailwindcss build src/style.css -o docs/style.css"
   },
   "repository": {
     "type": "git",
@@ -55,7 +53,8 @@
     "rimraf": "^3.0.2",
     "tailwindcss": "^1.4.6",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "ace-builds": "^1.4.11",
