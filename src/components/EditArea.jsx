@@ -8,11 +8,7 @@ import React, { useState } from 'react';
 import AceEditor from 'react-ace';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import {
-  setSelectedText,
-  setText,
-  setActiveDocumentId,
-} from '../reducks/editor/actions';
+import { setSelectedText, setText } from '../reducks/editor/actions';
 
 const EditArea = React.memo((props) => {
   const [editorInstance, setEditorInstance] = useState('');
@@ -29,7 +25,7 @@ const EditArea = React.memo((props) => {
   const onLoad = (newEditorInstance) => {
     setEditorInstance(newEditorInstance);
     /* ストアにActiveDocumentIdを登録 */
-    dispatch(setActiveDocumentId(documentId));
+    // dispatch(setActiveDocumentId(documentId));
   };
   const onSelectionChange = () => {
     dispatch(setSelectedText(editorInstance, documentId));

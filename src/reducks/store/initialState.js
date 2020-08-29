@@ -30,7 +30,7 @@ const initialState = {
           lang: 'python',
         }
     ],
-    activeDocumentId: '',
+    activeDocumentId: 'c',
   },
 };
 
