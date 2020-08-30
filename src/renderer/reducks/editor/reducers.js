@@ -5,7 +5,7 @@ import {
   SET_FILE_INFO,
   SET_DOCUMENT_FROM_FILE,
   SET_SELECTED_TEXT,
-  SET_TEXT,
+  SET_EDITED_TEXT,
   SET_ACTIVE_EDITOR_ID,
   SET_NEW_DOCUMENT,
   DELETE_DOCUMENT,
@@ -87,7 +87,7 @@ const EditorReducer = (state = initialState.editor, action) => {
       };
     }
 
-    case SET_TEXT: {
+    case SET_EDITED_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocumentを取得 */
       const document = getDocument(state, documentId);
