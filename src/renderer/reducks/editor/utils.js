@@ -6,8 +6,9 @@ export const getActiveDocument = (editor) => {
 };
 
 export const getDocument = (editor, documentId) => {
-  const document = editor.documents.find(
+  const { documents } = editor;
+  const documentIndex = documents.findIndex(
     (val) => val.documentId === documentId,
   );
-  return document;
+  return { document: documents[documentIndex], documentIndex };
 };

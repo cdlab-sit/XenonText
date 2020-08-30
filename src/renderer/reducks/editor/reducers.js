@@ -26,9 +26,9 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_FILE_TEXT: {
       const { documentId, fileText } = action.payload;
 
-      /* documentIdに対応したdocumentを取得 */
-      const document = utils.getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocument, documentIndexを取得 */
+      const { document, documentIndex } = utils.getDocument(state, documentId);
+      if (document === -1) return { ...state };
 
       /* editedTextを更新したdocumentを生成 */
       const newDocument = {
@@ -37,9 +37,9 @@ const EditorReducer = (state = initialState.editor, action) => {
       };
 
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const { documents } = state;
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
@@ -47,11 +47,11 @@ const EditorReducer = (state = initialState.editor, action) => {
       const { documentId, fileText, filePath } = action.payload;
       const fileName = filePath.split('/').reverse()[0];
 
-      /* documentIdに対応したdocumentを取得 */
-      const document = utils.getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocument, documentIndexを取得 */
+      const { document, documentIndex } = utils.getDocument(state, documentId);
+      if (document === -1) return { ...state };
 
-      /* editedTextを更新したdocumentを生成 */
+      /* fileから読み取った情報からdocumentを生成 */
       const newDocument = {
         ...document,
         editedText: fileText,
@@ -61,9 +61,9 @@ const EditorReducer = (state = initialState.editor, action) => {
       };
 
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const { documents } = state;
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
@@ -89,35 +89,36 @@ const EditorReducer = (state = initialState.editor, action) => {
 
     case SET_EDITED_TEXT: {
       const { documentId } = action.payload;
-      /* documentIdに対応したdocumentを取得 */
-      const document = utils.getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocument, documentIndexを取得 */
+      const { document, documentIndex } = utils.getDocument(state, documentId);
+      if (documentIndex === -1) return { ...state };
+
       /* editedTextを更新したdocumentを生成 */
       const newDocument = {
         ...document,
         editedText: action.payload.text,
       };
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const { documents } = state;
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
     case SET_SELECTED_TEXT: {
       const { documentId } = action.payload;
-      /* documentIdに対応したdocumentを取得 */
-      const document = utils.getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocumentIndexを取得 */
+      const { document, documentIndex } = utils.getDocument(state, documentId);
+      if (documentIndex === -1) return { ...state };
       /* selectedTextを更新したdocumentを生成 */
       const newDocument = {
         ...document,
         selectedText: action.payload.selectedText,
       };
+      const { documents } = state;
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
