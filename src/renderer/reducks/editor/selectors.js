@@ -1,23 +1,10 @@
 import { createSelector } from 'reselect';
+import * as utils from './utils';
 
-export const getActiveDocument = (editor) => {
-  const activeDocument = editor.documents.find(
-    (val) => val.documentId === editor.activeDocumentId,
-  );
-  return activeDocument;
-};
-
-export const getDocument = (editor, documentId) => {
-  const document = editor.documents.find(
-    (val) => val.documentId === documentId,
-  );
-  return document;
-};
-
-export const getActiveDocumentSelector = createSelector(
+export const getActiveDocument = createSelector(
   [(state) => state.editor],
   (editor) => {
-    const activeDocument = getActiveDocument(editor);
+    const activeDocument = utils.getActiveDocument(editor);
     // activeDocumentがない瞬間があるので条件分岐
     if (activeDocument) {
       return activeDocument;
@@ -29,7 +16,7 @@ export const getActiveDocumentSelector = createSelector(
 export const getCharCount = createSelector(
   [(state) => state.editor],
   (editor) => {
-    const activeDocument = getActiveDocument(editor);
+    const activeDocument = utils.getActiveDocument(editor);
     // activeDocumentがない瞬間があるので条件分岐
     if (activeDocument) {
       // 範囲選択されている場合
@@ -54,7 +41,7 @@ export const getDocuments = createSelector([(state) => state], (state) => {
   return state.documents;
 });
 
-export const getFileStatus = createSelector([getDocument], (document) => {
+export const getFileStatus = createSelector([utils.getDocument], (document) => {
   if (document.editedText === document.fileText) {
     return true;
   }

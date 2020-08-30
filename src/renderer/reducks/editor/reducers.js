@@ -10,8 +10,8 @@ import {
   SET_NEW_DOCUMENT,
   DELETE_DOCUMENT,
 } from './actions';
-import { getDocument } from './selectors';
 import initialState from '../store/initialState';
+import * as utils from './utils';
 
 const documentTemplate = {
   documentId: '',
@@ -27,7 +27,7 @@ const EditorReducer = (state = initialState.editor, action) => {
       const { documentId, fileText } = action.payload;
 
       /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
+      const document = utils.getDocument(state, documentId);
       if (document === undefined) return { ...state };
 
       /* editedTextを更新したdocumentを生成 */
@@ -48,7 +48,7 @@ const EditorReducer = (state = initialState.editor, action) => {
       const fileName = filePath.split('/').reverse()[0];
 
       /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
+      const document = utils.getDocument(state, documentId);
       if (document === undefined) return { ...state };
 
       /* editedTextを更新したdocumentを生成 */
@@ -90,7 +90,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_EDITED_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
+      const document = utils.getDocument(state, documentId);
       if (document === undefined) return { ...state };
       /* editedTextを更新したdocumentを生成 */
       const newDocument = {
@@ -107,7 +107,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_SELECTED_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
+      const document = utils.getDocument(state, documentId);
       if (document === undefined) return { ...state };
       /* selectedTextを更新したdocumentを生成 */
       const newDocument = {
