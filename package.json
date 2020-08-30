@@ -60,6 +60,7 @@
   "dependencies": {
     "ace-builds": "^1.4.11",
     "electron": "^8.2.5",
+    "electron-devtools-installer": "^3.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-ace": "^8.1.0",
