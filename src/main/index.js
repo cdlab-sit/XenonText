@@ -1,5 +1,9 @@
 import { BrowserWindow, app } from 'electron';
 import fs from 'fs';
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS,
+} from 'electron-devtools-installer';
 
 const createWindow = () => {
   // ブラウザウインドウを作成
@@ -19,6 +23,9 @@ const createWindow = () => {
    * 開発者ツールを開く
    * win.webContents.openDevTools();
    */
+  installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+    .then((name) => console.log(name))
+    .catch((err) => console.log(err));
 };
 
 if (process.env.NODE_ENV === 'development') {
