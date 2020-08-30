@@ -27,7 +27,10 @@ const EditorReducer = (state = initialState.editor, action) => {
       const { documentId, fileText } = action.payload;
 
       /* documentIdに対応したdocument, documentIndexを取得 */
-      const { document, documentIndex } = utils.getDocument(state, documentId);
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
       if (document === -1) return { ...state };
 
       /* editedTextを更新したdocumentを生成 */
@@ -48,7 +51,10 @@ const EditorReducer = (state = initialState.editor, action) => {
       const fileName = filePath.split('/').reverse()[0];
 
       /* documentIdに対応したdocument, documentIndexを取得 */
-      const { document, documentIndex } = utils.getDocument(state, documentId);
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
       if (document === -1) return { ...state };
 
       /* fileから読み取った情報からdocumentを生成 */
@@ -90,7 +96,10 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_EDITED_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocument, documentIndexを取得 */
-      const { document, documentIndex } = utils.getDocument(state, documentId);
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
       if (documentIndex === -1) return { ...state };
 
       /* editedTextを更新したdocumentを生成 */
@@ -108,7 +117,10 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_SELECTED_TEXT: {
       const { documentId } = action.payload;
       /* documentIdに対応したdocumentIndexを取得 */
-      const { document, documentIndex } = utils.getDocument(state, documentId);
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
       if (documentIndex === -1) return { ...state };
       /* selectedTextを更新したdocumentを生成 */
       const newDocument = {

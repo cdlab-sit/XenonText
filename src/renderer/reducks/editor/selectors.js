@@ -42,7 +42,7 @@ export const getDocuments = createSelector([(state) => state], (state) => {
 });
 
 export const getFileStatus = createSelector(
-  [utils.getDocument],
+  [utils.getDocumentAndIndex],
   ({ document }) => {
     if (document.editedText === document.fileText) {
       return true;

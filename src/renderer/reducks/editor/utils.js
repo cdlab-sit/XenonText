@@ -5,7 +5,7 @@ export const getActiveDocument = (editor) => {
   return activeDocument;
 };
 
-export const getDocument = (editor, documentId) => {
+export const getDocumentAndIndex = (editor, documentId) => {
   const { documents } = editor;
   const documentIndex = documents.findIndex(
     (val) => val.documentId === documentId,
