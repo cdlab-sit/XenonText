@@ -54,10 +54,6 @@ export const getDocuments = createSelector([(state) => state], (state) => {
   return state.documents;
 });
 
-export const getFileText = createSelector([(state) => state], (state) => {
-  return state.fileText;
-});
-
 export const getFileStatus = createSelector([getDocument], (document) => {
   if (document.editedText === document.fileText) {
     return true;
