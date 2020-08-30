@@ -154,28 +154,28 @@ const EditorReducer = (state = initialState.editor, action) => {
       const documentsCount = newDocuments.length;
 
       let nextActiveEditorIndex;
-      switch (true) {
+      if (documentsCount === 0) {
         /* 全てのタブを削除した場合 */
-        case documentsCount === 0:
-          return {
-            ...state,
-            activeDocumentId: '',
-            documents: [],
-          };
+        return {
+          ...state,
+          activeDocumentId: '',
+          documents: [],
+        };
+      }
+      if (deletedDocumentId !== activeDocumentId) {
         /* アクティブタブを変更しない場合 */
-        case deletedDocumentId !== activeDocumentId:
-          return {
-            ...state,
-            activeDocumentId,
-            documents: newDocuments,
-          };
+        return {
+          ...state,
+          activeDocumentId,
+          documents: newDocuments,
+        };
+      }
+      if (documentsCount === deletedIndex) {
         /* 削除したタブが右端の場合 */
-        case documentsCount === deletedIndex:
-          nextActiveEditorIndex = deletedIndex - 1;
-          break;
+        nextActiveEditorIndex = deletedIndex - 1;
+      } else {
         /* 削除したタブの右に, 他のタブがある場合 */
-        default:
-          nextActiveEditorIndex = deletedIndex;
+        nextActiveEditorIndex = deletedIndex;
       }
 
       return {
