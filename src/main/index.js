@@ -23,8 +23,11 @@ const createWindow = () => {
    * 開発者ツールを開く
    * win.webContents.openDevTools();
    */
+
   installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+    // eslint-disable-next-line no-console
     .then((name) => console.log(name))
+    // eslint-disable-next-line no-console
     .catch((err) => console.log(err));
 };
 
