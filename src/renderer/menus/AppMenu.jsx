@@ -9,7 +9,7 @@ import {
   setNewDocument,
   deleteDocument,
 } from '../reducks/editor/actions';
-import { getActiveDocumentSelector } from '../reducks/editor/selectors';
+import { getActiveDocument } from '../reducks/editor/selectors';
 
 const { app, Menu } = remote;
 
@@ -18,9 +18,7 @@ export default function AppMenu() {
   const activeDocumentId = useSelector(
     (state) => state.editor.activeDocumentId,
   );
-  const activeDocument = getActiveDocumentSelector(
-    useSelector((state) => state),
-  );
+  const activeDocument = getActiveDocument(useSelector((state) => state));
 
   // 新規ファイル
   const addNewFile = () => {
