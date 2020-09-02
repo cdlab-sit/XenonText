@@ -157,12 +157,17 @@ const EditorReducer = (state = initialState.editor, action) => {
       let nextActiveEditorIndex;
       switch (true) {
         /* 全てのタブを削除した場合 */
-        case documentsCount === 0:
+        case documentsCount === 0: {
+          const newDocument = {
+            ...documentTemplate,
+            documentId: uuidv4(),
+          };
           return {
             ...state,
-            activeDocumentId: '',
-            documents: [],
+            activeDocumentId: newDocument.documentId,
+            documents: [newDocument],
           };
+        }
         /* アクティブタブを変更しない場合 */
         case deletedDocumentId !== activeDocumentId:
           return {
