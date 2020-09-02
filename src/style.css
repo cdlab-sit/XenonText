@@ -5,3 +5,7 @@
 header {
     -webkit-app-region: drag;
 }
+
+.scrollbar-hiddon::-webkit-scrollbar {
+    display: none;
+}
