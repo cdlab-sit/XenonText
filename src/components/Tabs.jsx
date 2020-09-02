@@ -22,7 +22,7 @@ export default function Tabs(props) {
   };
 
   return (
-    <div className="h-10 flex w-full items-end">
+    <div className="h-10 flex w-full items-end overflow-x-scroll scrollbar-hiddon">
       {documents.map((document) => {
         return (
           <Tab

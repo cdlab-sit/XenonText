@@ -19046,6 +19046,15 @@ header {
   -webkit-app-region: drag;
 }
 
+.scrollbar-hiddon {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hiddon::-webkit-scrollbar {
+  display: none;
+}
+
 @media (min-width: 640px) {
   .sm\:space-y-0 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;

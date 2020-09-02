@@ -5,3 +5,12 @@
 header {
     -webkit-app-region: drag;
 }
+
+.scrollbar-hiddon {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hiddon::-webkit-scrollbar {
+    display: none;
+}
