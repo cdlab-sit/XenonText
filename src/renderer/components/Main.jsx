@@ -29,7 +29,7 @@ export default function Main() {
   };
 
   return (
-    <div className="flex flex-auto flex-col">
+    <div className="flex flex-auto flex-col overflow-scroll">
       <Tabs documents={documents} />
       {/* documentsに含まれているdocumentを全てレンダリング */}
       {documents.map((document) => {

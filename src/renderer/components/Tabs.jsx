@@ -22,7 +22,7 @@ export default function Tabs(props) {
   };
 
   return (
-    <div className="h-10 flex items-end">
+    <div className="h-10 flex items-end overflow-scroll">
       {documents.map((document) => {
         return (
           <Tab
