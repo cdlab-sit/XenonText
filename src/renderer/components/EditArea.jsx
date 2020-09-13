@@ -12,8 +12,8 @@ import {
 } from '../reducks/editor/actions';
 
 const fileNameToFileType = (fileName) => {
-  const modelist = ace.require('ace/ext/modelist');
-  const { mode } = modelist.getModeForPath(fileName);
+  const modeList = ace.require('ace/ext/modelist');
+  const { mode } = modeList.getModeForPath(fileName);
   const fileType = mode.split('/').pop();
 
   try {
