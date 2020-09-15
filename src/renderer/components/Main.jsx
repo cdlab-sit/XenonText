@@ -14,7 +14,6 @@ export default function Main() {
   const activeDocumentId = getActiveDocumentId(editorState);
   const documents = getDocuments(editorState);
 
-  /* これでできたけど根本的な理由は不明, あとで調べる */
   useEffect(() => {
     if (documents.length === 0) {
       dispatch(setNewDocument());
@@ -42,6 +41,7 @@ export default function Main() {
             key={document.documentId}
           >
             <EditArea
+              fileName={document.fileName}
               initialText={document.fileText}
               documentId={document.documentId}
             />
