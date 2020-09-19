@@ -1,22 +1,22 @@
 import React from 'react';
+import { remote } from 'electron';
 import { useSelector } from 'react-redux';
 import { getActiveDocument } from '../reducks/editor/selectors';
+
+const pathLib = require('path');
+
+const { app } = remote;
 
 const pathTextColor = 'text-gray-600';
 
 export default function TitleBar() {
   const activeDocument = getActiveDocument(useSelector((state) => state));
 
-  const title = activeDocument ? activeDocument.fileName : 'XenonText';
+  const title = activeDocument ? activeDocument.fileName : app.name;
 
-  const path = (() => {
-    if (activeDocument.filePath) {
-      const pathLength =
-        activeDocument.filePath.length - activeDocument.fileName.length;
-      return ` - ${activeDocument.filePath.substr(0, pathLength)}`;
-    }
-    return '';
-  })();
+  const path = activeDocument.filePath
+    ? ` – ${pathLib.dirname(activeDocument.filePath)}`
+    : '';
 
   return (
     <header className="w-full h-6">
