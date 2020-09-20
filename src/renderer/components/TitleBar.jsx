@@ -23,7 +23,7 @@ export default function TitleBar() {
       <h1
         className="
                     text-xs text-center text-white
-                    leading-6 font-medium
+                    leading-6 font-medium select-none
                 "
       >
         {title}
