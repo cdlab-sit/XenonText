@@ -1,7 +1,7 @@
 {
   "name": "XenonText",
   "version": "0.1.0-website",
-  "description": "Electron + React でテキストエディタを作る",
+  "description": "シンプルなエディタを駆け出しエンジニアに",
   "author": "CDLab",
   "main": "main.js",
   "scripts": {
