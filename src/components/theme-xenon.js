@@ -25,6 +25,9 @@ ace.define(
         padding-right: 4px !important;\
         box-sizing: border-box;\
     }\
+    .ace-xenon .ace_text-input{\
+        left: 20px;\
+    }\
     .ace-xenon .ace_gutter {\
         color:  #718096;\
         width: 40px !important;\
