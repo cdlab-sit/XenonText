@@ -13,6 +13,8 @@ import {
 import initialState from '../store/initialState';
 import * as utils from './utils';
 
+const pathLib = require('path');
+
 const documentTemplate = {
   documentId: '',
   selectedText: null,
@@ -48,7 +50,7 @@ const EditorReducer = (state = initialState.editor, action) => {
 
     case SET_FILE_INFO: {
       const { documentId, fileText, filePath } = action.payload;
-      const fileName = filePath.split('/').reverse()[0];
+      const fileName = pathLib.basename(filePath);
 
       /* documentIdに対応したdocument, documentIndexを取得 */
       const { document, documentIndex } = utils.getDocumentAndIndex(
@@ -76,7 +78,7 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_DOCUMENT_FROM_FILE: {
       const { fileText, filePath } = action.payload;
 
-      const fileName = filePath.split('/').reverse()[0];
+      const fileName = pathLib.basename(filePath);
 
       const newDocument = {
         ...documentTemplate,
