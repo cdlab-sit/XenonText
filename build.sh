@@ -10,3 +10,11 @@ cd ../
 
 # リリースページのコピー
 cp -r release/docs/ docs
+
+# ドキュメントのビルド
+cd document
+npm run build
+cd ../
+
+# ドキュメントのコピー
+cp -r document/src/.vuepress/dist/ docs/documentation
