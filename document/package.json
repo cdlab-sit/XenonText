@@ -1,0 +1,17 @@
+{
+  "name": "XenonText",
+  "version": "0.1.0-document",
+  "description": "シンプルなエディタを駆け出しエンジニアに",
+  "main": "index.js",
+  "author": "CDLab",
+  "homepage": "cdlab-sit.github.io/xenontext/",
+  "repository": "https://github.com/cdlab-sit/XenonText",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.4"
+  }
+}
