@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cdlab-sit/editor.git"
+    "url": "git+https://github.com/cdlab-sit/XenonText.git"
   },
   "keywords": [
     "xenontext",
