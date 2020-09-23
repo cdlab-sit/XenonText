@@ -1,6 +1,6 @@
 {
   "name": "XenonText",
-  "version": "0.1.0-document",
+  "version": "0.2.0-document",
   "description": "シンプルなエディタを駆け出しエンジニアに",
   "main": "index.js",
   "author": "CDLab",
