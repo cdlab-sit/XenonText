@@ -5,13 +5,15 @@ import {
   SET_FILE_INFO,
   SET_DOCUMENT_FROM_FILE,
   SET_SELECTED_TEXT,
-  SET_TEXT,
+  SET_EDITED_TEXT,
   SET_ACTIVE_EDITOR_ID,
   SET_NEW_DOCUMENT,
   DELETE_DOCUMENT,
 } from './actions';
-import { getDocument } from './selectors';
 import initialState from '../store/initialState';
+import * as utils from './utils';
+
+const pathLib = require('path');
 
 const documentTemplate = {
   documentId: '',
@@ -26,9 +28,12 @@ const EditorReducer = (state = initialState.editor, action) => {
     case SET_FILE_TEXT: {
       const { documentId, fileText } = action.payload;
 
-      /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocument, documentIndexを取得 */
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
+      if (document === -1) return { ...state };
 
       /* editedTextを更新したdocumentを生成 */
       const newDocument = {
@@ -37,21 +42,24 @@ const EditorReducer = (state = initialState.editor, action) => {
       };
 
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const { documents } = state;
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
     case SET_FILE_INFO: {
       const { documentId, fileText, filePath } = action.payload;
-      const fileName = filePath.split('/').reverse()[0];
+      const fileName = pathLib.basename(filePath);
 
-      /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocument, documentIndexを取得 */
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
+      if (document === -1) return { ...state };
 
-      /* editedTextを更新したdocumentを生成 */
+      /* fileから読み取った情報からdocumentを生成 */
       const newDocument = {
         ...document,
         editedText: fileText,
@@ -61,16 +69,16 @@ const EditorReducer = (state = initialState.editor, action) => {
       };
 
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const { documents } = state;
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
     case SET_DOCUMENT_FROM_FILE: {
       const { fileText, filePath } = action.payload;
 
-      const fileName = filePath.split('/').reverse()[0];
+      const fileName = pathLib.basename(filePath);
 
       const newDocument = {
         ...documentTemplate,
@@ -87,37 +95,44 @@ const EditorReducer = (state = initialState.editor, action) => {
       };
     }
 
-    case SET_TEXT: {
+    case SET_EDITED_TEXT: {
       const { documentId } = action.payload;
-      /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocument, documentIndexを取得 */
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
+      if (documentIndex === -1) return { ...state };
+
       /* editedTextを更新したdocumentを生成 */
       const newDocument = {
         ...document,
         editedText: action.payload.text,
       };
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const { documents } = state;
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
     case SET_SELECTED_TEXT: {
       const { documentId } = action.payload;
-      /* documentIdに対応したdocumentを取得 */
-      const document = getDocument(state, documentId);
-      if (document === undefined) return { ...state };
+      /* documentIdに対応したdocumentIndexを取得 */
+      const { document, documentIndex } = utils.getDocumentAndIndex(
+        state,
+        documentId,
+      );
+      if (documentIndex === -1) return { ...state };
       /* selectedTextを更新したdocumentを生成 */
       const newDocument = {
         ...document,
         selectedText: action.payload.selectedText,
       };
+      const { documents } = state;
       /* 更新documentを含むdocumentsを生成 */
-      const newDocuments = state.documents.map((el) =>
-        el.documentId === document.documentId ? newDocument : el,
-      );
+      const newDocuments = documents.concat();
+      newDocuments[documentIndex] = newDocument;
       return { ...state, documents: newDocuments };
     }
 
@@ -154,28 +169,28 @@ const EditorReducer = (state = initialState.editor, action) => {
       const documentsCount = newDocuments.length;
 
       let nextActiveEditorIndex;
-      switch (true) {
+      if (documentsCount === 0) {
         /* 全てのタブを削除した場合 */
-        case documentsCount === 0:
-          return {
-            ...state,
-            activeDocumentId: '',
-            documents: [],
-          };
+        return {
+          ...state,
+          activeDocumentId: '',
+          documents: [],
+        };
+      }
+      if (deletedDocumentId !== activeDocumentId) {
         /* アクティブタブを変更しない場合 */
-        case deletedDocumentId !== activeDocumentId:
-          return {
-            ...state,
-            activeDocumentId,
-            documents: newDocuments,
-          };
+        return {
+          ...state,
+          activeDocumentId,
+          documents: newDocuments,
+        };
+      }
+      if (documentsCount === deletedIndex) {
         /* 削除したタブが右端の場合 */
-        case documentsCount === deletedIndex:
-          nextActiveEditorIndex = deletedIndex - 1;
-          break;
+        nextActiveEditorIndex = deletedIndex - 1;
+      } else {
         /* 削除したタブの右に, 他のタブがある場合 */
-        default:
-          nextActiveEditorIndex = deletedIndex;
+        nextActiveEditorIndex = deletedIndex;
       }
 
       return {

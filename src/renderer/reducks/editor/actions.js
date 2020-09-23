@@ -2,7 +2,7 @@ export const SET_FILE_TEXT = 'SET_FILE_TEXT';
 export const SET_FILE_INFO = 'SET_FILE_INFO';
 export const SET_DOCUMENT_FROM_FILE = 'SET_DOCUMENT_FROM_FILE';
 export const SET_SELECTED_TEXT = 'SET_SELECTED_TEXT';
-export const SET_TEXT = 'SET_TEXT';
+export const SET_EDITED_TEXT = 'SET_EDITED_TEXT';
 export const SET_ACTIVE_EDITOR_ID = 'SET_ACTIVE_EDITOR_ID';
 export const SET_NEW_DOCUMENT = 'SET_NEW_DOCUMENT';
 export const SET_EDITOR_ID = 'SET_EDITOR_ID';
@@ -46,7 +46,7 @@ export const setText = (editorInstance, documentId) => ({
     documentId,
     text: editorInstance.getValue(),
   },
-  type: SET_TEXT,
+  type: SET_EDITED_TEXT,
 });
 
 export const setActiveDocumentId = (documentId) => ({

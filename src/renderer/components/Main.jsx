@@ -14,7 +14,6 @@ export default function Main() {
   const activeDocumentId = getActiveDocumentId(editorState);
   const documents = getDocuments(editorState);
 
-  /* これでできたけど根本的な理由は不明, あとで調べる */
   useEffect(() => {
     if (documents.length === 0) {
       dispatch(setNewDocument());
@@ -29,7 +28,7 @@ export default function Main() {
   };
 
   return (
-    <div className="flex flex-auto flex-col">
+    <div className="flex flex-auto flex-col overflow-x-scroll">
       <Tabs documents={documents} />
       {/* documentsに含まれているdocumentを全てレンダリング */}
       {documents.map((document) => {
@@ -42,6 +41,7 @@ export default function Main() {
             key={document.documentId}
           >
             <EditArea
+              fileName={document.fileName}
               initialText={document.fileText}
               documentId={document.documentId}
             />
