@@ -1,7 +1,7 @@
 {
   "name": "XenonText",
-  "version": "0.1.0",
-  "description": "Electron + React でテキストエディタを作る",
+  "version": "0.2.0",
+  "description": "シンプルなエディタを駆け出しエンジニアに",
   "author": "CDLab",
   "main": "main.js",
   "scripts": {
@@ -21,9 +21,10 @@
     "css:tailwind": "tailwindcss build src/style.css -o dist/style.css",
     "icon:mac": "png2icns icon/icon.png -o icon/icon.icns"
   },
+  "homepage": "https://cdlab-sit.github.io/XenonText/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cdlab-sit/editor.git"
+    "url": "git+https://github.com/cdlab-sit/XenonText.git"
   },
   "keywords": [
     "xenontext",
