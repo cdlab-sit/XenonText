@@ -67,9 +67,10 @@ export const setDocumentId = (documentId) => ({
   type: SET_EDITOR_ID,
 });
 
-export const deleteDocument = (documentId) => ({
+export const deleteDocument = (documentId, callback = () => {}) => ({
   payload: {
     documentId,
+    callback,
   },
   type: DELETE_DOCUMENT,
 });

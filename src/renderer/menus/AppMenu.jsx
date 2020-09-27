@@ -9,7 +9,7 @@ import {
   setNewDocument,
   deleteDocument,
 } from '../reducks/editor/actions';
-import { getActiveDocument } from '../reducks/editor/selectors';
+import { getActiveDocument, getDocuments } from '../reducks/editor/selectors';
 
 const { app, Menu } = remote;
 
@@ -19,6 +19,7 @@ export default function AppMenu() {
     (state) => state.editor.activeDocumentId,
   );
   const activeDocument = getActiveDocument(useSelector((state) => state));
+  const documents = getDocuments(useSelector((state) => state.editor));
 
   // 新規ファイル
   const addNewFile = () => {
@@ -78,6 +79,11 @@ export default function AppMenu() {
     dispatch(deleteDocument(activeDocumentId));
   };
 
+  const quit = () => {
+    const documentIds = documents.map((doc) => doc.documentId);
+    dispatch(deleteDocument(documentIds.reverse(), app.quit));
+  };
+
   const appName = app.name;
   const appMenuTemplate = [
     // XenonText
@@ -116,7 +122,8 @@ export default function AppMenu() {
         },
         {
           label: `${appName} を終了`,
-          role: 'quit',
+          accelerator: 'Command+Q',
+          click: quit,
         },
       ],
     },
