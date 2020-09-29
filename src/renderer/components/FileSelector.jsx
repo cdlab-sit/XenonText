@@ -9,7 +9,7 @@ export default function FileSelector() {
   const documents = getDocuments(editorState);
 
   return (
-    <div className="flex flex-auto flex-col">
+    <div className="flex flex-auto flex-col overflow-y-scroll">
       {documents.map((document) => {
         return (
           <FileBlock
