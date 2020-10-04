@@ -5,7 +5,7 @@ import Main from './Main';
 
 export default function Body() {
   return (
-    <div className="flex flex-auto">
+    <div className="flex flex-auto overflow-y-scroll">
       <ResizePanel
         direction="e"
         handleClass="hidden"
