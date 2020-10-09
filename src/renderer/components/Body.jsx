@@ -3,14 +3,14 @@ import ResizePanel from 'react-resize-panel';
 import { useSelector } from 'react-redux';
 import SideBar from './SideBar';
 import Main from './Main';
-import { getSideBarSettings } from '../reducks/settings/selectors';
+import { getSideBarVisibility } from '../reducks/settings/selectors';
 
 export default function Body() {
-  const sideBarSettings = getSideBarSettings(
+  const sideBarVisibility = getSideBarVisibility(
     useSelector((state) => state.settings),
   );
   let visibility = '';
-  if (sideBarSettings.visibility === false) {
+  if (sideBarVisibility === false) {
     visibility = 'none';
   }
 
