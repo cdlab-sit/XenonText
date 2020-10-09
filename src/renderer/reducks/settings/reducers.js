@@ -6,7 +6,9 @@ const SettingsReducer = (state = initialState.settings, action) => {
     case SET_SIDE_BAR_VISIBILITY: {
       return {
         ...state,
-        visibility: action.payload.sideBarVisibility,
+        sideBar: {
+          visibility: !state.sideBar.visibility,
+        },
       };
     }
     default:
