@@ -3,6 +3,11 @@ const initialState = {
     documents: [],
     activeDocumentId: '',
   },
+  settings: {
+    sideBar: {
+      visibility: true,
+    },
+  },
 };
 
 export default initialState;
