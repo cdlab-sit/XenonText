@@ -10,6 +10,8 @@ import {
   deleteDocument,
 } from '../reducks/editor/actions';
 import { getActiveDocument } from '../reducks/editor/selectors';
+import { setSideBarVisibility } from '../reducks/settings/actions';
+import { getSideBarVisibility } from '../reducks/settings/selectors';
 
 const { app, Menu } = remote;
 
@@ -76,6 +78,10 @@ export default function AppMenu() {
   // ファイル（ タブ ）を閉じる
   const closeFile = () => {
     dispatch(deleteDocument(activeDocumentId));
+  };
+
+  const toggleSideBarVisibility = () => {
+    dispatch(setSideBarVisibility());
   };
 
   const appName = app.name;
@@ -240,7 +246,8 @@ export default function AppMenu() {
           label: 'サイドバーを表示',
           accelerator: 'Command+B',
           type: 'checkbox',
-          enabled: false,
+          checked: getSideBarVisibility(useSelector((state) => state.settings)),
+          click: toggleSideBarVisibility,
         },
         {
           type: 'separator',
