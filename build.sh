@@ -5,6 +5,7 @@ rm -rf docs/*
 
 # リリースページのビルド
 cd release
+npm install
 npm run build
 cd ../
 
@@ -13,6 +14,7 @@ cp -r release/docs/ docs
 
 # ドキュメントのビルド
 cd document
+npm install
 npm run build
 cd ../
 
