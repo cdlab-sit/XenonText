@@ -7,7 +7,7 @@ const SettingsReducer = (state = initialState.settings, action) => {
       return {
         ...state,
         sideBar: {
-          visibility: !state.sideBar.visibility,
+          visibility: action.payload.visibility,
         },
       };
     }
