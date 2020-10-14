@@ -21,7 +21,9 @@ export default function AppMenu() {
     (state) => state.editor.activeDocumentId,
   );
   const activeDocument = getActiveDocument(useSelector((state) => state));
-
+  const sideBarVisibility = getSideBarVisibility(
+    useSelector((state) => state.settings),
+  );
   // 新規ファイル
   const addNewFile = () => {
     dispatch(setNewDocument());
@@ -81,7 +83,7 @@ export default function AppMenu() {
   };
 
   const toggleSideBarVisibility = () => {
-    dispatch(setSideBarVisibility());
+    dispatch(setSideBarVisibility(!sideBarVisibility));
   };
 
   const appName = app.name;
@@ -246,7 +248,7 @@ export default function AppMenu() {
           label: 'サイドバーを表示',
           accelerator: 'Command+B',
           type: 'checkbox',
-          checked: getSideBarVisibility(useSelector((state) => state.settings)),
+          checked: sideBarVisibility,
           click: toggleSideBarVisibility,
         },
         {
