@@ -7,6 +7,9 @@ ace.define(
     exports.cssClass = 'ace-xenon';
     exports.cssText =
       ' \
+    .ace-xenon .ace_scrollbar{\
+        display: none;\
+    }\
     .ace-xenon .ace_cursor{\
         position: relative !important;\
         right: 2px;\

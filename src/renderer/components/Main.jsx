@@ -28,7 +28,7 @@ export default function Main() {
   };
 
   return (
-    <div className="flex flex-auto flex-col overflow-x-scroll">
+    <div className="flex flex-auto flex-col overflow-x-scroll scrollbar-hiddon">
       <Tabs documents={documents} />
       {/* documentsに含まれているdocumentを全てレンダリング */}
       {documents.map((document) => {
