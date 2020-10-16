@@ -9,18 +9,14 @@ export default function Body() {
   const sideBarVisibility = getSideBarVisibility(
     useSelector((state) => state.settings),
   );
-  let visibility = '';
+  const panelStyle = { width: '200px' };
   if (sideBarVisibility === false) {
-    visibility = 'none';
+    panelStyle.display = 'none';
   }
 
   return (
     <div className="flex flex-auto overflow-y-scroll">
-      <ResizePanel
-        direction="e"
-        handleClass="hidden"
-        style={{ width: '200px', display: visibility }}
-      >
+      <ResizePanel direction="e" handleClass="hidden" style={panelStyle}>
         <SideBar />
       </ResizePanel>
       <Main />
