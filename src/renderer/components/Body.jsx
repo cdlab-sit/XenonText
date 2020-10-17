@@ -15,7 +15,7 @@ export default function Body() {
   }
 
   return (
-    <div className="flex flex-auto overflow-y-scroll">
+    <div className="flex flex-auto overflow-y-scroll scrollbar-hiddon">
       <ResizePanel direction="e" handleClass="hidden" style={panelStyle}>
         <SideBar />
       </ResizePanel>
