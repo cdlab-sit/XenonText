@@ -14,6 +14,7 @@ const createWindow = () => {
       nodeIntegration: true,
     },
     width: 1280,
+    backgroundColor: '#4a5568',
   });
 
   // そしてこのアプリの index.html をロード
