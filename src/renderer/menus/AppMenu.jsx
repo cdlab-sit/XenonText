@@ -1,86 +1,18 @@
-import fs from 'fs';
 import { remote } from 'electron';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setFileText,
-  setFileInfo,
-  setDocumentFromFile,
-  setNewDocument,
-  deleteDocument,
-} from '../reducks/editor/actions';
-import { getActiveDocument } from '../reducks/editor/selectors';
 import { setSideBarVisibility } from '../reducks/settings/actions';
 import { getSideBarVisibility } from '../reducks/settings/selectors';
+import utils from './utils';
 
 const { app, Menu } = remote;
+const { addNewFile, openFile, saveFileAs, saveFile, closeFile } = utils();
 
 export default function AppMenu() {
   const dispatch = useDispatch();
-  const activeDocumentId = useSelector(
-    (state) => state.editor.activeDocumentId,
-  );
-  const activeDocument = getActiveDocument(useSelector((state) => state));
   const sideBarVisibility = getSideBarVisibility(
     useSelector((state) => state.settings),
   );
-  // 新規ファイル
-  const addNewFile = () => {
-    dispatch(setNewDocument());
-  };
-
-  // ファイル読み込み
-  const readFile = (path) => {
-    const data = fs.readFileSync(path);
-    return data.toString();
-  };
-
-  // ファイルを開く
-  const openFile = () => {
-    const fileIndex = 0;
-    const options = {
-      properties: ['openFile'],
-    };
-
-    remote.dialog.showOpenDialog(options).then((path) => {
-      if (path) {
-        const filePath = path.filePaths[fileIndex];
-        const fileText = readFile(filePath);
-        dispatch(setDocumentFromFile(fileText, filePath));
-      }
-    });
-  };
-
-  // 名前を付けて保存
-  const saveFileAs = () => {
-    const options = {
-      properties: ['openFile'],
-    };
-
-    remote.dialog.showSaveDialog(options).then((path) => {
-      if (path) {
-        const fileText = activeDocument.editedText;
-        fs.writeFileSync(path.filePath, fileText);
-        dispatch(setFileInfo(activeDocumentId, fileText, path.filePath));
-      }
-    });
-  };
-
-  // ファイルの保存
-  const saveFile = () => {
-    if (activeDocument.filePath) {
-      const fileText = activeDocument.editedText;
-      fs.writeFileSync(activeDocument.filePath, fileText);
-      dispatch(setFileText(activeDocumentId, fileText));
-    } else {
-      saveFileAs();
-    }
-  };
-
-  // ファイル（ タブ ）を閉じる
-  const closeFile = () => {
-    dispatch(deleteDocument(activeDocumentId));
-  };
 
   const toggleSideBarVisibility = () => {
     dispatch(setSideBarVisibility(!sideBarVisibility));
