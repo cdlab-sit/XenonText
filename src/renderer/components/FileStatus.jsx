@@ -21,17 +21,18 @@ export default function FileStatus(props) {
   const { documentId } = props;
   let fileStatusPathCommand = savedImagePathCommand;
   const dispatch = useDispatch();
-  /* FileStatusが押された時
-  -> タブとドキュメントを削除 */
-  const onClick = (e) => {
-    e.stopPropagation();
-    closeTab(dispatch, documentId);
-  };
 
   const isSaved = getFileStatus(
     useSelector((state) => state.editor),
     documentId,
   );
+  /* FileStatusが押された時
+  -> タブとドキュメントを削除 */
+  const onClick = (e) => {
+    e.stopPropagation();
+    closeTab(dispatch, documentId, isSaved);
+  };
+
   if (!isSaved) {
     fileStatusPathCommand = unsavedImagePathCommand;
   }
