@@ -72,9 +72,8 @@ export default function utils() {
     }
   };
 
-  const closeFile = () => {
-    const { activeDocumentId } = store.getState().editor;
-    store.dispatch(deleteDocument(activeDocumentId));
+  const closeFile = (documentId) => {
+    store.dispatch(deleteDocument(documentId));
   };
 
   return {

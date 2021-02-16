@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSideBarVisibility } from '../reducks/settings/actions';
 import { getSideBarVisibility } from '../reducks/settings/selectors';
 import utils from './utils';
+import store from '../reducks/store/store';
 
 const { app, Menu } = remote;
-const { addNewFile, openFile, saveFileAs, saveFile, closeFile } = utils();
+const { addNewFile, openFile, saveFileAs, saveFile } = utils();
 
 export default function AppMenu() {
   const dispatch = useDispatch();
@@ -16,6 +17,12 @@ export default function AppMenu() {
 
   const toggleSideBarVisibility = () => {
     dispatch(setSideBarVisibility(!sideBarVisibility));
+  };
+
+  const closeFile = () => {
+    const { activeDocumentId } = store.getState().editor;
+    const { closeFile: utilsCloseFile } = utils();
+    utilsCloseFile(activeDocumentId);
   };
 
   const appName = app.name;
