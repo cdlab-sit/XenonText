@@ -23,20 +23,24 @@ export const closeTab = (dispatch, documentId, IsSaved) => {
   } else {
     // ファイルが保存されていない場合(変更がある場合)
     dispatch(setActiveDocumentId(documentId));
-    const selected = remote.dialog.showMessageBoxSync(dialogOptions);
-    switch (selected) {
-      case 0: // 保存
-        saveFile();
-        closeFile(documentId);
-        break;
-      case 1: // キャンセル
-        // do nothing
-        break;
-      case 2: // 保存しない
-        closeFile(documentId);
-        break;
-      default:
-        break;
-    }
+
+    // activeDocumentIdの変更をレンダリングするため、setTimeoutを利用
+    setTimeout(() => {
+      const selected = remote.dialog.showMessageBoxSync(dialogOptions);
+      switch (selected) {
+        case 0: // 保存
+          saveFile();
+          closeFile(documentId);
+          break;
+        case 1: // キャンセル
+          // do nothing
+          break;
+        case 2: // 保存しない
+          closeFile(documentId);
+          break;
+        default:
+          break;
+      }
+    }, 0);
   }
 };
