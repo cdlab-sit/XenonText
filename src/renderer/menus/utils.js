@@ -49,15 +49,13 @@ export default function utils() {
     const options = {
       properties: ['openFile'],
     };
-
-    remote.dialog.showSaveDialog(options).then((path) => {
-      if (path) {
-        const { activeDocument, activeDocumentId } = getActiveDocumentAndId();
-        const fileText = activeDocument.editedText;
-        fs.writeFileSync(path.filePath, fileText);
-        store.dispatch(setFileInfo(activeDocumentId, fileText, path.filePath));
-      }
-    });
+    const path = remote.dialog.showSaveDialogSync(options);
+    if (path) {
+      const { activeDocument, activeDocumentId } = getActiveDocumentAndId();
+      const fileText = activeDocument.editedText;
+      fs.writeFileSync(path, fileText);
+      store.dispatch(setFileInfo(activeDocumentId, fileText, path));
+    }
   };
 
   // ファイルの保存
