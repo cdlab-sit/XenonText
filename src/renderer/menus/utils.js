@@ -5,6 +5,7 @@ import {
   setFileText,
   setFileInfo,
   setDocumentFromFile,
+  setActiveDocumentId,
   setNewDocument,
   deleteDocument,
 } from '../reducks/editor/actions';
@@ -15,6 +16,20 @@ const getActiveDocumentAndId = () => {
     .getState()
     .editor.documents.find((val) => val.documentId === activeDocumentId);
   return { activeDocument, activeDocumentId };
+};
+
+const getFileStatus = (documentId) => {
+  const document = store
+    .getState()
+    .editor.documents.find((val) => val.documentId === documentId);
+  return document.fileText === document.editedText;
+};
+
+const getFileName = (documentId) => {
+  const document = store
+    .getState()
+    .editor.documents.find((val) => val.documentId === documentId);
+  return document.fileName;
 };
 
 export default function utils() {
@@ -70,8 +85,43 @@ export default function utils() {
     }
   };
 
+  // ファイルを閉じる
   const closeFile = (documentId) => {
-    store.dispatch(deleteDocument(documentId));
+    const IsSaved = getFileStatus(documentId);
+    if (IsSaved === true) {
+      // ファイルが保存されている場合(変更がない場合)
+      store.dispatch(deleteDocument(documentId));
+    } else {
+      // ファイルが保存されていない場合(変更がある場合)
+      store.dispatch(setActiveDocumentId(documentId));
+      const fileName = getFileName(documentId);
+      const dialogOptions = {
+        type: 'question',
+        message: `閉じる前に "${fileName}" への変更を保存しますか？`,
+        detail: '保存しない場合、変更内容が失われます。',
+        buttons: ['保存', 'キャンセル', '保存しない'],
+        cancelId: 1, // Escキー入力時
+        defaultId: 0,
+      };
+      // activeDocumentIdの変更をレンダリングするため、setTimeoutを利用
+      setTimeout(() => {
+        const selected = remote.dialog.showMessageBoxSync(dialogOptions);
+        switch (selected) {
+          case 0: // 保存
+            saveFile();
+            store.dispatch(deleteDocument(documentId));
+            break;
+          case 1: // キャンセル
+            // do nothing
+            break;
+          case 2: // 保存しない
+            store.dispatch(deleteDocument(documentId));
+            break;
+          default:
+            break;
+        }
+      }, 0);
+    }
   };
 
   return {
