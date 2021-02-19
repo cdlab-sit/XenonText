@@ -2,9 +2,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFileStatus } from '../reducks/editor/selectors';
-import { deleteDocument } from '../reducks/editor/actions';
+import utils from '../menus/utils';
+
+const { closeFile } = utils();
 
 const savedImagePathCommand =
   'M4.293 4.293a1 1 0 011.414 0L10 ' +
@@ -20,18 +22,18 @@ const unsavedImagePathCommand =
 export default function FileStatus(props) {
   const { documentId } = props;
   let fileStatusPathCommand = savedImagePathCommand;
-  const dispatch = useDispatch();
-  /* FileStatusが押された時
-  -> タブとドキュメントを削除 */
-  const onClick = (e) => {
-    e.stopPropagation();
-    dispatch(deleteDocument(documentId));
-  };
 
   const isSaved = getFileStatus(
     useSelector((state) => state.editor),
     documentId,
   );
+  /* FileStatusが押された時
+  -> タブとドキュメントを削除 */
+  const onClick = (e) => {
+    e.stopPropagation();
+    closeFile(documentId);
+  };
+
   if (!isSaved) {
     fileStatusPathCommand = unsavedImagePathCommand;
   }

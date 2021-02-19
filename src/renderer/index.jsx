@@ -2,9 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
-import createStore from './reducks/store/store';
-
-const store = createStore();
+import store from './reducks/store/store';
 
 /*
  *  ストアの状態を表示
