@@ -10,25 +10,25 @@ import {
   deleteDocument,
 } from '../reducks/editor/actions';
 
-const getActiveDocumentAndId = () => {
+const getActiveDocumentId = () => {
   const { activeDocumentId } = store.getState().editor;
-  const activeDocument = store
-    .getState()
-    .editor.documents.find((val) => val.documentId === activeDocumentId);
-  return { activeDocument, activeDocumentId };
+  return activeDocumentId;
 };
 
-const getFileStatus = (documentId) => {
+const getDocument = (documentId) => {
   const document = store
     .getState()
     .editor.documents.find((val) => val.documentId === documentId);
+  return document;
+};
+
+const IsFileSaved = (documentId) => {
+  const document = getDocument(documentId);
   return document.fileText === document.editedText;
 };
 
 const getFileName = (documentId) => {
-  const document = store
-    .getState()
-    .editor.documents.find((val) => val.documentId === documentId);
+  const document = getDocument(documentId);
   return document.fileName;
 };
 
@@ -66,7 +66,8 @@ export default function utils() {
     };
     const path = remote.dialog.showSaveDialogSync(options);
     if (path) {
-      const { activeDocument, activeDocumentId } = getActiveDocumentAndId();
+      const activeDocumentId = getActiveDocumentId();
+      const activeDocument = getDocument(activeDocumentId);
       const fileText = activeDocument.editedText;
       fs.writeFileSync(path, fileText);
       store.dispatch(setFileInfo(activeDocumentId, fileText, path));
@@ -75,7 +76,8 @@ export default function utils() {
 
   // ファイルの保存
   const saveFile = () => {
-    const { activeDocument, activeDocumentId } = getActiveDocumentAndId();
+    const activeDocumentId = getActiveDocumentId();
+    const activeDocument = getDocument(activeDocumentId);
     if (activeDocument.filePath) {
       const fileText = activeDocument.editedText;
       fs.writeFileSync(activeDocument.filePath, fileText);
@@ -87,7 +89,7 @@ export default function utils() {
 
   // ファイルを閉じる
   const closeFile = (documentId) => {
-    const IsSaved = getFileStatus(documentId);
+    const IsSaved = IsFileSaved(documentId);
     if (IsSaved === true) {
       // ファイルが保存されている場合(変更がない場合)
       store.dispatch(deleteDocument(documentId));
