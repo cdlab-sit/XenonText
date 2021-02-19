@@ -22,7 +22,7 @@ const getDocument = (documentId) => {
   return document;
 };
 
-const IsFileSaved = (documentId) => {
+const isFileSaved = (documentId) => {
   const document = getDocument(documentId);
   return document.fileText === document.editedText;
 };
@@ -89,8 +89,8 @@ export default function utils() {
 
   // ファイルを閉じる
   const closeFile = (documentId) => {
-    const IsSaved = IsFileSaved(documentId);
-    if (IsSaved === true) {
+    const isSaved = isFileSaved(documentId);
+    if (isSaved === true) {
       // ファイルが保存されている場合(変更がない場合)
       store.dispatch(deleteDocument(documentId));
     } else {
