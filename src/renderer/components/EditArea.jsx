@@ -1,7 +1,7 @@
 import ace from 'ace-builds/src-noconflict/ace';
 import 'ace-builds/src-noconflict/ext-modelist';
 import './theme-xenon';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import AceEditor from 'react-ace';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -28,13 +28,17 @@ const fileNameToFileType = (fileName) => {
   return fileType;
 };
 
-const EditArea = React.memo((props) => {
+const EditArea = (props) => {
   const [editorInstance, setEditorInstance] = useState('');
 
   const { fileName, initialText, documentId } = props;
 
   /* ファイル名からファイルタイプを設定 */
   const fileType = fileNameToFileType(fileName);
+
+  if (editorInstance !== '') {
+    editorInstance.focus();
+  }
 
   const dispatch = useDispatch();
   const onChange = () => {
@@ -50,8 +54,8 @@ const EditArea = React.memo((props) => {
     dispatch(setSelectedText(editorInstance, documentId));
   };
 
-  return (
-    <div className="bg-gray-900 flex-auto">
+  const Editor = useMemo(() => {
+    return (
       <AceEditor
         value={initialText}
         editorProps={{ $blockScrolling: 'true' }}
@@ -70,9 +74,11 @@ const EditArea = React.memo((props) => {
         width="100%"
         wrapEnabed={false}
       />
-    </div>
-  );
-});
+    );
+  }, [editorInstance]);
+
+  return <div className="bg-gray-900 flex-auto">{Editor}</div>;
+};
 
 EditArea.propTypes = {
   initialText: PropTypes.string.isRequired,
