@@ -74,7 +74,7 @@ export default function AppMenu() {
       submenu: [
         {
           label: '新規ファイル',
-          accelerator: 'Command+N',
+          accelerator: 'CmdOrCtrl+N',
           click: addNewFile,
         },
         {
@@ -82,7 +82,7 @@ export default function AppMenu() {
         },
         {
           label: '開く…',
-          accelerator: 'Command+O',
+          accelerator: 'CmdOrCtrl+O',
           click: openFile,
         },
         {
@@ -90,12 +90,12 @@ export default function AppMenu() {
         },
         {
           label: '保存',
-          accelerator: 'Command+S',
+          accelerator: 'CmdOrCtrl+S',
           click: saveFile,
         },
         {
           label: '名前を付けて保存…',
-          accelerator: 'Shift+Command+S',
+          accelerator: 'Shift+CmdOrCtrl+S',
           click: saveFileAs,
         },
         {
@@ -103,7 +103,7 @@ export default function AppMenu() {
         },
         {
           label: 'ファイルを閉じる',
-          accelerator: 'Command+W',
+          accelerator: 'CmdOrCtrl+W',
           click: closeFile,
         },
       ],
@@ -115,12 +115,12 @@ export default function AppMenu() {
       submenu: [
         {
           label: '元に戻す',
-          accelerator: 'Command+Z',
+          accelerator: 'CmdOrCtrl+Z',
           role: 'undo',
         },
         {
           label: 'やり直し',
-          accelerator: 'Shift+Command+Z',
+          accelerator: 'Shift+CmdOrCtrl+Z',
           role: 'redo',
         },
         {
@@ -128,17 +128,17 @@ export default function AppMenu() {
         },
         {
           label: '切り取り',
-          accelerator: 'Command+X',
+          accelerator: 'CmdOrCtrl+X',
           role: 'cut',
         },
         {
           label: 'コピー',
-          accelerator: 'Command+C',
+          accelerator: 'CmdOrCtrl+C',
           role: 'copy',
         },
         {
           label: '貼り付け',
-          accelerator: 'Command+V',
+          accelerator: 'CmdOrCtrl+V',
           role: 'paste',
         },
         {
@@ -146,12 +146,12 @@ export default function AppMenu() {
         },
         {
           label: '検索',
-          accelerator: 'Command+F',
+          accelerator: 'CmdOrCtrl+F',
           enabled: false,
         },
         {
           label: '置換',
-          accelerator: 'SHIFT+Command+F',
+          accelerator: 'Shift+CmdOrCtrl+F',
           enabled: false,
         },
       ],
@@ -163,17 +163,17 @@ export default function AppMenu() {
       submenu: [
         {
           label: 'すべて選択',
-          accelerator: 'Command+A',
+          accelerator: 'CmdOrCtrl+A',
           role: 'selectAll',
         },
         {
           label: '行を選択',
-          accelerator: 'Command+L',
+          accelerator: 'CmdOrCtrl+L',
           enabled: false,
         },
         {
           label: '単語を選択',
-          accelerator: 'Command+D',
+          accelerator: 'CmdOrCtrl+D',
           enabled: false,
         },
       ],
@@ -185,7 +185,7 @@ export default function AppMenu() {
       submenu: [
         {
           label: 'サイドバーを表示',
-          accelerator: 'Command+B',
+          accelerator: 'CmdOrCtrl+B',
           type: 'checkbox',
           checked: sideBarVisibility,
           click: toggleSideBarVisibility,
@@ -195,7 +195,7 @@ export default function AppMenu() {
         },
         {
           label: 'フルスクリーンにする',
-          accelerator: 'Option+Command+F',
+          accelerator: 'Option+CmdOrCtrl+F',
           role: 'togglefullscreen',
         },
       ],
