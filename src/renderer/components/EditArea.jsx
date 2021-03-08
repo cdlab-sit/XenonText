@@ -28,15 +28,15 @@ const fileNameToFileType = (fileName) => {
   return fileType;
 };
 
-const EditArea = (props) => {
+const EditArea = React.memo((props) => {
   const [editorInstance, setEditorInstance] = useState('');
 
-  const { fileName, initialText, documentId } = props;
+  const { fileName, initialText, documentId, activeTab } = props;
 
   /* ファイル名からファイルタイプを設定 */
   const fileType = fileNameToFileType(fileName);
 
-  if (editorInstance !== '') {
+  if (editorInstance !== '' && activeTab === true) {
     editorInstance.focus();
   }
 
@@ -78,12 +78,13 @@ const EditArea = (props) => {
   }, [editorInstance]);
 
   return <div className="bg-gray-900 flex-auto">{Editor}</div>;
-};
+});
 
 EditArea.propTypes = {
   initialText: PropTypes.string.isRequired,
   documentId: PropTypes.string.isRequired,
   fileName: PropTypes.string.isRequired,
+  activeTab: PropTypes.bool.isRequired,
 };
 
 export default EditArea;

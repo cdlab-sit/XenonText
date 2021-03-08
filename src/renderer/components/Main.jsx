@@ -41,6 +41,7 @@ export default function Main() {
             key={document.documentId}
           >
             <EditArea
+              activeTab={shouldShow(document.documentId)}
               fileName={document.fileName}
               initialText={document.fileText}
               documentId={document.documentId}
